@@ -1,0 +1,52 @@
+<div class="card">
+    <div class="card-body">
+        <!-- title -->
+        <div class="d-md-flex align-items-center">
+            <div>
+                <button class="btn btn-info" type="button"><i class="fa fa-print"></i>   imprimer</button>
+            </div>
+            <div class="ml-auto">
+                <div class="dl">
+                    <form class="m-b-0" style="width: 200px">
+                      <input type='text' class="form-control" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- title -->
+    </div>
+    <div class="table-responsive">
+        <table #table class="table v-middle">
+            <thead>
+                <tr class="bg-light">
+                    <th class="border-top-0">N°</th>
+                    <th class="border-top-0">Matricule</th>
+                    <th class="border-top-0">NOM</th>
+                    <th class="border-top-0">Prenom(s)</th>
+                    <th class="border-top-0">N° CNI</th>
+                    <th class="border-top-0">Contact</th>
+                    <th class="border-top-0">Specialité</th>
+                    <th class="border-top-0">E-mail</th>
+                    <th class="border-top-0">Ville/Résidence</th>
+                    <th class="border-top-0">Actions</th>
+                </tr>
+            </thead>
+                <tbody>
+                    <tr *ngFor="let item of collection">
+                        <td>{{ item.n }}</td>
+                        <td>{{ item.matricule }}</td>
+                        <td>{{ item.nom }}</td>
+                        <td>{{ item.prenom }}</td>
+                        <td>{{ item.cni }}</td>
+                        <td>{{ item.contact }}</td>
+                        <td>{{ item.specialite }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.ville }}</td>
+                        <td class="text-center">
+                            <a href="javascript:void(0)" class="mr-1 text-inverse" title="Voir profil"><i class="ti-user text-dark"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+    </div>
+    </div>

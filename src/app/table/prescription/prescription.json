@@ -1,0 +1,12 @@
+[
+  {
+    "n": "1",
+    "nom": "Bamba",
+    "prenom": "Nabintou",
+    "date": "12/05/2019",
+    "prescription": "GOUTE EPAISSE",
+    "cout": "2000",
+    "ristourne": "10",
+    "prescripteur": "Sande Franck"
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "n": "1",
+    "famille": "ANTIBACTERIENS",
+    "designation": "INJECTION",
+    "puachat": "810",
+    "puvente": "820",
+    "statut": "1",
+    "qtestock": "30",
+    "qterest": "28",
+    "stockreel": "0",
+    "peremption": "27/01/2019"
+  }, {
+    "n": "2",
+    "famille": "COMPRIME",
+    "designation": "ANTIBIOTIQUE",
+    "puachat": "110",
+    "puvente": "200",
+    "statut": "0",
+    "qtestock": "50",
+    "qterest": "8",
+    "stockreel": "1",
+    "peremption": "12/07/2019"
+  }
+]

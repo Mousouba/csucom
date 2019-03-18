@@ -1,0 +1,24 @@
+[
+  {
+    "n": "1",
+    "famille": "Comprimé",
+    "image": "chair.png",
+    "designation": "Seringue",
+    "puachat": "120",
+    "puvente": "120",
+    "qteinit": "3",
+    "qterest": "3",
+    "date": "15/03/2018"
+  },
+  {
+    "n": "2",
+    "famille": "Sirop",
+    "image": "chair3.png",
+    "designation": "iphone",
+    "puachat": "120",
+    "puvente": "120",
+    "qteinit": "3",
+    "qterest": "13",
+    "date": "15/03/2018"
+  }
+]

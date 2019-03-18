@@ -1,0 +1,37 @@
+[
+  {
+    "nom": "All Star",
+    "image": "chair.png",
+    "montant": "120"
+  },
+  {
+    "nom": "Produit 2",
+    "image": "chair2.png",
+    "montant": "620"
+  },
+  {
+    "nom": "Produit 8",
+    "image": "chair3.png",
+    "montant": "1200"
+  },
+  {
+    "nom": "Produit 34",
+    "image": "chair4.png",
+    "montant": "2300"
+  },
+  {
+    "nom": "iPad",
+    "image": "ipad.png",
+    "montant": "2300"
+  },
+  {
+    "nom": "iPhone",
+    "image": "iphone.png",
+    "montant": "2300"
+  },
+  {
+    "nom": "Montre",
+    "image": "iwatch.png",
+    "montant": "2300"
+  }
+]

@@ -1,0 +1,121 @@
+
+<div class="row">
+    <div class="table-responsive col-md-9" style="display: inline-block">
+            <table #table class="table v-middle col-md-12">
+                <thead>
+                    <tr class="bg-light">
+                        <th style="width: 20%">Designation</th>
+                        <th align="center">Qté Stock</th>
+                        <th >Prix achat</th>
+                        <th>Prix Vente</th>
+                        <th style="width: 20%">Péremption</th>
+                        <th align="center">Option</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">
+                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                    <option selected>choisir</option>
+                                    <option value="1">cratère</option>
+                                    <option value="2">Boxe</option>
+                                    <option value="3">Bourse</option>
+                                </select>
+                            </td>
+
+                            <td class="text-center"><input placeholder="0" class="form-control" type="number" min="1" step="1" ></td>
+
+                             <td class="font-500 text-center"><input autofocus class="form-control" placeholder="Prix"></td>
+
+                            <td class="font-500 text-center"><input autofocus class="form-control" type="text" placeholder="Prix"></td>
+
+                            <td style="width: 20%"  class="font-500 text-center"><input type="date" class="form-control" placeholder=""></td>
+                            <td class="text-center">
+                                <a href="javascript:void(0)" class="text-inverse" title="Ajouter à la liste"><i class="fas fa-plus"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+            </table>
+
+        </div>
+        <div class="col-md-3">
+        <div class="comment-widgets scrollable" style="height:auto;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">SAISIE D'INFORMATION</h5>
+                    <hr>
+                    <small>Fournisseur :<span class="font-12 text-danger">&nbsp;*</span></small>
+                    <div class="form-group m-b-30">
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option selected>Fournisseurs</option>
+                            <option value="1">SANDE</option>
+                            <option value="2">DOUMBIA</option>
+                            <option value="3">YVES</option>
+                        </select>
+                    </div>
+                    <small>Raison Social :<span class="font-12 text-danger">&nbsp;*</span></small>
+                     <input type="text" class="form-control" placeholder="Saisir la raison sociale">
+                    
+                    <small>Adresse :<span class="font-12 text-danger">&nbsp;*</span></small>
+                    <input type="text" class="form-control" placeholder="Saisir votre addresse">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Liste des arrivages-->
+    
+    <div class="page-breadcrumb" style="margin-bottom: 30px">
+        <div class="row">
+            <div class="col-12 align-self-center">
+                <h4 class="page-title">Liste des Arrivages</h4>
+                <div class="d-flex align-items-center">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-12 col-lg-12">
+        <div class="table-responsive">
+            <table class="table product-overview">
+                <thead>
+                    <tr>
+                        <th align="center">N°</th>
+                        <th align="center">Designation</th>
+                        <th align="center">Qté Stock</th>
+                        <th align="center">Prix achat</th>
+                        <th align="center">Prix Vente</th>
+                        <th align="center">Péremption</th>
+                        <th align="center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                        abenasole
+                        </td>
+                        <td>16</td>
+
+                         <td>8400</td>
+
+                        <td>5400</td>
+
+                        <td>17/02/1972</td>
+                        
+                        <td class="text-center">
+                            <a  href="javascript:void(0)" class=" mr-3 text-danger" title="Supprimer de la liste"><i class="text-danger ti-close"></i></a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-actions" style="width: 100%;margin-top: 40px">
+        <div class="text-center">
+            <button type="submit" class="btn btn-info m-r-5">Commander</button>
+            <button type="reset" class="btn btn-dark">Tout Annuler</button>
+        </div>
+    </div>
+</div>

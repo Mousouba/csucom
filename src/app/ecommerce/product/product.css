@@ -1,0 +1,31 @@
+.test{
+    width: 90px;
+    height: 70px;
+    float: right;
+    bottom: 0;
+    margin:0 5px 30px 0;
+    right: 0;
+    position: fixed;
+}
+
+.sup-class {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 6px 15px 0 0;
+    font-size: 16px;
+    color: #fff;
+    width: 25px;
+    height: 25px;
+    background: #333d54;
+    border-radius: 50%;
+    text-align: center;
+}
+.t{
+    background-image: linear-gradient(to left, #333d54, #4798e8);
+}
+
+.test:hover{
+    margin-bottom: 20px;
+    transition: all .4s;
+}

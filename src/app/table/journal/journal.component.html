@@ -1,0 +1,70 @@
+
+<div class="card">
+    <div class="row">
+        <div class="card-body">
+
+
+            
+            
+
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- title -->
+        <div class="d-md-flex align-items-center col-md-12 ">
+            <div>
+                <div _ngcontent-c4="" class="custom-control custom-radio">
+                    <input _ngcontent-c4="" class="custom-control-input" id="customRadio2" name="customRadio" type="radio"><label _ngcontent-c4="" class="custom-control-label" for="customRadio2">Jour</label>
+                </div>
+                <div _ngcontent-c4="" class="custom-control custom-radio">
+                    <input _ngcontent-c4="" class="custom-control-input" id="customRadio3" name="customRadio" type="radio"><label _ngcontent-c4="" class="custom-control-label" for="customRadio3">Garde</label>
+                </div>
+                <!--<button class="btn btn-info" type="button"><i class="fa fa-print"></i>   imprimer</button>-->
+            </div>
+            <div style="margin-left: 3%"  class="col-md-12">
+                <div class="dl">
+                    <form class="m-b-0" style="width: 200px; display: inline-block; float: left">
+                      <input type='date' class="form-control" title="periode début" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
+                    </form>
+                    <form class="m-b-0" style="width: 200px; display: inline-block; margin-left: 40px">
+                      <input type='date' class="form-control" title="periode fin" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
+                    </form>
+                    <form class="m-b-0" style="width: 200px; display: inline-block; float: right">
+                      <input type='text' class="form-control" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- title -->
+    </div>
+    <div class="table-responsive col-md-12" style="display: inline-block">
+        <table #table class="table v-middle col-md-12">
+            <thead>
+                <tr class="bg-light">
+                    <th>Reçu N°</th>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Client</th>
+                    <th>Designation</th>
+                    <th>Prix unitaire</th>
+                    <th>Qte</th>
+                    <th>Montant total</th>
+                    <th>Espèces Reçu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of collection">
+                    <td>{{ item.n }}</td>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.heure }}</td>
+                    <td>{{ item.client }}</td>
+                    <td>{{ item.designation }}</td>
+                    <td>{{ item.pu }}</td>
+                    <td>{{ item.qte }}</td>
+                    <td>{{ item.montant }}</td>
+                    <td>{{ item.espece }}</td>
+                </tr>
+            </tbody>
+       </table>
+    </div>
+</div>

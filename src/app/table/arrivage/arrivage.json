@@ -1,0 +1,59 @@
+[
+  {
+    "patient": "Karamoko Ali",
+    "chambre": "4",
+    "lit": "5",
+    "date": "03/04/2018",
+    "entree": "10:30",
+    "sortie": "16:05",
+    "statut": "1"
+  },{
+    "patient": "Bouo Alain",
+    "chambre": "2",
+    "lit": "6",
+    "date": "03/07/2018",
+    "entree": "07:30",
+    "sortie": "16:05",
+    "statut": "0"
+  },{
+    "patient": "Bouo Alain",
+    "chambre": "2",
+    "lit": "6",
+    "date": "03/07/2018",
+    "entree": "07:30",
+    "sortie": "16:05",
+    "statut": "0"
+  },{
+    "patient": "Bouo Alain",
+    "chambre": "2",
+    "lit": "6",
+    "date": "03/07/2018",
+    "entree": "07:30",
+    "sortie": "16:05",
+    "statut": "0"
+  },{
+    "patient": "Bouo Alain",
+    "chambre": "2",
+    "lit": "6",
+    "date": "03/07/2018",
+    "entree": "07:30",
+    "sortie": "16:05",
+    "statut": "0"
+  },{
+    "patient": "Bouo Alain",
+    "chambre": "2",
+    "lit": "6",
+    "date": "03/07/2018",
+    "entree": "07:30",
+    "sortie": "16:05",
+    "statut": "0"
+  },{
+    "patient": "Bouo Alain",
+    "chambre": "2",
+    "lit": "6",
+    "date": "03/07/2018",
+    "entree": "07:30",
+    "sortie": "16:05",
+    "statut": "0"
+  }
+]

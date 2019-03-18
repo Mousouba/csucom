@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Personnes connectées</h4>
+        <div class="chat-box scrollable position-relative" [perfectScrollbar]="config">
+            <!--chat Row -->
+            <ul class="chat-list">
+                <!--chat Row -->
+                <li class="chat-item">
+                    <div class="chat-img">
+                        <img src="../../assets/images/users/1.jpg" alt="user">
+                    </div>
+                    <div class="chat-content">
+                        <h6 class="font-medium">James Anderson</h6>
+                        <div class="online-point"></div> <small>En ligne</small>
+                    </div>
+                </li>
+                <li class="chat-item">
+                    <div class="chat-img">
+                        <img src="../../assets/images/users/1.jpg" alt="user">
+                    </div>
+                    <div class="chat-content">
+                        <h6 class="font-medium">Luc More</h6>
+                        <div class="online-point"></div> <small>En ligne</small>
+                    </div>
+                </li>
+                <li class="chat-item">
+                    <div class="chat-img">
+                        <img src="../../assets/images/users/1.jpg" alt="user">
+                    </div>
+                    <div class="chat-content">
+                        <h6 class="font-medium">Angeline Jolie</h6>
+                        <div class="online-point"></div> <small>En ligne</small>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <style>
+            .online-point{
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: #22c6ab;
+                display: inline-flex;
+                margin-right:3px;
+            }
+        </style>
+    </div>
+</div>
