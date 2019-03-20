@@ -4,7 +4,8 @@ const fs = require('fs');
 let bodyParser = require('body-parser');
 const morgan = require('morgan')('dev');
 const crypto = require('crypto');
-const config = require('./config');
+const config = require('./setting/config');
+const { isErr } = require('./src/utilitaire_Ryu');
 const session = require('express-session');
 const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
@@ -18,14 +19,15 @@ mysql.createConnection({
     user: config.db.user,
     password: config.db.password
 }).then((db) => {
-    const User = require('./Model/User')(db, config);
     console.log(`CONNEXION ETABLIE AVEC LA BD`);
-    let holdId = null;  // permettant de mettre un drapeau sur le dernier mail traité.
-    let moment = 0; //complement du drapeau
     const app = express();
-    const api = express.Router();
     const https = require('http').createServer(app);
     let io = require('socket.io')(https);
+    const api = express.Router();
+    const User = require('./Model/User')(db, config);
+
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({extended: false}));
 
     app.use(expressValidator());
     app.use(session({
@@ -33,14 +35,48 @@ mysql.createConnection({
         resave: config.session.resave,
         saveUninitialized: config.session.saveUninitialized
     }));
-    //app.use(express.static(`${__dirname}/Public`));
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: false }));
+
+ 
+    // create application/x-www-form-urlencoded parser
+    
     app.use(cookieParser());
     app.use(morgan);
     
     api.get('/', async (req, res)=>{
-        res.json({success:true, message: "Hello world"})
+        if(req.session.csucom){
+            let info = {};
+            const NumberPer =  await User.getTotalPrescription();
+            const NumberClient =  await User.getTotalPatient();
+            info.totalClient = NumberClient.totalClient
+            info.totalPrescription = NumberPer.totalPrescription
+            res.json({success:true, user: req.session.csucom, info:info})
+        }
+        else{
+            res.json({success:false, user: null})
+        }
+    });
+    api.post('/login', async (req, res) =>{
+        req.check('user', "Email Invalide").isEmail();
+        req.check('pass', "On ne Valide Pas ce Genre de Mot de passe").isAlphanumeric() //.matches(/^(?=.*[^a-zA-Z0-9])$/);
+
+        const error = req.validationErrors();
+        if(error){
+            res.json({ errors: error })
+        }
+        else{
+           let user = req.body.user;
+           let pass = req.body.pass;
+           let password = crypto.createHmac('sha256', pass).update('I love cupcakes').digest('hex');
+            const personC = await User.userExist(user, password);
+           if (!isErr(personC)){
+               req.session.csucom = personC;
+               res.json(personC);
+           }
+           else{
+               res.json({ error: 'Identification Echoué. Veuillez verifier vos cordonnées' })
+           }
+        }
+        //res.render(`${__dirname}/public/form.twig`, { user: "nil" })
     });
     api.get('/logout', async (req, res) => {
         req.session.destroy((err) => {
