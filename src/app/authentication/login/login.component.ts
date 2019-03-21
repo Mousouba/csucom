@@ -14,10 +14,7 @@ export class LoginComponent implements OnInit {
   loginform = true;
   recoverform = false;
   
-  private const apiUrl = "http://localhost:2037/api";
-
-  data = [any];
-
+  //apiUrl = "http://localhost:2037/api";
   showRecoverForm() {
   	this.loginform = !this.loginform;
   	this.recoverform = true;
@@ -29,9 +26,10 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit(){
-    this.data = ()  => {return this.http.get(this.apiUrl)}
-    
-    console.log(this.data);
+    this.http.get<any>("http://localhost:2037/api")
+    .subscribe( data => {
+      console.log(data);
+    })
   }
 
 }

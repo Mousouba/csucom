@@ -9,6 +9,7 @@ const { isErr } = require('./src/utilitaire_Ryu');
 const session = require('express-session');
 const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
+var cors = require('cors')
 
 
 const mysql = require('promise-mysql');
@@ -25,6 +26,8 @@ mysql.createConnection({
     let io = require('socket.io')(https);
     const api = express.Router();
     const User = require('./Model/User')(db, config);
+
+    app.use(cors())
 
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({extended: false}));
