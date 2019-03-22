@@ -109,6 +109,17 @@ let User = class {
             })
         })
     }
+    static getAllObservationWithDate(){
+        return new Promise((next)=>{
+            let current = new Date().getDate();
+            db.query("SELECT *, CONCAT(client.name, ' ',client.firstname) nom, DAY(observation.back_date) jr, observation.id ident FROM observation LEFT JOIN prescription ON observation.prescription_id = prescription.id LEFT JOIN client ON prescription.client_id = client.id WHERE jr <= ? ORDER BY observation.id DESC", [parseInt(current, 10) + 2])
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
     static setObservation(prescription_id,ch,lt,sortie){
         return new Promise((next)=>{
             db.query("INSERT INTO observation(prescription_id, chambre, lit, enter_date, back_date) VALUES (?,?,?,NOW(),?)", [parseInt(prescription_id, 10), parseInt(ch, 10), parseInt(lt, 10),sortie] )
