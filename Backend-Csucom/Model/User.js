@@ -112,7 +112,7 @@ let User = class {
     static getAllObservationWithDate(){
         return new Promise((next)=>{
             let current = new Date().getDate();
-            db.query("SELECT *, CONCAT(client.name, ' ',client.firstname) nom, DAY(observation.back_date) jr, observation.id ident FROM observation LEFT JOIN prescription ON observation.prescription_id = prescription.id LEFT JOIN client ON prescription.client_id = client.id WHERE jr <= ? ORDER BY observation.id DESC", [parseInt(current, 10) + 2])
+            db.query("SELECT *, CONCAT(client.name, ' ',client.firstname) nom, DAY(observation.back_date) jr, observation.id ident FROM observation LEFT JOIN prescription ON observation.prescription_id = prescription.id LEFT JOIN client ON prescription.client_id = client.id WHERE DAY(observation.back_date) <= ? ORDER BY observation.id DESC", [parseInt(current, 10) + 2])
             .then((result)=>{
                 next(result);
             }).catch((err)=>{
