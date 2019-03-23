@@ -111,6 +111,18 @@ let User = class {
             })
         })
     }
+
+    static getAllArticle(){
+        return new Promise((next)=>{
+            db.query("SELECT * FROM ph_article ORDER BY libelle ASC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
     static getAllPrescriction(){
         return new Promise((next)=>{
             db.query("SELECT *, prescription.register_date date, prescription.price prix, designation.name desig, medecin.name medecin,  client.name nom, client.firstname prenom FROM prescription LEFT JOIN client ON prescription.client_id = client.id LEFT JOIN medecin ON prescription.medecin_id = medecin.id LEFT JOIN designation ON prescription.designation_id = designation.id ORDER BY prescription.id DESC")
@@ -131,6 +143,20 @@ let User = class {
             })
         })
     }
+
+    static getAllJour(){
+        return new Promise((next)=>{
+            db.query("SELECT * FROM ph_journalVente LEFT JOIN ph_article ON  ph_journalVente.article_id = ph_article.id ORDER BY ph_journalVente.id DESC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+
+
     static getAllObservationWithDate(){
         return new Promise((next)=>{
             let current = new Date().getDate();
