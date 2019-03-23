@@ -80,7 +80,6 @@ mysql.createConnection({
         }*/
     });
     api.get('/medecin', async (req, res)=>{
-        let info = {}
         let me = {
             "id": 1,
             "pseudo": "Icore",
@@ -93,7 +92,23 @@ mysql.createConnection({
             "etat": 0,
             "numero": null
         }
-        info.med = await User.getAllMedecin();
+        let info = await User.getAllMedecin();
+        res.json({success:true, user: me, info:info})
+    })
+    api.get('/pres', async (req, res)=>{
+        let me = {
+            "id": 1,
+            "pseudo": "Icore",
+            "email": "core.irie@gmail.com",
+            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
+            "rang": 0,
+            "register_date": "2019-03-20T09:52:22.000Z",
+            "login_date": "2019-03-22T18:36:42.000Z",
+            "attempt": 4,
+            "etat": 0,
+            "numero": null
+        }
+        let info = await User.getAllPrescriction();
         res.json({success:true, user: me, info:info})
     })
     api.post('/login', async (req, res) =>{

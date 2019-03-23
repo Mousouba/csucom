@@ -12,7 +12,17 @@ export class DataService {
 
   constructor(private _http: HttpClient) { }
 
-  getData(): Observable<Data[]> {
-    return this._http.get<Data[]>(this.apiUrl);
+  getData(): Observable<any[]> {
+    return this._http.get<any[]>(this.apiUrl);
   }
+
+  getMedecin(): Observable<any[]> {
+    return this._http.get<any[]>(this.apiUrl+"/medecin");
+  }
+
+  getPres(): Observable<any[]> {
+    return this._http.get<any[]>(this.apiUrl+"/pres");
+  }
+  
 }
+
