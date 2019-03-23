@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Injectable } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
@@ -26,10 +27,15 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit(){
-    this.http.get<any>("http://localhost:2037/api")
+   /* this.http.get<any>("http://localhost:2037/api")
     .subscribe( data => {
       console.log(data);
-    })
+    })*/
+  }
+
+  onSubmit(form: NgForm){
+      console.log("je passe");
+      
   }
 
 }

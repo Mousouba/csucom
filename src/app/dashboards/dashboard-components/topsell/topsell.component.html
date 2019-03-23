@@ -25,56 +25,32 @@
                     <th class="border-top-0">Lit</th>
                     <th class="border-top-0">Service ou prestation</th>
                     <th class="border-top-0">Date</th>
-                    <th class="border-top-0">Heure d'entrée</th>
                     <th class="border-top-0">Heure de sortie</th>
                     <th class="border-top-0">Statut</th>
                 </tr>
             </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let item of data">
                         <td>
                             <div class="d-flex align-items-center">
                                 <div class="m-r-10">
                                     <a class="btn btn-circle btn-danger text-white">KA</a>
                                 </div>
                                 <div class="">
-                                    <h4 class="m-b-0 font-16">Koné Ali</h4>
+                                    <h4 class="m-b-0 font-16">{{item.name}} {{item.firstname}} </h4>
                                 </div>
                             </div>
                         </td>
-                        <td>CH&nbsp;3</td>
-                        <td>L&nbsp;4</td>
+                        <td>CH&nbsp;{{item.chambre}}</td>
+                        <td>L&nbsp;{{item.lit}}</td>
                         <td>
                             <h5 class="m-b-0">Mise en Observation</h5>
                         </td>
-                        <td>Mercredi 29</td>
-                        <td>09:10</td>
-                        <td>16:00</td>
+                        <td>{{item.back_date}}</td>
+                        <td>{{item.heur}}</td>
                         <td>
-                            <label class="label label-success label-rounded">Déjà libéré</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div class="m-r-10">
-                                    <a class="btn btn-circle btn-danger text-white">KA</a>
-                                </div>
-                                <div class="">
-                                    <h4 class="m-b-0 font-16">Koné Ali</h4>
-                                </div>
-                            </div>
-                        </td>
-                        <td>CH&nbsp;3</td>
-                        <td>L&nbsp;4</td>
-                        <td>
-                            <h5 class="m-b-0">Mise en Observation</h5>
-                        </td>
-                        <td>Mercredi 29</td>
-                        <td>09:10</td>
-                        <td>16:00</td>
-                        <td>
-                            <label class="label label-danger label-rounded">Pas libéré</label>
+                            <label *ngIf="1 == item.etat" class="label label-success label-rounded">Libéré</label>
+                            <label *ngIf="0 == item.etat" class="label label-danger label-rounded">Observé</label>
                         </td>
                     </tr>
                 </tbody>

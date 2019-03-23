@@ -69,6 +69,28 @@ let User = class {
         })
     }
 
+    static getSumPres(){
+        return new Promise((next)=>{
+            db.query("SELECT SUM(price) sumPres FROM prescription")
+            .then((result)=>{
+                next(result[0]);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static getSumPhar(){
+        return new Promise((next)=>{
+            db.query("SELECT SUM(encaisse) sumEn FROM ph_journalvente")
+            .then((result)=>{
+                next(result[0]);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
     static getTotalDeficite(){
         return new Promise((next)=>{
             db.query("SELECT COUNT(id) totalDeficite FROM ph_article WHERE qte < 6")
@@ -112,7 +134,7 @@ let User = class {
     static getAllObservationWithDate(){
         return new Promise((next)=>{
             let current = new Date().getDate();
-            db.query("SELECT *, CONCAT(client.name, ' ',client.firstname) nom, DAY(observation.back_date) jr, observation.id ident FROM observation LEFT JOIN prescription ON observation.prescription_id = prescription.id LEFT JOIN client ON prescription.client_id = client.id WHERE DAY(observation.back_date) <= ? ORDER BY observation.id DESC", [parseInt(current, 10) + 2])
+            db.query("SELECT *, CONCAT(client.name, ' ',client.firstname) nom, DAY(observation.back_date) jr, DATE(observation.back_date) dates, HOUR(observation.back_date) heur, observation.id ident FROM observation LEFT JOIN prescription ON observation.prescription_id = prescription.id LEFT JOIN client ON prescription.client_id = client.id WHERE DAY(observation.back_date) <= ? ORDER BY observation.id DESC", [parseInt(current, 10) + 2])
             .then((result)=>{
                 next(result);
             }).catch((err)=>{

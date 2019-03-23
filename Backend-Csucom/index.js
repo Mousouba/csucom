@@ -64,10 +64,14 @@ mysql.createConnection({
             const NumberObservation =  await User.getTotalObservation();
             const NumberDeficite =  await User.getTotalDeficite();
             const listeOb =  await User.getAllObservationWithDate();
+            const SumPres =  await User.getSumPres();
+            const SumPhar =  await User.getSumPhar();
             info.totalClient = NumberClient.totalClient
             info.totalPrescription = NumberPer.totalPrescription
             info.totalObservation = NumberObservation.totalObservation
             info.totalDeficite = NumberDeficite.totalDeficite
+            info.totalSumPres = (SumPres.sumPres !== null) ? SumPres.sumPres : 0
+            info.SumPhar = (SumPhar.sumEn !== null) ? SumPhar.sumEn : 0
             info.listeOb = listeOb
             res.json({success:true, user: me, info:info})
         //}
@@ -75,6 +79,23 @@ mysql.createConnection({
             res.json({success:false, user: null})
         }*/
     });
+    api.get('/medecin', async (req, res)=>{
+        let info = {}
+        let me = {
+            "id": 1,
+            "pseudo": "Icore",
+            "email": "core.irie@gmail.com",
+            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
+            "rang": 0,
+            "register_date": "2019-03-20T09:52:22.000Z",
+            "login_date": "2019-03-22T18:36:42.000Z",
+            "attempt": 4,
+            "etat": 0,
+            "numero": null
+        }
+        info.med = await User.getAllMedecin();
+        res.json({success:true, user: me, info:info})
+    })
     api.post('/login', async (req, res) =>{
         req.check('user', "Email Invalide").isEmail();
         req.check('pass', "On ne Valide Pas ce Genre de Mot de passe").isAlphanumeric() //.matches(/^(?=.*[^a-zA-Z0-9])$/);

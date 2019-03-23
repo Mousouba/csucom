@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { Routes, RouterModule } from '@angular/router';
 import { CalendarModule, CalendarDateFormatter } from 'angular-calendar';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +23,7 @@ import { FullcalendarComponent } from './fullcalendar/fullcalendar.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
