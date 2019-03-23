@@ -1,32 +1,41 @@
-import { Component, AfterViewInit, Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/service/data.service';
+import { HttpClient } from '@angular/common/http';
+import { GetFirstWord } from 'src/app/model/GetFirstWord';
+
 
 @Component({
   templateUrl: './dashboard1.component.html',
   styleUrls: ['./dashboard1.component.css']
 })
-export class Dashboard1Component implements AfterViewInit {
+export class Dashboard1Component implements OnInit {
+public data = []
+public user = {}
+public info = {}
 
-  constructor(private http:HttpClient, private route:Router) {
-    this.http.get<any>("http://localhost:2037/api")
-        .subscribe( data => {
-            if(data['success'] == true){
-                route.navigate(['/authentication/login']);
-                console.log("verifié !");
-            }
-        }
-    
-    this.http.get<any>("http://localhost:2037/api")
-        .subscribe( All_data => {
-            console.log(All_data);
-        }
-        
+title = "yves mick";
+  constructor(private dataService: DataService, private route:Router, private http: HttpClient){
+
+     
   }
 
   ngOnInit() {
-    
+    return this.dataService.getData()
+      .subscribe( (Data) => { this.data = Data["info"].listeOb; this.user = Data["user"]; this.info = Data["info"]
+        console.log('DATA DIRECT ' + JSON.stringify(Data["info"].totalClient))} );
   }
+
   
-  ngAfterViewInit() {}
+  
+  ngAfterViewInit() {
+    console.log("===A====");
+    console.log(this.data);
+  }
 }
+
+
+
+
+            
+            
