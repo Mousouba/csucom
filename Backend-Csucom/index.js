@@ -144,13 +144,85 @@ mysql.createConnection({
             const personC = await User.userExist(user, password);
            if (!isErr(personC)){
                req.session.csucom = personC;
-               res.json(personC);
+               res.json({stat: true, user:personC});
            }
            else{
-               res.json({ error: 'Identification Echoué. Veuillez verifier vos cordonnées' })
+               res.json({ stat: false, error: 'Identification Echoué. Veuillez verifier vos cordonnées' })
            }
         }
         //res.render(`${__dirname}/public/form.twig`, { user: "nil" })
+    });
+    api.post('/fm', async (req, res) =>{
+        req.check('name', "Nom Invalide").notEmpty();
+
+        const error = req.validationErrors();
+        if(error){
+            res.json({ errors: error })
+        }
+        else{
+           let name = req.body.name;
+            const personC = await User.setFamille(name);
+            const all = await User.getFamille();
+           if (!isErr(personC)){
+               res.json({stat: false, all: all});
+           }
+           else{
+               res.json({stat: true, error: 'Identification Echoué. Veuillez verifier vos cordonnées' })
+           }
+        }
+    });
+
+    api.post('/art', async (req, res) =>{
+        req.check('libelle', "libelle Invalide").notEmpty();
+        req.check('describes', "describes Invalide").notEmpty();
+        req.check('date_peremption', "date Peremption Invalide").notEmpty();
+        req.check('priceAchat', "prix Achat Invalide").isInt();
+        req.check('priceVente', "prix Vente Invalide").isInt();
+        req.check('qtes', "quantitée Invalide").isInt();
+        const error = req.validationErrors();
+        if(error){
+            res.json({ errors: error })
+        }
+        else{
+           let libelle = req.body.libelle;
+           let describes = req.body.describes;
+           let date_peremption = req.body.date_peremption;
+           let priceAchat = req.body.priceAchat;
+           let priceVente = req.body.priceVente;
+           let qtes = req.body.qtes;
+           let famille_id = req.body.famille_id
+           const ref = Math.floor(Math.random() * Math.floor(9999));
+           const personC = await User.setArticle(libelle, describes,priceAchat, priceVente,qtes,condition,famille_id,date_peremption,ref);
+           if (!isErr(personC)){
+               res.json({stat: false, all: personC});
+           }
+           else{
+               res.json({stat: true, error: 'Identification Echoué. Veuillez verifier vos cordonnées' })
+           }
+        }
+    });
+
+
+    api.post('/ds', async (req, res) =>{
+        req.check('name', "Nom Invalide").notEmpty();
+        req.check('priceUnitaire', "prix Invalide").isInt()
+
+        const error = req.validationErrors();
+        if(error){
+            res.json({ errors: error })
+        }
+        else{
+           let name = req.body.name;
+           let service = req.body.service;
+           let priceU = req.body.priceU;
+            const personC = await User.setDes(name, service, priceU);
+           if (!isErr(personC)){
+               res.json({stat: false, all: personC});
+           }
+           else{
+               res.json({stat: true, error: 'Identification Echoué. Veuillez verifier vos cordonnées' })
+           }
+        }
     });
     api.get('/logout', async (req, res) => {
         req.session.destroy((err) => {

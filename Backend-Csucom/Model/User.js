@@ -178,4 +178,54 @@ let User = class {
             })
         })
     }
+
+
+    static setArticle(libelle,describes,priceAchat,priceVente,qtes,conditi,famille_id,date_peremption,ref){
+        return new Promise((next)=>{
+            db.query("INSERT INTO ph_article(libelle,describes,priceAchat,priceVente,qtes,date_peremption,ref,famille_id) VALUES (?,?,?,?,?,?,?,?)", [libelle,describes,parseInt(priceAchat, 10),parseInt(priceVente, 10),parseInt(qtes, 10),date_peremption,ref,parseInt(famille_id, 10)] )
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static setFamille(name){
+        return new Promise((next)=>{
+            db.query("INSERT INTO ph_famille(name) VALUES (?)", [name] )
+            .then((result)=>{
+                next(result[0]);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static setDes(name, service, priceU){
+        return new Promise((next)=>{
+            db.query("INSERT INTO designation(name, service_id, price_U) VALUES (?,?,?)", [name, parseInt(service, 10), parseInt(priceU, 10)] )
+            .then((result)=>{
+                db.query("SELECT * FROM designation ORDER BY id DESC")
+                .then((ress)=>{
+                    next(ress);
+                }).catch((err)=>{
+                    next(err)
+                })
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static getFamille(){
+        return new Promise((next)=>{
+            db.query("SELECT * FROM ph_famille ORDER BY id DESC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
 }
