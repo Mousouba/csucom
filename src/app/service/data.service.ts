@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Data } from '../model/data';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -22,6 +21,18 @@ export class DataService {
 
   getPres(): Observable<any[]> {
     return this._http.get<any[]>(this.apiUrl+"/pres");
+  }
+
+  getObs(): Observable<any[]> {
+    return this._http.get<any[]>(this.apiUrl+"/observ");
+  }
+
+  getArticle(): Observable<any[]> {
+    return this._http.get<any[]>(this.apiUrl+"/vente");
+  }
+
+  getJournal(): Observable<any[]> {
+    return this._http.get<any[]>(this.apiUrl+"/journal");
   }
   
 }

@@ -1,14 +1,6 @@
 
 <div class="card">
-    <div class="row">
-        <div class="card-body">
 
-
-            
-            
-
-        </div>
-    </div>
     <div class="card-body">
         <!-- title -->
         <div class="d-md-flex align-items-center col-md-12 ">
@@ -29,9 +21,6 @@
                     <form class="m-b-0" style="width: 200px; display: inline-block; margin-left: 40px">
                       <input type='date' class="form-control" title="periode fin" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
                     </form>
-                    <form class="m-b-0" style="width: 200px; display: inline-block; float: right">
-                      <input type='text' class="form-control" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
-                    </form>
                 </div>
             </div>
         </div>
@@ -43,26 +32,22 @@
                 <tr class="bg-light">
                     <th>Reçu N°</th>
                     <th>Date</th>
-                    <th>Heure</th>
                     <th>Client</th>
                     <th>Designation</th>
                     <th>Prix unitaire</th>
                     <th>Qte</th>
                     <th>Montant total</th>
-                    <th>Espèces Reçu</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of collection">
-                    <td>{{ item.n }}</td>
-                    <td>{{ item.date }}</td>
-                    <td>{{ item.heure }}</td>
-                    <td>{{ item.client }}</td>
-                    <td>{{ item.designation }}</td>
-                    <td>{{ item.pu }}</td>
-                    <td>{{ item.qte }}</td>
-                    <td>{{ item.montant }}</td>
-                    <td>{{ item.espece }}</td>
+                    <td>{{ item.keyGen }}</td>
+                    <td>{{ item.register }}</td>
+                    <td>{{ item.name_client }}</td>
+                    <td>{{ item.libelle }}</td>
+                    <td>{{ item.priceVente }}</td>
+                    <td>{{ item.quantite }}</td>
+                    <td>{{ item.priceVente * item.quantite }}</td>
                 </tr>
             </tbody>
        </table>

@@ -109,7 +109,9 @@ mysql.createConnection({
             "numero": null
         }
         let info = await User.getAllObservation();
-        res.json({success:true, user: me, info:info})
+        let chambre = await User.getAllChambre();
+        let lit = await User.getAllLit();
+        res.json({success:true, user: me, info:info, chambre:chambre, lit:lit})
     })
 
     
@@ -129,6 +131,42 @@ mysql.createConnection({
         let info = await User.getAllPrescriction();
         res.json({success:true, user: me, info:info})
     })
+
+    api.get('/vente', async (req, res)=>{
+        let me = {
+            "id": 1,
+            "pseudo": "Icore",
+            "email": "core.irie@gmail.com",
+            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
+            "rang": 0,
+            "register_date": "2019-03-20T09:52:22.000Z",
+            "login_date": "2019-03-22T18:36:42.000Z",
+            "attempt": 4,
+            "etat": 0,
+            "numero": null
+        }
+        let article = await User.getAllArticle();
+        res.json({success:true, user: me, article:article})
+    })
+
+
+    api.get('/journal', async (req, res)=>{
+        let me = {
+            "id": 1,
+            "pseudo": "Icore",
+            "email": "core.irie@gmail.com",
+            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
+            "rang": 0,
+            "register_date": "2019-03-20T09:52:22.000Z",
+            "login_date": "2019-03-22T18:36:42.000Z",
+            "attempt": 4,
+            "etat": 0,
+            "numero": null
+        }
+        let article = await User.getJournal();
+        res.json({success:true, user: me, article:article})
+    })
+
     api.post('/login', async (req, res) =>{
         req.check('user', "Email Invalide").isEmail();
         req.check('pass', "On ne Valide Pas ce Genre de Mot de passe").isAlphanumeric() //.matches(/^(?=.*[^a-zA-Z0-9])$/);

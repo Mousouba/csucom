@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -33,9 +31,8 @@ export class LoginComponent implements OnInit {
     })*/
   }
 
-  onSubmit(form: NgForm){
-      console.log("je passe");
-      
+  onSubmit(ngForm: NgForm){
+    console.log(ngForm.value);
   }
 
 }
