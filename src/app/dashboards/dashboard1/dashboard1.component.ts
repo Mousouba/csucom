@@ -2,7 +2,6 @@ import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { HttpClient } from '@angular/common/http';
-import { GetFirstWord } from 'src/app/model/GetFirstWord';
 
 
 @Component({

@@ -3,31 +3,26 @@
     <div class="col-md-9 col-lg-9">
         <div class="card">
             <div class="card-body">
+                <button class="mb-2 btn btn-light" [routerLink]="['/ecom/products']">Retour</button>
                 <div class="table-responsive">
                     <table class="table v-middle product-overview" id="zero_config">
                         <thead>
                             <tr>
                                 <th style="width: 1%">N°</th>
-                                <th>Image</th>
                                 <th>Designation</th>
-                                <th>Pu Vente</th>
-                                <th>Quantité</th>
-                                <th>Total</th>
+                                <th>Prix</th>
+                                <th>Qte en stock</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <img src="assets/images/product/chair3.png" alt="iMac" width="30"> 
-                                </td>
-                                <td>Séringue</td>
-                                <td>340</td>
-                                <td>2</td>
-                                <td>680</td>
+                            <tr *ngFor="let item of collection; let i = index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ item.libelle }}</td>
+                                <td>{{ item.priceVente }}</td>
+                                <td>{{ item.qte }}</td>
                                 <td class="text-right">
-                                    <a  href="javascript:void(0)" class=" mr-3 text-danger" title="Supprimer de la liste"><i class="text-danger ti-close"></i></a>
+                                    <a (click)="removeItem(i)" href="javascript:void(0)" class=" mr-3 text-danger" title="Supprimer de la liste"><i class="text-danger ti-close"></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -40,24 +35,22 @@
     <div class="col-md-3 col-lg-3">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">INFORMATION DE L'ACHAT</h5>
-                <hr>
                 <small>N° Reçu</small>
                 <h2>00345</h2>
                 <small>Client / Destination<span class="font-12 text-danger">&nbsp;*</span></small>
-                <input type="text" class="form-control" placeholder="Saisir nom ici">
+                <input [(ngModel)]="client" type="text" class="form-control" placeholder="Saisir nom ici">
                 <hr>
                 <small>Total Net à payer</small>
-                <h2>6000&nbsp;CFA</h2>
+                <h2>{{ total }}&nbsp;CFA</h2>
                 <small>Montant Espèce reçu<span class="font-12 text-danger">&nbsp;*</span></small>
-                <input type="number" min="0" step="5" class="form-control" placeholder="Saisir montant ici">
+                <input [(ngModel)]="monnaie" type="number" value="0" min="0" step="5" class="form-control" placeholder="Saisir montant ici">
                 <small>Monnaie rendue</small>
-                <h2>0&nbsp;CFA</h2>
+                <h2 *ngIf="!total">0&nbsp;CFA</h2>
+                <h2 *ngIf="total">{{ total - monnaie }}&nbsp;CFA</h2>
                 <hr>
                 <div class="form-actions" style="width: 100%;margin-top: 40px">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success m-r-1">Commander</button>
-                        <button type="submit" class="btn btn-dark m-r-5">Annuler</button>
+                        <button *ngIf="total" [disabled]="!client" type="submit" class="btn btn-success m-r-1">Commander</button>
                     </div>
                 </div>
             </div>

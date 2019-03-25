@@ -111,10 +111,33 @@ let User = class {
             })
         })
     }
+    
 
     static getAllArticle(){
         return new Promise((next)=>{
             db.query("SELECT * FROM ph_article ORDER BY libelle ASC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static getAllChambre(){
+        return new Promise((next)=>{
+            db.query("SELECT * FROM chambre ORDER BY libelle ASC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static getAllLit(){
+        return new Promise((next)=>{
+            db.query("SELECT * FROM lit ORDER BY libelle ASC")
             .then((result)=>{
                 next(result);
             }).catch((err)=>{
@@ -133,6 +156,18 @@ let User = class {
             })
         })
     }
+
+    static getJournal(){
+        return new Promise((next)=>{
+            db.query("SELECT *, ph_article.libelle libelle,  ph_article.priceVente FROM ph_journalvente LEFT JOIN ph_article ON ph_journalvente.article_id = ph_article.id ORDER BY ph_journalvente.id DESC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
     static getAllObservation(){
         return new Promise((next)=>{
             db.query("SELECT *, CONCAT(client.name, ' ',client.firstname) nom, observation.id ident FROM observation LEFT JOIN prescription ON  observation.prescription_id = prescription.id LEFT JOIN client ON prescription.client_id = client.id ORDER BY observation.id DESC")

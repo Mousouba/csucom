@@ -1,33 +1,39 @@
-<div class="row el-element-overlay">
-    
-    <div *ngFor="let item of collection"  class="col-lg-3 col-md-6">
+<div class="row">
+    <div class="col-md-12 col-lg-12">
         <div class="card">
-            <div class="el-card-item">
-                <div class="el-card-avatar el-overlay-1" style="height: 210px">
-                    <img src="assets/images/product/{{ item.image }}" alt="user" />
-                    <div class="el-overlay">
-                        <ul class="list-style-none el-info">
-                            <li class="el-item">
-                                <a title="Ajouter au panier" class="btn default btn-outline image-popup-vertical-fit el-link" href="#)">
-                                    <i class="ti-shopping-cart font-16"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="d-flex no-block align-items-center">
-                    <div class="m-l-15">
-                        <h4 class="m-b-0">{{ item.nom }}</h4>
-                    </div>
-                    <div class="ml-auto m-r-15">
-                        <div class="label label-info ">{{ item.montant }}&nbsp;CFA</div>
-                    </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table v-middle product-overview" id="zero_config">
+                        <thead>
+                            <tr>
+                                <th style="width: 1%">N°</th>
+                                <th>Designation</th>
+                                <th>Pu Vente</th>
+                                <th>En stock</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of collection; let i = index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ item.libelle }}</td>
+                                <td>{{ item.priceVente }}</td>
+                                <td>
+                                    <label *ngIf=" 5 < item.qte"  class="label label-success label-rounded">{{ item.qte }}</label>
+                                    <label *ngIf=" 5 > item.qte"   class="label label-danger label-rounded">{{ item.qte }}</label>
+                                </td>
+                                <td class="text-right">
+                                    <a (click)="addToCart(i)" href="javascript:void(0)" class=" mr-3 text-danger" title="Ajouter au panier"><i class="text-success icon-Add-Bag"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="test">
-    <button [routerLink]="['/ecom/cart']"  class="t btn btn-primary btn-circle btn-xl" title="Commander maintenant !" type="button"><i class="icon-Add-Bag"></i></button>
-    <span class="sup-class">12</span>
+    <div class="test">
+        <button [routerLink]="['/ecom/cart']"  class="t btn btn-primary btn-circle btn-xl" title="Commander maintenant !" type="button"><i class="icon-Add-Bag"></i></button>
+        <span class="sup-class">{{ count }}</span>
+    </div>
 </div>

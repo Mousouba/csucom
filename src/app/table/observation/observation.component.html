@@ -4,31 +4,25 @@
             <table #table class="table v-middle col-md-12">
                 <thead>
                     <tr class="bg-light">
+                        <th class="border-top-0 ">N°</th>
                         <th class="border-top-0 ">Patient</th>
                         <th class="border-top-0 text-center">Chambre</th>
                         <th class="border-top-0 text-center">Lit</th>
                         <th class="border-top-0 text-center">Date</th>
-                        <th class="border-top-0 text-center" >Entrée</th>
                         <th class="border-top-0 text-center">Sortie</th>
-                        <th class="border-top-0 text-center">Statut</th>
                         <th class="border-top-0 text-center">Actions</th>
                     </tr>
                 </thead>
                     <tbody>
-                        <tr *ngFor="let item of collection">
-                            <td>{{ item.patient }}</td>
+                        <tr *ngFor="let item of collection; let i = index">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ item.nom }}</td>
                             <td class="text-center">CH&nbsp;{{ item.chambre }}</td>
                             <td class="text-center">L&nbsp;{{ item.lit }}</td>
-                            <td class="text-center">{{ item.date }}</td>
-                            <td class="text-center">{{ item.entree }}</td>
-                            <td class="text-center">{{ item.sortie }}</td>
+                            <td class="text-center">{{ item.back_date }}</td>
+                            <td class="text-center">00:00</td>
                             <td class="text-center">
-                                <label *ngIf=" 1 == item.statut" class="label label-danger label-rounded font-weight-100">Observé</label>
-                                <label *ngIf=" 0 == item.statut" class="label label-success label-rounded font-weight-100">Libéré</label>
-                            </td>
-                            <td class="text-center">
-                                <a  href="javascript:void(0)" class="mr-3 text-inverse" title="Voir profil"><i class="ti-user text-dark"></i></a>
-                                <a href="javascript:void(0)" class="text-inverse" title="Supprimer"><i class="ti-trash text-dark"></i></a>
+                                <a  href="javascript:void(0)" class="mr-3 text-inverse text-center" title="Voir profil"><i class="ti-user text-dark"></i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -41,18 +35,10 @@
                 <div class="card-body">
                     <h5 class="card-title">SAISIE D'INFORMATION</h5>
                     <hr>
-                    <form>
-                        <div class="form-group m-b-30">
-                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Sélectionnez le patient</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </form>
-                    <small>N° Reçu</small>
-                    <h4>00345</h4>
+                    <small>N° de reçu<span class="font-12 text-danger">&nbsp;*</span></small>
+                    <input class="form-control" placeholder="000333">
+                    <small>Nom du patient</small>
+                    <h4>Kone</h4>
                     <small>Numero</small>
                     <h4>03030303</h4>
                     <small>Sexe</small>
@@ -61,45 +47,24 @@
                     <form>
                         <div class="form-group m-b-30">
                             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Sélectionnez la chambre</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option *ngFor="let item of chambre">{{ item.libelle | uppercase }}</option>
                             </select>
                         </div>
                     </form>
                     <form>
                         <div class="form-group m-b-30">
                             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Sélectionnez le lit</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option *ngFor="let item of lit">{{ item.libelle | uppercase }}</option>
                             </select>
                         </div>
                     </form>
                     <small>Date de mise en observation<span class="font-12 text-danger">&nbsp;*</span></small>
                     <input type="text" class="form-control" placeholder="2017-06-04" id="mdate">
-
-                    <small>Heure d'entrée<span class="font-12 text-danger">&nbsp;*</span></small>
-                    <input class="form-control" id="timepicker" placeholder="00:00">
-
                     <small>Heure de sortie<span class="font-12 text-danger">&nbsp;*</span></small>
-                    <input class="form-control" id="timepicker1" placeholder="00:00">
-                    <hr>
-                    <form>
-                        <div class="form-group m-b-30">
-                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Sélectionnez l'observateur</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </form>
+                    <input type="date" class="form-control" id="timepicker1" placeholder="00:00">
                     <hr>
                     <div class="form-group col-md-12 text-center">
-                        <button class="btn btn-success mr-1">Enregistrer</button>
+                        <button class="btn btn-success mr-1">Enreg</button>
                         <button class="btn btn-secondary btn-outline">Modifier</button>
                     </div>
                 </div>
