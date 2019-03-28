@@ -1,72 +1,92 @@
-<div class="row">
-    <!-- Column -->
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-                <form action="#">
-                    <div class="form-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Nom<span class="font-12 text-danger">&nbsp;*</span></label>
-                                    <input autofocus type="text" id="firstName" class="form-control" placeholder=""> 
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Prenom<span class="font-12 text-danger">&nbsp;*</span></label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="">
-                                </div>
-                            </div>
-                            <!--/span-->
+<form (ngSubmit)="onSubmit(f)" #f="ngForm" class="row col-md-12">
+        <div class="col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Patient</h5>
+                    <hr>
+                     <input *ngIf="!collection.id" name="name" ngModel required  id="firstName" type="text" class="form-control mb-3" placeholder="Nom du patient">
+                     <input *ngIf="collection.id" name="name" disabled value="{{ collection.name }}"  id="firstName" type="text" class="form-control mb-3" placeholder="Nom du patient">
+                     <input *ngIf="!collection.id" name="firstname" ngModel required  id="firstName" type="text" class="form-control mb-3" placeholder="Prénom du patient">
+                     <input *ngIf="collection.id" name="firstname" disabled value="{{ collection.firstname }}" id="firstName" type="text" class="form-control mb-3" placeholder="Prénom du patient">
+                     <div class="form-group m-b-30">
+                        <select *ngIf="!collection.id" name="sexe" ngModel required class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option >Homme</option>
+                            <option >Femme</option>
+                        </select>
+                        <select *ngIf="collection.id" name="sexe" disabled  class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option selected>{{ collection.sexe }}</option>
+                        </select>
+                     </div>
+                     <input *ngIf="!collection.id" name="birth_date" ngModel required type="date" class="form-control mb-3" placeholder="Date de naissance'">
+                     <input *ngIf="collection.id" name="birth_date" disabled value="{{ collection.birth_date }}" type="text" class="form-control mb-3" placeholder="Date de naissance'">
+                     <input *ngIf="collection.id" name="number" disabled type="text" value="{{ collection.number }}" class="form-control  mb-3" placeholder="Contact">
+                     <input *ngIf="!collection.id" name="number" ngModel type="text" class="form-control  mb-3"  placeholder="Contact">
+                    
+                    <div class="row" *ngIf="!collection.id" >
+                        <div _ngcontent-c5="" class="custom-control custom-checkbox">
+                                <input name="assure" checked ngModel _ngcontent-c5=""  class="custom-control-input" id="customCheck1" type="checkbox"><label _ngcontent-c5="" class="custom-control-label" for="customCheck1">Assuré (à jour)</label>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Sexe<span class="font-12 text-danger">&nbsp;*</span></label>
-                                    <select class="form-control" data-placeholder="Choisir une famille" tabindex="1">
-                                        <option value="Category 1">Homme</option>
-                                        <option value="Category 2">Femme</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Age</label>
-                                    <input type="number" min="0" step="1" id="firstName" class="form-control" placeholder="">
-                                </div>
-                            </div>
-                            <!--/span-->
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Adresse</label>
-                                    <input type="text" id="firstName" class="form-control" placeholder=""> 
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group text-right">
-                                    <button type="submit" class="btn btn-success m-r-5" style="margin-top: 6%">
-                                        <i class="fa fa-check"></i> Enregister
-                                    </button>
-                                </div>
-                            </div>
-                            <!--/span-->
-                         </div>
-                        <div class="row">
-                            <div _ngcontent-c5="" class="custom-control custom-checkbox">
-                                <input _ngcontent-c5="" checked="" class="custom-control-input" id="customCheck2" type="checkbox"><label _ngcontent-c5="" class="custom-control-label" for="customCheck2">Assuré (à jour)</label>
-                            </div>
-                         </div>
-                        
                     </div>
-                </form>
+
+                    <div class="row" *ngIf="collection.id" disabled>
+                        <div _ngcontent-c5="" class="custom-control custom-checkbox">
+                                <input name="assure" checked ngModel *ngIf="collection.assure" _ngcontent-c5="" disabled checked="true" class="custom-control-input" id="customCheck2" type="checkbox">
+                                <input name="assure" checked ngModel *ngIf="!collection.assure" _ngcontent-c5="" disabled  class="custom-control-input" id="customCheck2" type="checkbox"><label _ngcontent-c5="" class="custom-control-label" for="customCheck2">Assuré (à jour)</label>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Column -->
-</div>
+        <div class="col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Prescriptions</h5>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="inputname" class="control-label col-form-label">Service</label>
+                                    <select name="service" ngModel required class="form-control">
+                                        <option *ngFor="let item of service" value="{{ item.id }}">{{ item.name }}</option>
+                                    </select>
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="inputname" class="control-label col-form-label">Prescripteur</label>
+                                    <select name="medecin" ngModel required class="form-control">
+                                    <option *ngFor="let item of medecin" value="{{ item.id }}">{{ item.name }} {{ item.firstname }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="inputname" class="control-label col-form-label">Designation</label>
+                                <select  name="libelle" ngModel required  class="form-control">
+                                    <option *ngFor="let item of designation" value="{{ item.id }}">{{ item.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="inputname" class="control-label col-form-label">N° de reçu</label>
+                                <input name="keyGen" type="text" disabled  value="{{ keyGen }}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input class="col-sm-6 col-md-6" name="priceU" ngModel required type="number" min="0" step="5" class="form-control mb-3" placeholder="Prix unitaire">
+                        <input class="col-sm-6 col-md-6"  name="montant" ngModel type="number" min="0" step="5" class="form-control mb-3" placeholder="Montant">
+                    </div>
+                  <button type="submit" [disabled]="!f.form.valid" class="btn btn-success m-r-5">
+                        <i class="fa fa-check"></i> Enregister
+                   </button>
+                </div>
+            </div>
+        </div>
+        </form>

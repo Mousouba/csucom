@@ -13,7 +13,7 @@ let User = class {
     
     static userExist(login,password){
         return new Promise((next) => {
-            db.query("SELECT id FROM gestionnaire WHERE email = ? AND pass = ?", [login, password])
+            db.query("SELECT id FROM gestionnaire WHERE pseudo = ? AND pass = ?", [login, password])
                 .then((result)=>{
                     if (result[0] !== undefined){
                         db.query("UPDATE gestionnaire SET login_date = NOW() WHERE gestionnaire.id = ?", [parseInt(result[0].id, 10)])
@@ -49,9 +49,31 @@ let User = class {
     }
     static getTotalPatient(){
         return new Promise((next)=>{
-            db.query("SELECT COUNT(id) totalClient FROM client")
+            db.query("SELECT *, COUNT(id) totalClient FROM client")
             .then((result)=>{
                 next(result[0]);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static getAllPatient(){
+        return new Promise((next)=>{
+            db.query("SELECT * FROM client ORDER BY id DESC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static getMaxPatientID(){
+        return new Promise((next)=>{
+            db.query("SELECT MAX(id) lastID FROM client ORDER BY id DESC")
+            .then((result)=>{
+                next(result);
             }).catch((err)=>{
                 next(err)
             })
@@ -112,10 +134,33 @@ let User = class {
         })
     }
     
+    static getAllService(){
+        return new Promise((next)=>{
+            db.query("SELECT * FROM service ORDER BY name ASC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+    
+    
 
     static getAllArticle(){
         return new Promise((next)=>{
             db.query("SELECT * FROM ph_article ORDER BY libelle ASC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static getAllArticleInventaire(){
+        return new Promise((next)=>{
+            db.query("SELECT *, ph_famille.name sa_famille FROM ph_article LEFT JOIN ph_famille ON ph_famille.id = famille_id ORDER BY ph_famille.name ASC")
             .then((result)=>{
                 next(result);
             }).catch((err)=>{
@@ -203,6 +248,29 @@ let User = class {
             })
         })
     }
+
+    static getFamille(){
+        return new Promise((next)=>{
+            db.query("SELECT * FROM ph_famille ORDER BY id DESC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static getDes(){
+        return new Promise((next)=>{
+            db.query("SELECT * FROM designation ORDER BY id DESC")
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
     static setObservation(prescription_id,ch,lt,sortie){
         return new Promise((next)=>{
             db.query("INSERT INTO observation(prescription_id, chambre, lit, enter_date, back_date) VALUES (?,?,?,NOW(),?)", [parseInt(prescription_id, 10), parseInt(ch, 10), parseInt(lt, 10),sortie] )
@@ -213,4 +281,67 @@ let User = class {
             })
         })
     }
+
+
+    static setArticle(libelle,priceAchat,priceVente,qtes,conditi,famille_id,date_peremption,ref,date){
+        return new Promise((next)=>{
+            db.query("INSERT INTO ph_article(libelle,priceAchat,priceVente,qte,conditionnement,date_peremption,ref,famille_id,register_date) VALUES (?,?,?,?,?,?,?,?,?)", [libelle,parseInt(priceAchat, 10),parseInt(priceVente, 10),parseInt(qtes, 10),conditi,date_peremption,ref,parseInt(famille_id, 10),date] )
+            .then((result)=>{
+                next(result);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static setFamille(name){
+        return new Promise((next)=>{
+            db.query("INSERT INTO ph_famille(name) VALUES (?)", [name] )
+            .then((result)=>{
+                next(result[0]);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static setPres(client,service,medecin,libelle,keyGen,date,gestionnaire,ristourne,montant){
+        return new Promise((next)=>{
+            db.query("INSERT INTO prescription(`client_id`, `id_service`, `medecin_id`, `designation_id`, `keyGen`, `register_date`, `gestionnaire_id`, `ristourne`, `price`) VALUES (?,?,?,?,?,?,?,?,?)", [client,service,medecin,libelle,keyGen,date,gestionnaire,ristourne,montant] )
+            .then((result)=>{
+                next(result[0]);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static setPatient(name,firstname,sexe,birth_date,number,assure,register_date){
+        return new Promise((next)=>{
+            db.query("INSERT INTO client(name,firstname,sexe,birth_date,number,assure,register_date) VALUES (?,?,?,?,?,?,?)", [name,firstname,sexe,birth_date,number,assure,register_date] )
+            .then((result)=>{
+                next(result[0]);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+    static setDes(name, service, priceU){
+        return new Promise((next)=>{
+            db.query("INSERT INTO designation(name, service_id, price_U) VALUES (?,?,?)", [name, parseInt(service, 10), parseInt(priceU, 10)] )
+            .then((result)=>{
+                db.query("SELECT * FROM designation ORDER BY id DESC")
+                .then((ress)=>{
+                    next(ress);
+                }).catch((err)=>{
+                    next(err)
+                })
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+
 }

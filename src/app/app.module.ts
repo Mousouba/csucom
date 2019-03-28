@@ -32,6 +32,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { DataService } from './service/data.service';
 import { PanierService } from './service/panier.service';
+import { InfoUserService } from './service/info-user.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -71,7 +72,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useClass: HashLocationStrategy
     },
     DataService,
-    PanierService
+    PanierService,
+    InfoUserService
   ],
   bootstrap: [AppComponent]
 })

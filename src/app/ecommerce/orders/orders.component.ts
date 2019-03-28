@@ -1,14 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/service/data.service';
 
-declare var require: any;
-const data: any = require('./order.json');
 @Component({
   templateUrl: 'orders.component.html'
 })
-export class OrderComponent {
-    private collection : [any];
+export class OrderComponent implements OnInit {
+    public collection : [any];
+    public hisID:number;
     
-    constructor(){
-        this.collection = data;
+    constructor( private dataService : DataService ){}
+
+    ngOnInit(){
+      this.dataService.getInventaire()
+      .subscribe( (Data) => { this.collection = Data.article;
+                              console.log(JSON.stringify(this.collection)) 
+      })
     }
+
+    delArticle(id:number){
+      console.log('son id est : '+id);
+    }
+
+
 }

@@ -17,39 +17,38 @@
         <!-- title -->
     </div>
     <div class="table-responsive col-md-12" style="display: inline-block">
-            <table #table class="table v-middle col-md-12">
+            <table class="table v-middle product-overview" id="zero_config">
                 <thead>
-                    <tr class="bg-light">
-                        <th style="width: 5%">N°</th>
-                        <th style="width: 15%">Famille</th>
-                        <th style="width: 25%">Désignation</th>
-                        <th style="width: 5%">PU Achat</th>
-                        <th style="width: 5%">PU Vente</th>
-                        <th style="width: 10%">Statut</th>
-                        <th style="width: 10%">Qte Stock</th>
-                        <th style="width: 10%">Qte Rest.</th>
-                        <th style="width: 10%">Stock Réel</th>
-                        <th style="width: 5%">Péremption</th>
+                    <tr>
+                        <th style="width: 1%">N°</th>
+                        <th>Famille</th>
+                        <th>Designation</th>
+                        <th>PU Achat</th>
+                        <th>Pu Vente</th>
+                        <th class="text-center">Statut</th>
+                        <th>Qte Rest</th>
+                        <th>Date Exp</th>
+                        <th class="text-right">Action</th>
                     </tr>
                 </thead>
-                    <tbody>
-                        <tr *ngFor="let item of collection">
-                            <td>{{ item.n }}</td>
-                            <td>{{ item.famille }}</td>
-                            <td>{{ item.designation }}</td>
-                            <td>{{ item.puachat }}</td>
-                            <td>{{ item.puvente }}</td>
-                            <td class="text-center">
-                                <label *ngIf=" 0 == item.statut" class="label label-danger label-rounded">&nbsp;&nbsp;&nbsp;&nbsp;Fini&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <label *ngIf=" 1 == item.statut" class="label label-success label-rounded">En stock</label>
-                            </td>
-                            <td>{{ item.qtestock }}</td>
-                            <td>{{ item.qterest }}</td>
-                            <td><input class="form-control" required type="number" value='{{ item.stockreel }}' min="0" step="1"></td>
-                            <td>{{ item.peremption }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                <tbody>
+                    <tr *ngFor="let item of collection; let i = index">
+                        <td>{{ i+1 }}</td>
+                        <td>{{ item.sa_famille }}</td>
+                        <td>{{ item.libelle }}</td>
+                        <td class="text-center">{{ item.priceAchat }}</td>
+                        <td class="text-center">{{ item.priceVente }}</td>
+                        <td class="text-center">
+                            <span *ngIf=" item.qte >= 5" class="label label-success font-weight-100 label-rounded">+</span>
+                            <span *ngIf=" item.qte < 5" class="label label-danger font-weight-100 label-rounded">-</span>
+                        </td>
+                        <td class="text-center">{{ item.qte }}</td>
+                        <td>{{ item.date_peremption }}</td>
+                        <td class="text-right">
+                            <a (click)="delArticle(item.id)"  href="javascript:void(0)" class=" mr-3 text-danger" title="Supprimer de la liste"><i class="text-danger ti-close"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 </div>

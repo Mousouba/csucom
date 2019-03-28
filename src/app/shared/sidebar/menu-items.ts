@@ -21,7 +21,7 @@ export const ROUTES: RouteInfo[] = [
         title: 'Liste des prescripteurs',
         icon: '',
         class: '',
-        extralink: false,
+        extralink: false, 
         submenu: []
       },
       {
@@ -75,46 +75,6 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: '',
-        title: 'Approvisionnement',
-        icon: '',
-        class: 'right-title',
-        extralink: false,
-        submenu: []
-      },
-      {
-        path: '/tables/saisiefournisseur',
-        title: 'Saisie des fournisseurs',
-        icon: '',
-        class: '',
-        extralink: false,
-        submenu: []
-      },
-      {
-        path: '/tables/fournisseur',
-        title: 'Liste des fournisseurs',
-        icon: '',
-        class: '',
-        extralink: false,
-        submenu: []
-      },
-      {
-        path: '/tables/bon',
-        title: 'Bon de commandes',
-        icon: '',
-        class: '',
-        extralink: false,
-        submenu: []
-      },
-      {
-        path: '/tables/arrivage',
-        title: 'Arrivages',
-        icon: '',
-        class: '',
-        extralink: false,
-        submenu: []
-      },
-      {
-        path: '',
         title: 'Articles',
         icon: '',
         class: 'right-title',
@@ -154,14 +114,6 @@ export const ROUTES: RouteInfo[] = [
     class: 'has-arrow',
     extralink: false,
     submenu: [
-      {
-        path: '/tables/saisiepatient',
-        title: 'Saisie des adhérents',
-        icon: '',
-        class: '',
-        extralink: false,
-        submenu: []
-      },
       {
         path: '/tables/patient',
         title: 'Liste des patients',

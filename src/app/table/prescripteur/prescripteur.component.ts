@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
 
 @Component({
@@ -13,7 +13,9 @@ export class PrescripteurComponent implements OnInit {
   
   ngOnInit(){
     return this.dataService.getMedecin()
-    .subscribe( (Data) => { this.collection = Data.info; 
-      console.log('DATA DIRECT ' + JSON.stringify(Data["info"]))} );
+    .subscribe( (Data) => { this.collection = Data.info },  
+    (error) => {
+     console.log("erreur")
+    })
   }
 }

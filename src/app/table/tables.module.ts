@@ -26,13 +26,15 @@ import { BasictableComponent } from './basic/basic.component';
 import { DarktableComponent } from './dark-basic/dark.component';
 import { ColortableComponent } from './color-table/color.component';
 import { TablesizeComponent } from './sizing/size.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     RouterModule.forChild(TablesRoutes),
     CommonModule,
     NgxDatatableModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    FormsModule
   ],
   declarations: [
     PrescripteurComponent,
