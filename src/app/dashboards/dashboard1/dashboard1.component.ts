@@ -29,7 +29,7 @@ title = "yves mick";
   
   ngAfterViewInit() {
     console.log("===A====");
-    console.log(this.data);
+    console.log(this.data); 
   }
 }
 

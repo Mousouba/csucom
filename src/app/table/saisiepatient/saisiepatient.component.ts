@@ -13,11 +13,12 @@ export class SaisiepatientComponent implements OnInit {
   public medecin: any[];
   public service: any[];
   public designation: any[];
-  public ID : number;
+  public ID : any = 1;
   public gestionnaire: number = 1;
   public ristourne: number = 10;
   public montant: number = 0;
-  public keyGen: string = "003032";
+  public keyGen: string =  Math.floor(Math.random() * 99999 ).toString() ;
+
   constructor( private dataService: DataService, private infoClient : InfoUserService, private infoUser: InfoUserService) {}
 
   ngOnInit(){

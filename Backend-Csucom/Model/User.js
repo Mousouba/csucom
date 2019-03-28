@@ -307,10 +307,14 @@ let User = class {
 
     static setPres(client,service,medecin,libelle,keyGen,date,gestionnaire,ristourne,montant){
         return new Promise((next)=>{
+            console.log(client,service,medecin,libelle,keyGen,date,gestionnaire,ristourne,montant)
             db.query("INSERT INTO prescription(`client_id`, `id_service`, `medecin_id`, `designation_id`, `keyGen`, `register_date`, `gestionnaire_id`, `ristourne`, `price`) VALUES (?,?,?,?,?,?,?,?,?)", [client,service,medecin,libelle,keyGen,date,gestionnaire,ristourne,montant] )
             .then((result)=>{
+                console.log('A')
                 next(result[0]);
             }).catch((err)=>{
+                console.log(err)
+
                 next(err)
             })
         })

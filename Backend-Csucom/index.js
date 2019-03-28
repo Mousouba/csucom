@@ -45,20 +45,9 @@ mysql.createConnection({
     app.use(morgan);
     
     api.get('/', async (req, res)=>{
-        //if(req.session.csucom){
+        if(req.session.csucom){
             let info = {};
-            let me = {
-                "id": 1,
-                "pseudo": "Icore",
-                "email": "core.irie@gmail.com",
-                "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
-                "rang": 0,
-                "register_date": "2019-03-20T09:52:22.000Z",
-                "login_date": "2019-03-22T18:36:42.000Z",
-                "attempt": 4,
-                "etat": 0,
-                "numero": null
-            }
+            
             const NumberPer =  await User.getTotalPrescription();
             const NumberClient =  await User.getTotalPatient();
             const NumberObservation =  await User.getTotalObservation();
@@ -73,81 +62,36 @@ mysql.createConnection({
             info.totalSumPres = (SumPres.sumPres !== null) ? SumPres.sumPres : 0
             info.SumPhar = (SumPhar.sumEn !== null) ? SumPhar.sumEn : 0
             info.listeOb = listeOb
-            res.json({success:true, user: me, info:info})
-        //}
-        /*else{
+            console.log(info)
+            res.json({success:true, user: req.session.csucom, info:info})
+        }
+        else{
             res.json({success:false, user: null})
-        }*/
+        }
     });
     api.get('/medecin', async (req, res)=>{
-        let me = {
-            "id": 1,
-            "pseudo": "Icore",
-            "email": "core.irie@gmail.com",
-            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
-            "rang": 0,
-            "register_date": "2019-03-20T09:52:22.000Z",
-            "login_date": "2019-03-22T18:36:42.000Z",
-            "attempt": 4,
-            "etat": 0,
-            "numero": null
-        }
         let info = await User.getAllMedecin();
-        res.json({success:true, user: me, info:info})
+        res.json({success:true, user: req.session.csucom, info:info})
     })
 
     api.get('/service', async (req, res)=>{
-        let me = {
-            "id": 1,
-            "pseudo": "Icore",
-            "email": "core.irie@gmail.com",
-            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
-            "rang": 0,
-            "register_date": "2019-03-20T09:52:22.000Z",
-            "login_date": "2019-03-22T18:36:42.000Z",
-            "attempt": 4,
-            "etat": 0,
-            "numero": null
-        }
         let info = await User.getAllService();
-        res.json({success:true, user: me, info:info})
+        res.json({success:true, user: req.session.csucom, info:info})
     })
 
     api.get('/observ', async (req, res)=>{
-        let me = {
-            "id": 1,
-            "pseudo": "Icore",
-            "email": "core.irie@gmail.com",
-            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
-            "rang": 0,
-            "register_date": "2019-03-20T09:52:22.000Z",
-            "login_date": "2019-03-22T18:36:42.000Z",
-            "attempt": 4,
-            "etat": 0,
-            "numero": null
-        }
+        
         let info = await User.getAllObservation();
         let chambre = await User.getAllChambre();
         let lit = await User.getAllLit();
-        res.json({success:true, user: me, info:info, chambre:chambre, lit:lit})
+        res.json({success:true, user: req.session.csucom, info:info, chambre:chambre, lit:lit})
     })
 
     
     api.get('/pres', async (req, res)=>{
-        let me = {
-            "id": 1,
-            "pseudo": "Icore",
-            "email": "core.irie@gmail.com",
-            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
-            "rang": 0,
-            "register_date": "2019-03-20T09:52:22.000Z",
-            "login_date": "2019-03-22T18:36:42.000Z",
-            "attempt": 4,
-            "etat": 0,
-            "numero": null
-        }
+        
         let info = await User.getAllPrescriction();
-        res.json({success:true, user: me, info:info})
+        res.json({success:true, user: req.session.csucom, info:info})
     })
 
     api.get('/vente', async (req, res)=>{
@@ -168,90 +112,35 @@ mysql.createConnection({
     })
 
     api.get('/inventaire', async (req, res)=>{
-        let me = {
-            "id": 1,
-            "pseudo": "Icore",
-            "email": "core.irie@gmail.com",
-            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
-            "rang": 0,
-            "register_date": "2019-03-20T09:52:22.000Z",
-            "login_date": "2019-03-22T18:36:42.000Z",
-            "attempt": 4,
-            "etat": 0,
-            "numero": null
-        }
+        
         let article = await User.getAllArticleInventaire();
-        res.json({success:true, user: me, article:article})
+        res.json({success:true, user: req.session.csucom, article:article})
     })
 
 
     api.get('/journal', async (req, res)=>{
-        let me = {
-            "id": 1,
-            "pseudo": "Icore",
-            "email": "core.irie@gmail.com",
-            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
-            "rang": 0,
-            "register_date": "2019-03-20T09:52:22.000Z",
-            "login_date": "2019-03-22T18:36:42.000Z",
-            "attempt": 4,
-            "etat": 0,
-            "numero": null
-        }
+        
         let article = await User.getJournal();
-        res.json({success:true, user: me, article:article})
+        res.json({success:true, user: req.session.csucom, article:article})
     })
 
 
     api.get('/fm', async (req, res)=>{
-        let me = {
-            "id": 1,
-            "pseudo": "Icore",
-            "email": "core.irie@gmail.com",
-            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
-            "rang": 0,
-            "register_date": "2019-03-20T09:52:22.000Z",
-            "login_date": "2019-03-22T18:36:42.000Z",
-            "attempt": 4,
-            "etat": 0,
-            "numero": null
-        }
+        
         let famille = await User.getFamille();
-        res.json({success:true, user: me, data:famille})
+        res.json({success:true, user: req.session.csucom, data:famille})
     })
 
     api.get('/patient', async (req, res)=>{
-        let me = {
-            "id": 1,
-            "pseudo": "Icore",
-            "email": "core.irie@gmail.com",
-            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
-            "rang": 0,
-            "register_date": "2019-03-20T09:52:22.000Z",
-            "login_date": "2019-03-22T18:36:42.000Z",
-            "attempt": 4,
-            "etat": 0,
-            "numero": null
-        }
+       
         let famille = await User.getAllPatient();
-        res.json({success:true, user: me, data:famille})
+        res.json({success:true, user: req.session.csucom, data:famille})
     })
 
     api.get('/des', async (req, res)=>{
-        let me = {
-            "id": 1,
-            "pseudo": "Icore",
-            "email": "core.irie@gmail.com",
-            "pass": "cc7b555a56ef4e4dea39c6f376474aa5bcb24232590e85d8db1014a42da78800",
-            "rang": 0,
-            "register_date": "2019-03-20T09:52:22.000Z",
-            "login_date": "2019-03-22T18:36:42.000Z",
-            "attempt": 4,
-            "etat": 0,
-            "numero": null
-        }
+        
         let famille = await User.getDes();
-        res.json({success:true, user: me, data:famille})
+        res.json({success:true, user: req.session.csucom, data:famille})
     })
     
 
@@ -276,7 +165,6 @@ mysql.createConnection({
                res.json({ stat: false, error: 'Identification Echoué. Veuillez verifier vos cordonnées' })
            }
         }
-        //res.render(`${__dirname}/public/form.twig`, { user: "nil" })
     });
     api.post('/fm', async (req, res) =>{
         req.check('name', "Nom Invalide").notEmpty();
@@ -370,16 +258,16 @@ mysql.createConnection({
             res.json({ errors: error })
         }
         else{
-            console.log(req.body)
-           let service = req.body.service;
-           let medecin = req.body.medecin;
-           let libelle = req.body.libelle;
-           let keyGen = req.body.keyGen;
-           let client = req.body.client;
-           let montant = req.body.montant;
-           let ristourne = req.body.ristourne;
-           let gestionnaire = req.body.gestionnaire;
-           
+            
+           let service = parseInt(req.body.service, 10) ;
+           let medecin = parseInt(req.body.medecin, 10);
+           let libelle = parseInt(req.body.libelle, 10);
+           let keyGen = req.body.keyGen
+           let client = parseInt(req.body.client, 10);
+           let montant = parseInt(req.body.montant, 10);
+           let ristourne = parseInt(req.body.ristourne, 10);
+           let gestionnaire = parseInt(req.body.gestionnaire, 10);
+           console.log(req.body)
             const personC = await User.setPres(client,service,medecin,libelle,keyGen,"2019-03-20 12:01:13",gestionnaire,ristourne,montant);
             if (!isErr(personC)){
                 res.json({stat: true, all: personC});
