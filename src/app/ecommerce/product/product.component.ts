@@ -10,13 +10,27 @@ export class ProductComponent implements OnInit{
     public collection:any[];
     public index:number;
     public count:number = 0;
+    //Pour recherche
+    public dana = [];
     
     constructor(private dataService:DataService, private panier: PanierService){
     }
 
+    updateFilter(event) {
+      const val = event.target.value.toLowerCase();
+      console.log("tape :"+ val);
+      const temp = this.dana.filter(function(d) {
+        return d.libelle.toLowerCase().indexOf(val) !== -1 || !val;
+      });
+      this.collection = temp;
+      console.log("return :"+JSON.stringify(this.collection))
+    }
+
     ngOnInit(){
       this.dataService.getArticle()
-      .subscribe( (Data) => { this.collection = Data.article;})
+      .subscribe( (Data) => { this.collection = Data.article;
+        this.dana = this.collection;
+      })
 
       this.count = this.panier.panier.length;
     }

@@ -123,15 +123,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: '/tables/saisiepatient',
-        title: 'Saisie des patients',
-        icon: '',
-        class: '',
-        extralink: false,
-        submenu: []
-      },
-      {
-        path: '',
+        path: '/tables/caisse',
         title: 'Journal de la caisse',
         icon: '',
         class: '',

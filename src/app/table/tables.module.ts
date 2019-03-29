@@ -27,6 +27,7 @@ import { DarktableComponent } from './dark-basic/dark.component';
 import { ColortableComponent } from './color-table/color.component';
 import { TablesizeComponent } from './sizing/size.component';
 import { FormsModule } from '@angular/forms';
+import { CaisseComponent } from './caisse/caisse.component';
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { FormsModule } from '@angular/forms';
     ArticleComponent,
     SaisiefournisseurComponent,
     PatientComponent,
-    SaisiepatientComponent 
+    SaisiepatientComponent,
+    CaisseComponent
   ]
 })
 export class TablesModule {}

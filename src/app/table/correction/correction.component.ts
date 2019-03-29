@@ -11,14 +11,24 @@ const data: any = require('./correction.json');
 })
 export class CorrectionComponent implements OnInit {
 
-  public collection:[any];
+  public collection:any[];
+  public dana = [];
  
   constructor( private dataService : DataService) { }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    console.log("tape :"+ val);
+    const temp = this.dana.filter(function(d) {
+      return d.libelle.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+    this.collection = temp;
+  }
 
   ngOnInit(){
     this.dataService.getInventaire()
     .subscribe( (Data) => { this.collection = Data.article;
-                            console.log(JSON.stringify(this.collection)) 
+                            this.dana = this.collection;
     })
   }
   

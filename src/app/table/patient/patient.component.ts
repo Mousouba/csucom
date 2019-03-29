@@ -11,18 +11,40 @@ import { Router } from '@angular/router';
 export class PatientComponent  implements OnInit {
   
   collection:any[];
+  public dana = [];
+  public hidden = true;
 
   constructor( private dataService: DataService, private infoClient: InfoUserService, private route: Router) {}
   
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    console.log("tape :"+ val);
+    const temp = this.dana.filter(function(d) {
+      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+    this.collection = temp;
+    console.log('Sa  : '+JSON.stringify(this.collection));
+    if(this.collection.length == 0){
+      this.hidden = false;
+    }else{
+      this.hidden = true;
+    }
+  }
+
   ngOnInit(){
     return this.dataService.getPatient()
     .subscribe( (Data) => { this.collection = Data.data ;
-        console.log(JSON.stringify(this.collection[0].id ));
+        this.dana = this.collection;
     
     },  
     (error) => {
      console.log("erreur")
     })
+  }
+
+  navigateToNew(){
+    this.infoClient.isExist = 0;
+    this.route.navigate(["/tables/saisiepatient"])
   }
 
   getID(id:number){

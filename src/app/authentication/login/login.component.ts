@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onSubmit(ngForm: NgForm){
+  onSubmit(ngForm: NgForm){ 
     let isClicable = true;
     return this.dataService.authUser(ngForm.value)
     .subscribe( (Data) => { this.queryResponse = Data; 

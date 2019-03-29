@@ -23,7 +23,9 @@ export class SaisiepatientComponent implements OnInit {
 
   ngOnInit(){
     this.collection = this.infoClient.infoClient;
-    this.gestionnaire = this.infoUser.infoUser.id;
+    this.gestionnaire = this.infoUser.infoUser.user.id;
+    console.log("1 "+JSON.stringify(this.infoUser.infoUser.id));
+    console.log("2 "+JSON.stringify(this.infoUser.infoUser.user.id));
     if(!this.gestionnaire){
       this.gestionnaire = 1;
     }
@@ -59,6 +61,7 @@ export class SaisiepatientComponent implements OnInit {
 
     if(ngForm.value["montant"] > 0){
       this.ristourne = 0;
+      this.montant = ngForm.value["montant"]
     }else{
       this.montant = 0;
     }
@@ -67,17 +70,11 @@ export class SaisiepatientComponent implements OnInit {
       return this.dataService.setPatient({name:ngForm.value["name"], firstname:ngForm.value["firstname"] ,sexe:ngForm.value["sexe"],birth_date:ngForm.value["birth_date"],number:ngForm.value["number"],assure:ngForm.value["assure"]})
       .subscribe( (Data) => { 
         this.ID = Data.patient[0].lastID;
-        console.log('Peponse data:'+JSON.stringify(Data));
-        console.log('POST Response ID last:'+JSON.stringify(Data.patient[0].lastID));
-        console.log('son nom est '+ngForm.value["name"] );
-        console.log( JSON.stringify(ngForm.value) );
-        console.log('Id depuis le service: '+JSON.stringify(this.infoClient.infoClient["id"]))
-
        },  
       (error) => {
        console.log("erreur")
       }),
-      this.dataService.setPres({client:this.ID,service:ngForm.value["service"], medecin:ngForm.value["medecin"] ,libelle:ngForm.value["libelle"],keyGen:this.keyGen,gestionnaire:1,ristourne:this.ristourne,montant:this.montant})
+      this.dataService.setPres({client:this.ID,service:ngForm.value["service"], medecin:ngForm.value["medecin"] ,libelle:ngForm.value["libelle"],keyGen:this.keyGen,gestionnaire:this.gestionnaire,ristourne:this.ristourne,montant:this.montant})
       .subscribe( (Data) => { 
         console.log('Response :'+JSON.stringify(Data));
       });
@@ -85,7 +82,7 @@ export class SaisiepatientComponent implements OnInit {
       
     }else{
       this.ID = this.infoClient.infoClient.id;
-      return this.dataService.setPres({client:this.ID,service:ngForm.value["service"], medecin:ngForm.value["medecin"] ,libelle:ngForm.value["libelle"],keyGen:this.keyGen,gestionnaire:1,ristourne:this.ristourne,montant:this.montant})
+      return this.dataService.setPres({client:this.ID,service:ngForm.value["service"], medecin:ngForm.value["medecin"] ,libelle:ngForm.value["libelle"],keyGen:this.keyGen,gestionnaire:this.gestionnaire,ristourne:this.ristourne,montant:this.montant})
       .subscribe( (Data) => { 
         console.log('Response :'+JSON.stringify(Data));
       });

@@ -83,7 +83,11 @@
                         <input class="col-sm-6 col-md-6" name="priceU" ngModel required type="number" min="0" step="5" class="form-control mb-3" placeholder="Prix unitaire">
                         <input class="col-sm-6 col-md-6"  name="montant" ngModel type="number" min="0" step="5" class="form-control mb-3" placeholder="Montant">
                     </div>
-                  <button type="submit" [disabled]="!f.form.valid" class="btn btn-success m-r-5">
+                   <button [routerLink]="['/tables/patient']" class="btn btn-light m-r-5">
+                        <i class="mdi mdi-arrow-left-bold"></i> Retour
+                   </button>
+
+                   <button type="submit" [disabled]="!f.form.valid" class="btn btn-success m-r-5">
                         <i class="fa fa-check"></i> Enregister
                    </button>
                 </div>

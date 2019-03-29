@@ -36,7 +36,7 @@ export class DataService {
   }
 
   getInventaire(): Observable<any[]> {
-    return this._http.get<any[]>(this.apiUrl+"/inventaire");
+    return this._http.get<any[]>(this.apiUrl+"/inventaire"); 
   }
 
   getJournal(data:any): Observable<any> {
