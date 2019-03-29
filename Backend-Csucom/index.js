@@ -16,6 +16,7 @@ const mysql = require('promise-mysql');
 
 mysql.createConnection({
     host: config.db.host,
+    port: 8889,
     database: config.db.database,
     user: config.db.user,
     password: config.db.password
@@ -251,7 +252,7 @@ mysql.createConnection({
         }
         else{
            let name = req.body.name;
-           let service = req.body.service;
+           let service = req.body.famille;
            let priceU = req.body.priceU;
             const personC = await User.setDes(name, service, priceU);
            if (!isErr(personC)){

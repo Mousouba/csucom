@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(ngForm: NgForm){
-    console.log(ngForm.value);
+    console.log(ngForm.value); 
   }
 
 }
