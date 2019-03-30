@@ -13,7 +13,7 @@ public data = []
 public user = {}
 public info = {}
 
-title = "yves mick";
+title = "yves mick"; 
   constructor(private dataService: DataService, private route:Router, private http: HttpClient){
 
      
@@ -22,14 +22,14 @@ title = "yves mick";
   ngOnInit() {
     return this.dataService.getData()
       .subscribe( (Data) => { this.data = Data["info"].listeOb; this.user = Data["user"]; this.info = Data["info"]
-        console.log('DATA DIRECT ' + JSON.stringify(Data["info"].totalClient))} );
+        console.log('DATA DIRECT ' + JSON.stringify(Data))} );
   }
 
   
   
   ngAfterViewInit() {
     console.log("===A====");
-    console.log(this.data); 
+    console.log(this.data);  
   }
 }
 

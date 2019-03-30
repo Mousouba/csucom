@@ -45,7 +45,8 @@ mysql.createConnection({
     app.use(morgan);
     
     api.get('/', async (req, res)=>{
-        if(true){
+        console.log(JSON.stringify(req))
+        if(req.session.csucom){
             let info = {};
             
             const NumberPer =  await User.getTotalPrescription();
@@ -61,7 +62,9 @@ mysql.createConnection({
             info.totalDeficite = NumberDeficite.totalDeficite
             info.totalSumPres = (SumPres.sumPres !== null) ? SumPres.sumPres : 0
             info.SumPhar = (SumPhar.sumEn !== null) ? SumPhar.sumEn : 0
-            info.listeOb = listeOb
+            info.listeOb = listeOb;
+            info.user = req.session.csucom
+            console.log(req.session.csucom)
             res.json({success:true, user: req.session.csucom, info:info})
         }
         else{
