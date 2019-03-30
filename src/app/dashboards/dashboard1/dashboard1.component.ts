@@ -14,6 +14,7 @@ public data = []
 public user = {}
 public info = {}
 
+<<<<<<< HEAD
 title = "yves mick";
   constructor(private dataService: DataService, private route:Router, private infoUser : InfoUserService, private _http: HttpClient){}
 
@@ -29,13 +30,29 @@ title = "yves mick";
         //   this.route.navigate(["/authentication/login"]);
         // }
     });
+=======
+title = "yves mick"; 
+  constructor(private dataService: DataService, private route:Router, private http: HttpClient){
+
+     
+  }
+
+  ngOnInit() {
+    return this.dataService.getData()
+      .subscribe( (Data) => { this.data = Data["info"].listeOb; this.user = Data["user"]; this.info = Data["info"]
+        console.log('DATA DIRECT ' + JSON.stringify(Data))} );
+>>>>>>> 893e1d3dd5b16f9150a90dbf01c6e149ffd16132
   }
 
   
   
   ngAfterViewInit() {
     console.log("===A====");
+<<<<<<< HEAD
     console.log( " Level up " + this.data); 
+=======
+    console.log(this.data);  
+>>>>>>> 893e1d3dd5b16f9150a90dbf01c6e149ffd16132
   }
 }
 

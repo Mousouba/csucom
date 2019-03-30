@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit {
   showRecoverForm() {
   	this.loginform = !this.loginform;
   	this.recoverform = true;
-  }
+  } 
+
   
   showRecoverForm1() {
   	this.loginform = !this.loginform;

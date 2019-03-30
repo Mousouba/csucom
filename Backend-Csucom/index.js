@@ -83,7 +83,6 @@ mysql.createConnection({
             info.SumPhar = (SumPhar.sumEn !== null) ? SumPhar.sumEn : 0
             info.listeOb = listeOb
             res.status(200).send({stat:true, user: decoded, info:info})
-                (decoded);
                 }
               });
             
