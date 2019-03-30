@@ -1,0 +1,8 @@
+.nouveau {
+    position: absolute;
+    transform: translate(-50%,0%);
+    left: 50%;
+    background: #dcddde;
+    color:#444;
+    border: none;
+}

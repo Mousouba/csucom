@@ -13,6 +13,7 @@ import { ArticleComponent } from './article/article.component';
 import { SaisiefournisseurComponent } from './saisiefournisseur/saisiefournisseur.component';
 import { PatientComponent } from './patient/patient.component';
 import { SaisiepatientComponent } from './saisiepatient/saisiepatient.component';
+import { CaisseComponent } from './caisse/caisse.component';
 
 export const TablesRoutes: Routes = [
   {
@@ -90,6 +91,22 @@ export const TablesRoutes: Routes = [
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Liste des prescriptions' }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    path: '',
+    children: [
+      {
+        path: 'caisse',
+        component: CaisseComponent ,
+        data: {
+          title: 'Journal de la caisse ',
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'Journal de la caisse' }
           ]
         }
       }

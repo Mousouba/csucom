@@ -22,29 +22,34 @@
                     <th class="border-top-0">N°</th>
                     <th class="border-top-0">Nom</th>
                     <th class="border-top-0">Prenom(s)</th>
-                    <th class="border-top-0">Age</th>
+                    <th class="border-top-0">Date de naissance</th>
                     <th class="border-top-0">Sexe</th>
                     <th class="border-top-0">Contact</th>
-                    <th class="border-top-0">Date</th>
-                    <th class="border-top-0">Heure</th>
+                    <th class="border-top-0">Date de creation</th>
                     <th class="border-top-0">Actions</th>
                 </tr>
             </thead>
                 <tbody>
-                    <tr *ngFor="let item of collection">
-                        <td>{{ item.n }}</td>
-                        <td>{{ item.nom }}</td>
-                        <td>{{ item.prenom }}</td>
-                        <td>{{ item.cni }}</td>
-                        <td>{{ item.contact }}</td>
-                        <td>{{ item.specialite }}</td>
-                        <td>{{ item.email }}</td>
-                        <td>{{ item.ville }}</td>
+                    <tr *ngFor="let item of collection; let i = index">
+                        <td>{{ i+1 }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.firstname }}</td>
+                        <td>{{ item.birth_date }}</td>
+                        <td>{{ item.sexe }}</td>
+                        <td *ngIf="item.number != 0" >{{ item.number }}</td>
+                        <td *ngIf="item.number == 0" >00 00 00 00</td>
+                        <td>{{ item.register_date }}</td>
                         <td class="text-center">
-                            <a href="javascript:void(0)" class="mr-1 text-inverse" title="Supprimer de la liste"><i class="ti-close text-danger"></i></a>
+                            <a (click)="getThisClient(item.id, 1)" href="javascript:void(0)" class="mr-4 text-inverse" title="Aller vers ..."><i class="sl-icon-arrow-right-circle text-success"></i></a>
+                            <a (click)="getID(item.id)" href="javascript:void(0)" class=" text-inverse" title="Supprimer de la liste"><i class="ti-close text-danger"></i></a>
                         </td>
                     </tr>
                 </tbody>
         </table>
+        <div class="d-md-flex align-items-center">
+            <div class="text-center">
+                <button [hidden]="hidden" (click)="navigateToNew()" class="nouveau btn btn-info" type="button"><i class="fa fa-user"></i> Nouveau client </button>
+            </div>
+        </div>
     </div>
     </div>

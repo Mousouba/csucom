@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
 
 @Component({
@@ -7,13 +7,31 @@ import { DataService } from 'src/app/service/data.service';
   styleUrls: ['./prescripteur.css']
 })
 export class PrescripteurComponent implements OnInit {
-  
-  collection:any[];
-  constructor( private dataService: DataService) {}
+ 
+  //Pour recherche
+  public dana = [];
+
+  public collection:any[];
+
+  constructor( private dataService: DataService) {
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    console.log("tape :"+ val);
+    const temp = this.dana.filter(function(d) {
+      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+    this.collection = temp;
+  }
   
   ngOnInit(){
     return this.dataService.getMedecin()
-    .subscribe( (Data) => { this.collection = Data.info; 
-      console.log('DATA DIRECT ' + JSON.stringify(Data["info"]))} );
+    .subscribe( (Data) => { this.collection = Data.info;
+      this.dana = this.collection;
+    },  
+    (error) => {
+     console.log("erreur")
+    });
   }
 }

@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/service/data.service';
 
 declare var require: any;
 const data: any = require('./correction.json');
@@ -8,54 +9,28 @@ const data: any = require('./correction.json');
   templateUrl: './correction.component.html',
   styleUrls: ['./correction.css']
 })
-export class CorrectionComponent {
+export class CorrectionComponent implements OnInit {
 
-  private collection:[any];
-  editing = {};
-  rows = [];
-  temp = [...data];
-
-  loadingIndicator = true;
-  reorderable = true;
-
-  columns = [{ name: 'N°' }, { name: 'Matricule' }, { name: 'Nom' }, { name: 'Prenom' } , { name: 'Cni' }, { name: 'Contact' }, { name: 'Specialite' }, { name: 'Email' }, { name: 'Ville' }];
-
-  @ViewChild(CorrectionComponent) table: CorrectionComponent;
-  
-  
-  constructor() {
-    this.rows = data;
-    this.temp = [...data];
-    setTimeout(() => {
-      this.loadingIndicator = false;
-    }, 1500);
-    
-     
-     this.collection = data;
-  }
-  
-
+  public collection:any[];
+  public dana = [];
+ 
+  constructor( private dataService : DataService) { }
 
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
-    console.log(val);
-    // filter our data
-    const temp = this.temp.filter(function(d) {
-      return d.nom.toLowerCase().indexOf(val) !== -1 || !val;
+    console.log("tape :"+ val);
+    const temp = this.dana.filter(function(d) {
+      return d.libelle.toLowerCase().indexOf(val) !== -1 || !val;
     });
-    
-    console.log('temp = '+temp);
+    this.collection = temp;
+  }
 
-    // update the rows
-    this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table = data;
+  ngOnInit(){
+    this.dataService.getInventaire()
+    .subscribe( (Data) => { this.collection = Data.article;
+                            this.dana = this.collection;
+    })
   }
-  updateValue(event, cell, rowIndex) {
-    console.log('inline editing rowIndex', rowIndex);
-    this.editing[rowIndex + '-' + cell] = false;
-    this.rows[rowIndex][cell] = event.target.value;
-    this.rows = [...this.rows];
-    console.log('UPDATED!', this.rows[rowIndex][cell]);
-  }
+  
+
 }

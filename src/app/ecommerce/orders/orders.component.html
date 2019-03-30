@@ -3,42 +3,47 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
+                        <!-- title -->
+            <div class="d-md-flex align-items-center float-right">
+                <div class="ml-auto">
+                    <div class="dl">
+                        <form class="m-b-0" style="width: 200px; margin-bottom: 10px">
+                          <input type='text' class="form-control" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- title -->
                 <div class="table-responsive">
                     <table class="table v-middle product-overview" id="zero_config">
                         <thead>
                             <tr>
                                 <th style="width: 1%">N°</th>
                                 <th>Famille</th>
-                                <th>Image</th>
                                 <th>Designation</th>
                                 <th>PU Achat</th>
                                 <th>Pu Vente</th>
                                 <th class="text-center">Statut</th>
-                                <th>Qte initiale</th>
                                 <th>Qte Rest</th>
                                 <th>Date Exp</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of collection">
-                                <td>{{ item.n }}</td>
-                                <td>{{ item.famille }}</td>
-                                <td>
-                                    <img src="assets/images/product/{{ item.image }}" alt="iMac" width="80"> 
-                                </td>
-                                <td>{{ item.designation }}</td>
-                                <td class="text-center">{{ item.puachat }}</td>
-                                <td class="text-center">{{ item.puvente }}</td>
+                            <tr *ngFor="let item of collection; let i = index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ item.sa_famille }}</td>
+                                <td>{{ item.libelle }}</td>
+                                <td class="text-center">{{ item.priceAchat }}</td>
+                                <td class="text-center">{{ item.priceVente }}</td>
                                 <td class="text-center">
-                                    <span *ngIf=" item.qterest >= 10" class="label label-success font-weight-100 label-rounded">En stock</span>
-                                    <span *ngIf=" item.qterest < 10" class="label label-warning font-weight-100 label-rounded">En déficite</span>
+                                    <span *ngIf=" item.qte >= 5" class="label label-success font-weight-100 label-rounded">+</span>
+                                    <span *ngIf=" item.qte < 5" class="label label-danger font-weight-100 label-rounded">-</span>
                                 </td>
-                                <td class="text-center">{{ item.qteinit }}</td>
-                                <td class="text-center">{{ item.qterest }}</td>
-                                <td>{{ item.date }}</td>
+                                <td class="text-center">{{ item.qte }}</td>
+                                <td>{{ item.date_peremption }}</td>
                                 <td class="text-right">
-                                    <a  href="javascript:void(0)" class=" mr-3 text-danger" title="Supprimer de la liste"><i class="text-danger ti-close"></i></a>
+                                    <a (click)="delArticle(item.id)"  href="javascript:void(0)" class=" mr-3 text-danger" title="Supprimer de la liste"><i class="text-danger ti-close"></i></a>
                                 </td>
                             </tr>
                         </tbody>

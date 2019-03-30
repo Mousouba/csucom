@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { DataService } from 'src/app/service/data.service';
+import { Router } from '@angular/router';
+import { InfoUserService } from 'src/app/service/info-user.service';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +11,15 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
     
-  constructor( private http: HttpClient ) {}
+  constructor( private http: HttpClient, private dataService: DataService,
+                                         private route: Router, 
+                                         private infoUser: InfoUserService) {}
 
   loginform = true;
   recoverform = false;
+  
+  public queryResponse = [];
+  public errorMsg = " ";
   
   //apiUrl = "http://localhost:2037/api";
   showRecoverForm() {
@@ -25,14 +33,30 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit(){
-   /* this.http.get<any>("http://localhost:2037/api")
-    .subscribe( data => {
-      console.log(data);
-    })*/
+
   }
 
-  onSubmit(ngForm: NgForm){
-    console.log(ngForm.value); 
+  onSubmit(ngForm: NgForm){ 
+    let isClicable = true;
+    return this.dataService.authUser(ngForm.value)
+    .subscribe( (Data) => { this.queryResponse = Data;
+       
+      console.log('auth: '+JSON.stringify(Data));
+
+      setTimeout( () => {
+        if(Data.stat == false){
+          this.errorMsg = "Connexion échouée. Veuillez vérifier vos coordonnées ";
+          setTimeout(() => {
+            this.errorMsg = " ";
+          },4000)
+        }else{
+          this.infoUser.infoUser = this.queryResponse;
+          this.route.navigate(["/dashboard/dashboard1"]);
+        }
+      },2000)
+    })
   }
+
+  
 
 }

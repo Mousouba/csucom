@@ -8,14 +8,26 @@ import { DataService } from 'src/app/service/data.service';
 })
 export class JournalComponent implements OnInit {
 
-  private collection:any[];
+  public collection:any[];
+  public dana = [];
+
 
   constructor(private dataService:DataService) {}
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    console.log("tape :"+ val);
+    const temp = this.dana.filter(function(d) {
+      return d.keyGen.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+    this.collection = temp;
+  }
 
   ngOnInit(){
     return this.dataService.getJournal()
     .subscribe( (Data) => { this.collection = Data.article; 
-      console.log('DATA DIRECT ' + JSON.stringify(Data["article"]))} );
+      this.dana = this.collection;
+    } );
   }
 
 }

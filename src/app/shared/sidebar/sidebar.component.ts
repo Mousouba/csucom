@@ -3,6 +3,8 @@ import { ROUTES } from './menu-items';
 import { RouteInfo } from './sidebar.metadata';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InfoUserService } from 'src/app/service/info-user.service';
+import { DataService } from '../../service/data.service';
 declare var $: any;
 
 @Component({
@@ -13,6 +15,8 @@ export class SidebarComponent implements OnInit {
   showMenu = '';
   showSubMenu = '';
   public sidebarnavItems: any[];
+
+  public info = [];
   // this is for the open close
   addExpandClass(element: any) {
     if (element === this.showMenu) {
@@ -32,12 +36,14 @@ export class SidebarComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private infoUser: InfoUserService,
+    private _route: Router,
+    private dataService: DataService
   ) {}
 
   // End open close
   ngOnInit() {
     this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
-    console.log(this.sidebarnavItems);
   }
 }
