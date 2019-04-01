@@ -26,7 +26,7 @@
                     <th class="border-top-0">Contact</th>
                     <th class="border-top-0">Specialité</th>
                     <th class="border-top-0">E-mail</th>
-                    <th class="border-top-0">Ville/Résidence</th>
+                    <th class="border-top-0">Ville/Résidence</th> 
                 </tr>
             </thead>
                 <tbody>
@@ -82,9 +82,15 @@
                     <td>{{ item.name }}</td>
                     <td>{{ item.firstname }}</td>
                     <td>{{ item.cni }}</td>
+<<<<<<< HEAD
+                    <td>{{ item.number }}</td>
+                    <td>{{ item.specilalite }}</td>
+                    <td>{{ item.fonction }}</td>
+=======
                     <td>{{ item.number }} </td>
                     <td>{{ item.fonction }}</td>
                     <td>{{ item.specilalite }}</td>
+>>>>>>> 581188a335db37f4d147aad95b3d9679c8a2a752
                     <td>{{ item.email }}</td>
                     <td>{{ item.habitation }}</td>
                 </tr>
@@ -97,8 +103,8 @@
                     display:none;
                 }
                 
-            </style>
-    <style type="text/css" media="print">
+        </style>
+        <style type="text/css" media="print">
     
         .milieu{
             width: 98%;
@@ -144,30 +150,21 @@
             font-size: 30px;
     
         }
-        .tableau{
-                width: 100%;
-                height: 100%;
-                border-collapse: collapse;
-                text-align: center;
-            }
-            .imprimer
-                {
-                    display:block;
-                }
-            .rotate{
-                writing-mode: tb-rl;
-                height: 80%; margin: 10% 0%;
-            }
-    </style>
+        .tableau
+        {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .imprimer
+        {
+            display:block;
+        }
+        .rotate
+        {
+            writing-mode: tb-rl;
+            height: 80%; margin: 10% 0%;
+        }
+        </style>
     </div>
-    <script>
-    function imprimer() {
-    //    var printContents = document.getElementById('sectionAimprimer').innerHTML;    
-    //    var originalContents = document.body.innerHTML;      
-    //    document.body.innerHTML = printContents;     
-    //    window.print();     
-    //    document.body.innerHTML = originalContents;
-    alert("sa marche");
-    console.log("sa marche");
-    }
-</script>

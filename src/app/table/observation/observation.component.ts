@@ -10,9 +10,9 @@ import { DataService } from 'src/app/service/data.service';
 })
 export class ObservationComponent {
 
-  collection:any[];
-  chambre:any[];
-  lit:any[];
+  collection:any;
+  chambre:any;
+  lit:any;
 
   constructor(private dataService: DataService){
 
@@ -23,6 +23,15 @@ export class ObservationComponent {
     .subscribe( (Data) => { this.collection = Data.info; 
                             this.chambre = Data.chambre; 
                             this.lit = Data.lit; 
+                            console.log('id '+ JSON.stringify(Data.chambre.id));
+                            console.log('id1 '+ JSON.stringify(Data.chambre[0].id));
     })
   }
+  imprimer(){
+    let printContents = document.getElementById('sectionAimprimer').innerHTML;    
+    let originalContents = document.body.innerHTML;      
+    document.body.innerHTML = printContents;     
+    window.print();     
+    document.body.innerHTML = originalContents;
+   }
 }

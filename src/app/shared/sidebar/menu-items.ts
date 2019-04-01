@@ -141,7 +141,7 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '/dashboard/dashboard1',
+    path: '/tables/panneau',
     title: 'Panneau d\'administration',
     icon: 'ti-settings',
     class: '',

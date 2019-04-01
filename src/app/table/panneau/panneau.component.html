@@ -1,0 +1,172 @@
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+          <h4 class="page-title">GESTION DES COMPTES</h4>
+          <div class="d-flex align-items-center">
+
+          </div>
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex no-block justify-content-end align-items-center">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb col-md-12">
+                      <li class="breadcrumb-item active font-18" aria-current="page"><span class="text-info font-20"><b>{{ users.length }}</b>&nbsp;</span>COMPTES </li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+  <!-- Start Page Content -->
+  <!-- ============================================================== -->
+  <div class="row">
+      <!-- Column -->
+      <div class="col-md-12 col-lg-12">
+          <div class="card">
+
+              <div class="card-body">
+                  <div class="d-md-flex align-items-center mb-3">
+                      <div>
+                          <button [routerLink]="['/tables/compte']" class="btn btn-info" type="button"><i class="fa fa-user"></i>  Créer compte</button>
+                      </div>
+                  </div>
+                  <div class="table-responsive">
+                        <table class="table product-overview">
+                          <thead>
+                              <tr>
+                                  <th>Compte</th>
+                                  <th>Pseudo</th>
+                                  <th>E-mail</th>
+                                  <th>Contacts</th>
+                                  <th style="text-align:center">Type de compte</th>
+                                  <th style="text-align:center">Etat du compte</th>
+                                  <th style="text-align:center">Actions</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let item of users; let i=index">
+                                 <td>{{ i+1 }}</td>
+                                  <td>{{ item.pseudo }}</td>
+                                  <td>{{ item.email }}</td>
+                                  <td>{{ item.numero }}</td>
+                                  <td style="text-align:center" class="font-500">
+                                      <label *ngIf="1 == item.rang" class="label label-primary label-rounded">Admin</label>
+                                      <label *ngIf="0 == item.rang" class="label label-primary label-rounded">Gestionnaire</label>
+                                  </td>
+                                  <td style="text-align:center" class="font-500">
+                                      <label *ngIf="0 == item.etat" class="label label-success label-rounded">Actif</label>
+                                      <label *ngIf="1 == item.etat" class="label label-danger label-rounded">Bloqué</label>
+                                  </td>
+                                  <td width="10" align="center">
+                                      <a href="javascript:void(0)" class="mr-3 text-inverse text-dark" title="Réinitialiser son mot de passe"><i class="fas fa-sync-alt"></i></a>
+                                      <a href="javascript:void(0)" (click)="deleteItem(item.id, 'gestionnaire')" class="text-inverse " title="Supprimer ce compte"><i class="ti-trash text-dark"></i></a>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+
+  </div>
+  </div>
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+          <h4 class="page-title">GESTION DES CHAMBRES</h4>
+          <div class="d-flex align-items-center">
+
+          </div>
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex no-block justify-content-end align-items-center">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb col-md-12">
+                      <li class="breadcrumb-item active font-18" aria-current="page"><span class="text-info font-20"><b>{{ chambre.length }}</b>&nbsp;</span>CHAMBRES </li>
+                      <li class="breadcrumb-item active font-18" aria-current="page"><span class="text-info font-20"><b>{{ lit.length }}</b>&nbsp;</span>LITS </li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+
+  <div class="row">
+     
+      <!-- Column -->
+      <div class="col-md-6 col-lg-6">
+          <div class="card">
+
+              <div class="card-body">
+                  <div class="table-responsive">
+
+                      <table class="table product-overview">
+                          <thead>
+                              <tr>
+                                  <th>Chambres</th>
+                                  <th>Lits</th>
+                                  <th style="text-align:center">Actions</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let item of lit">
+                                 <td>{{ item.sa_chambre }}</td> 
+                                  <td>{{ item.lib }}</td>
+                                  <td width="10" align="center">
+                                      <a (click)="deleteItem(item.id, lit)" href="javascript:void(0)" class="text-inverse " title="Supprimer"><i class="ti-trash text-dark"></i></a>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+
+  </div>
+  <div class="col-md-6 col-lg-6">
+      <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">Ajouter Chambre</h5>
+              <hr>
+              <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <input type="text" disabled value="chambre {{ chambre.length+1 }}" class="form-control m-t-10">
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <button type="button" (click)="onChambre()" class="btn waves-effect waves-light btn-success float-right" style="margin-top: 10px">Ajouter</button>
+                </div>
+              </div>
+                <hr>
+          </div>
+
+          <div class="card-body">
+              <h5 class="card-title">Ajouter Lit</h5>
+              <hr>
+              <form class="row" (ngSubmit)="onLit(f)"  #f="ngForm" >
+                      <div class="col-sm-4 col-md-4">
+                          <div class="form-group">
+                            <select name="chambre_selected" ngModel required class="form-control">
+                              <option *ngFor="let item of chambre" value="{{ item.id }}">{{ item.libelle }}</option>
+                            </select>
+                          </div>
+                      </div>
+                      <div class="col-sm-4 col-md-4">
+                          <div class="form-group">
+                              <input name="lit" ngModel required type="text" class="form-control" placeholder="Etiquettez un lit">
+                          </div>
+                      </div>
+                      <div class="col-sm-4 col-md-4">
+                          <div class="form-group">
+                              <button type="submit" [disabled]="!f.form.valid" class=" float-right btn waves-effect waves-light btn-info">Ajouter</button>
+                          </div>
+                      </div>
+                  </form>
+          </div>
+      </div>
+  </div>
+
+

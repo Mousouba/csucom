@@ -37,4 +37,12 @@ export class PrescripteurComponent implements OnInit {
      console.log("erreur")
     });
   }
+
+  imprimer(){
+   let printContents = document.getElementById('sectionAimprimer').innerHTML;    
+   let originalContents = document.body.innerHTML;      
+   document.body.innerHTML = printContents;     
+   window.print();     
+   document.body.innerHTML = originalContents;
+  }
 }

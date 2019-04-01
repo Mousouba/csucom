@@ -1,0 +1,91 @@
+<div class="row">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="col-12">
+    <div class="row">
+      <div class="col-5 align-self-center">
+          <h4 class="page-title">Nouvel utilisateur</h4>
+          <div class="d-flex align-items-center">
+
+          </div>
+      </div>
+    </div>
+    <div class="card-body col-12 ">
+                    
+      <div class="row">
+          <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                  <label for="inputname" class="control-label col-form-label">Pseudo utilisateur : <span class="text-danger font-15">*</span> </label>
+                    <input name="pseudo" required ngModel type="text"  class="form-control" id="inputlname" autofocus>
+              </div>
+          </div>
+          <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                  <label for="inputlname" class="control-label col-form-label">E-mail utilisateur  :<span class="text-danger font-15">*</span></label>
+                  <input name="email" required ngModel type="text" class="form-control" id="inputlname" >
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                  <label for="inputEmail3" class="control-label col-form-label">Contact :<span class="text-danger font-15">*</span></label>
+                  <input name="contact" ngModel type="text" class="form-control" id="inputlname" >
+              </div>
+          </div>
+          <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                  <label for="inputEmail3" class="control-label col-form-label"> Spécialité :</label>
+                <div class="form-group m-b-30">
+                  <select name="specialite" ngModel class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                      <option >Gynécologue</option>
+                      <option >Ophtamologue</option>
+                      <option >caissiere</option>
+                  </select>
+              </div>
+              </div>
+          </div>
+          
+      </div>
+      <div class="row">
+            <div class="col-sm-6 col-md-6">
+                <div class="form-group">
+                    <label for="inputln" class="control-label col-form-label">Lieu d'habitation</label>
+                    <input name="lieu" ngModel type="text" class="form-control" id="inputln" >
+                </div>
+            </div>
+          <div class="col-sm-6 col-md-6">
+            <div class="form-group">
+              <label for="inlineFormCustomSelect" class="control-label col-form-label">Type de compte</label>
+              <select name="role" required ngModel class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                  <option value="1">Administrateur</option>
+                  <option value="0">Gestionnaire</option>
+              </select>
+          </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                  <label for="inputlname" class="control-label col-form-label">Nouveau mot de passe:</label>
+                  <input name="mdp" required ngModel #mdp="ngModel" type="password" class="form-control" id="inputlname" >
+                  <label *ngIf="mdp.value != mdpr.value && !mdpr.pristine " for="inputlname" class="control-label col-form-label text-danger"><i>Les mots de passe tapés ne sont pas identiques</i></label>
+              </div>
+          </div>
+          <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                  <label for="inputlname" class="control-label col-form-label">Rétapez le mot de passe:</label>
+                  <input name="mdpr" required ngModel #mdpr="ngModel" type="password" class="form-control" id="inputlname" >
+              </div>
+          </div>
+      </div>
+
+      <div class="card-body">
+          <div class="action-form">
+              <div class="form-group m-b-0 text-center float-right">
+                  <button [routerLink]="['/tables/panneau']"   type="button" style="background:#c1c1c1" class="btn waves-effect waves-light btn-light"><i class="mdi mdi-arrow-left-bold"></i>  Retour</button>
+                  <button [disabled]="!f.form.valid || mdp.value != mdpr.value" type="submit" class="btn waves-effect waves-light btn-success ml-4">Créer compte</button>
+              </div>
+          </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -10,6 +10,8 @@ import { InfoUserService } from 'src/app/service/info-user.service';
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
+
+  public isClick = false;
     
   constructor( private http: HttpClient, private dataService: DataService,
                                          private route: Router, 
@@ -38,15 +40,21 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(ngForm: NgForm){ 
-    let isClicable = true;
+    this.isClick = true;
     return this.dataService.authUser(ngForm.value)
+<<<<<<< HEAD
+    .subscribe( (Data) => { this.queryResponse = Data; 
+      console.log( JSON.stringify(this.queryResponse) );
+=======
     .subscribe( (Data) => { this.queryResponse = Data;
        
       console.log('auth: '+JSON.stringify(Data));
+>>>>>>> 581188a335db37f4d147aad95b3d9679c8a2a752
 
       setTimeout( () => {
         if(Data.stat == false){
           this.errorMsg = "Connexion échouée. Veuillez vérifier vos coordonnées ";
+          this.isClick = false;
           setTimeout(() => {
             this.errorMsg = " ";
           },4000)

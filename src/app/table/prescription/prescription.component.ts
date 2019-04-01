@@ -19,7 +19,7 @@ export class PrescriptionComponent implements OnInit {
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.dana.filter(function(d) {
-      return d.nom.toLowerCase().indexOf(val) !== -1 || !val;
+      return d.medecin.toLowerCase().indexOf(val) !== -1 || !val;
     });
     this.collection = temp;
   }
@@ -32,4 +32,11 @@ export class PrescriptionComponent implements OnInit {
     
     } );
   }
+  imprimer(){
+    let printContents = document.getElementById('sectionAimprimer').innerHTML;    
+    let originalContents = document.body.innerHTML;      
+    document.body.innerHTML = printContents;     
+    window.print();     
+    document.body.innerHTML = originalContents;
+   }
 }

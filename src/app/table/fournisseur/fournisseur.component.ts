@@ -1,8 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 
-declare var require: any;
-const data: any = require('./fournisseur.json');
-
 @Component({
   selector: 'app-test',
   templateUrl: './fournisseur.component.html',

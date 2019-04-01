@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +16,9 @@ public info = {}
 
 <<<<<<< HEAD
 title = "yves mick";
+<<<<<<< HEAD
+  constructor(private dataService: DataService, private route:Router, private http: HttpClient){ 
+=======
   constructor(private dataService: DataService, private route:Router, private infoUser : InfoUserService, private _http: HttpClient){}
 
   ngOnInit() {
@@ -33,6 +36,7 @@ title = "yves mick";
 =======
 title = "yves mick"; 
   constructor(private dataService: DataService, private route:Router, private http: HttpClient){
+>>>>>>> 581188a335db37f4d147aad95b3d9679c8a2a752
 
      
   }
@@ -40,12 +44,19 @@ title = "yves mick";
   ngOnInit() {
     return this.dataService.getData()
       .subscribe( (Data) => { this.data = Data["info"].listeOb; this.user = Data["user"]; this.info = Data["info"]
+<<<<<<< HEAD
+        console.log('DATA DIRECT ' + JSON.stringify(Data))} ); 
+=======
         console.log('DATA DIRECT ' + JSON.stringify(Data))} );
 >>>>>>> 893e1d3dd5b16f9150a90dbf01c6e149ffd16132
+>>>>>>> 581188a335db37f4d147aad95b3d9679c8a2a752
   }
 
   
   
+<<<<<<< HEAD
+
+=======
   ngAfterViewInit() {
     console.log("===A====");
 <<<<<<< HEAD
@@ -54,6 +65,7 @@ title = "yves mick";
     console.log(this.data);  
 >>>>>>> 893e1d3dd5b16f9150a90dbf01c6e149ffd16132
   }
+>>>>>>> 581188a335db37f4d147aad95b3d9679c8a2a752
 }
 
 

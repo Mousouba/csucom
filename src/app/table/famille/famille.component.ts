@@ -13,6 +13,10 @@ export class FamilleComponent implements OnInit{
   constructor( private dataService: DataService) {}
 
   ngOnInit(){
+    this.getData();
+  }
+
+  getData(){
     this.dataService.getFamille()
     .subscribe((Data) => {
       this.data = Data.data;
@@ -33,7 +37,11 @@ export class FamilleComponent implements OnInit{
      })
   }
 
-  onDelete(id:number){ 
-    console.log("son id est :"+ id);
+  deleteItem(id:number, table:string){
+    this.dataService.deleteItem({id:id, table: table})
+    .subscribe( (Data) => { 
+      console.log(JSON.stringify(Data));
+    });
+    this.getData();
   }
 }

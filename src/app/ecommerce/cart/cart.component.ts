@@ -10,6 +10,8 @@ export class CartComponent implements OnInit {
   public total: number = 0;
   public monnaie: number = 0;
   public client: string;
+  public keyGen: string =  Math.floor(Math.random() * 99999 ).toString() ;
+  public form = {};
 
   constructor( private panier: PanierService){}
 
@@ -18,6 +20,9 @@ export class CartComponent implements OnInit {
     this.calculeTotal();
     console.log("monnaie "+this.monnaie);
 
+  }
+  onSubmit(){
+    
   }
 
   removeItem(index:number){

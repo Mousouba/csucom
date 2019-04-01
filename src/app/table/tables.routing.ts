@@ -14,6 +14,8 @@ import { SaisiefournisseurComponent } from './saisiefournisseur/saisiefournisseu
 import { PatientComponent } from './patient/patient.component';
 import { SaisiepatientComponent } from './saisiepatient/saisiepatient.component';
 import { CaisseComponent } from './caisse/caisse.component';
+import { PanneauComponent } from './panneau/panneau.component';
+import { CompteComponent } from './compte/compte.component';
 
 export const TablesRoutes: Routes = [
   {
@@ -235,6 +237,38 @@ export const TablesRoutes: Routes = [
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Bons de commande fournisseur' }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    path: '',
+    children: [
+      {
+        path: 'panneau',
+        component: PanneauComponent,
+        data: {
+          title: 'Saisie de patients ',
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'Panneau d\'administration' }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    path: '',
+    children: [
+      {
+        path: 'compte',
+        component: CompteComponent,
+        data: {
+          title: 'Creation de compte utilisateur ',
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'Creationde compte utilisateur' }
           ]
         }
       }
