@@ -69,6 +69,16 @@ let User = class {
         })
     }
 
+    static delElement(table, id){
+        return new Promise((next)=>{
+            db.query('DELETE FROM '+ table + ' WHERE id = ?', [parseInt(id, 10)])
+            .then((resultat)=>{
+                next(resultat)
+            })
+            .catch((err)=>{ next(err)})
+        })
+    }
+
     static getMaxPatientID(){
         return new Promise((next)=>{
             db.query("SELECT MAX(id) lastID FROM client ORDER BY id DESC")

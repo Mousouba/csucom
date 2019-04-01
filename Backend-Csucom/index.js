@@ -155,6 +155,15 @@ mysql.createConnection({
         let famille = await User.getDes();
         res.json({success:true, user: req.session.csucom, data:famille})
     })
+    api.post('/del', async (req, res)=>{
+        const del = await User.delElement(req.body.table, req.body.id);
+        if(!isErr(del)){
+            res.send({user: req.session.csucom, stat: true} )
+        }
+        else{
+            res.send({user: req.session.csucom, stat: false} )
+        }
+    })
     
 
     api.post('/login', async (req, res) =>{
