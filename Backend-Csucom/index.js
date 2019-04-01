@@ -320,6 +320,29 @@ mysql.createConnection({
         }
     });
 
+
+    api.post('/chambre', async (req, res)=>{
+        const ch = await User.setChambre(req.body.chambre);
+        if(!isErr(ch)) res.send({stat: true})
+        res.send({stat: false})
+    })
+    api.post('/lit', async (req, res)=>{
+        const ch = await User.setLit(req.body.lit, req.body.chambre_selected);
+        if(!isErr(ch)) res.send({stat: true})
+        res.send({stat: false})
+    })
+
+    api.get('/chambre', async (req, res)=>{
+        const ch = await User.getAllChambre();
+        if(!isErr(ch)) res.send({stat: true, info:ch})
+        res.send({stat: false})
+    })
+    api.get('/lit', async (req, res)=>{
+        const ch = await User.getAllLit();
+        if(!isErr(ch)) res.send({stat: true, info:ch})
+        res.send({stat: false})
+    })
+
     api.post('/saisiepatient', async (req, res) =>{
         
         req.check('name', "Nom Invalide");

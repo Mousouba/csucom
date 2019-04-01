@@ -63,12 +63,8 @@ let User = class {
         return new Promise((next)=>{
             db.query("INSERT INTO gestionnaire(pseudo, email, pass, rang, numero) VALUES (?, ?, ?, ?, ?)", [pseudo, email, pass, parseInt(rang, 10), numero])
             .then((result)=>{
-                db.query("SELECT * FROM gestionnaire ORDER BY rang DESC")
-                .then((resul)=>{
-                    next(resul);
-                }).catch((err)=>{
-                    next(err)
-                })            }).catch((err)=>{
+                next(result)
+            }).catch((err)=>{
                 next(err)
             })
         })
@@ -218,7 +214,7 @@ let User = class {
 
     static getAllLit(){
         return new Promise((next)=>{
-            db.query("SELECT * FROM lit ORDER BY libelle ASC")
+            db.query("SELECT *, lit.libelle lib FROM lit LEFT JOIN chambre ON lit.id_chambre = chambre.id ORDER BY lit.libelle ASC")
             .then((result)=>{
                 next(result);
             }).catch((err)=>{
@@ -226,6 +222,7 @@ let User = class {
             })
         })
     }
+    
 
     static getAllPrescriction(){
         return new Promise((next)=>{
@@ -340,6 +337,31 @@ let User = class {
             })
         })
     }
+
+    static setChambre(name){
+        return new Promise((next)=>{
+            db.query("INSERT INTO chambre(libelle) VALUES (?)", [name] )
+            .then((result)=>{
+                next(result[0]);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+
+    static setLit(name, chambre_id){
+        return new Promise((next)=>{
+            db.query("INSERT INTO lit(libelle, id_chambre) VALUES (?,?)", [name, parseInt(chambre_id)] )
+            .then((result)=>{
+                next(result[0]);
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
+
+
 
     static setPres(client,service,medecin,libelle,keyGen,date,gestionnaire,ristourne,montant){
         return new Promise((next)=>{
