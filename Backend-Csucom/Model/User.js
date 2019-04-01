@@ -47,6 +47,32 @@ let User = class {
             })
         })
     }
+    static getUser(){
+        return new Promise((next)=>{
+            db.query("SELECT * FROM gestionnaire ORDER BY rang DESC")
+            .then((resul)=>{
+                next(resul);
+            }).catch((err)=>{
+                next(err)
+            })
+
+        })
+    }
+
+    static setUser(pseudo, email, pass, rang, numero){
+        return new Promise((next)=>{
+            db.query("INSERT INTO gestionnaire(pseudo, email, pass, rang, numero) VALUES (?, ?, ?, ?, ?)", [pseudo, email, pass, parseInt(rang, 10), numero])
+            .then((result)=>{
+                db.query("SELECT * FROM gestionnaire ORDER BY rang DESC")
+                .then((resul)=>{
+                    next(resul);
+                }).catch((err)=>{
+                    next(err)
+                })            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
     static getTotalPatient(){
         return new Promise((next)=>{
             db.query("SELECT *, COUNT(id) totalClient FROM client")

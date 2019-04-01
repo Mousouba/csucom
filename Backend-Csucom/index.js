@@ -61,11 +61,10 @@ mysql.createConnection({
       }
     
     api.get('/', async (req, res)=>{
-        var token = req.headers['x-access-token'];
-        if(!token){
-            jwt.verify(token, config.session.secret, async function(err, decoded) {
-                if (err) {res.status(500).send({stat:false, user: null});}
-                else{
+        var token = req.headers;
+        console.log(token)
+        console.log(req.session.csucom)
+        if(req.session.csucom){
                     let info = {};
             
             const NumberPer =  await User.getTotalPrescription();
@@ -82,9 +81,8 @@ mysql.createConnection({
             info.totalSumPres = (SumPres.sumPres !== null) ? SumPres.sumPres : 0
             info.SumPhar = (SumPhar.sumEn !== null) ? SumPhar.sumEn : 0
             info.listeOb = listeOb
-            res.status(200).send({stat:true, user: decoded, info:info})
-                }
-              });
+            
+            res.status(200).send({stat:true, user: req.session.csucom, info:info})
             
         }else{
             console.log("false INC")
@@ -111,7 +109,27 @@ mysql.createConnection({
         res.json({success:true, user: req.session.csucom, info:info, chambre:chambre, lit:lit})
     })
 
+    api.post('/user', async (req, res)=>{
+        var test = req.body
+        const email = test.email;
+        const pseudo = test.pseudo;
+        const contact = test.contact;
+        const level =  test.role;
+        let password = crypto.createHmac('sha256', test.mdp).update('I love cupcakes').digest('hex');
+        console.log(password)
+        const users = await User.setUser(pseudo, email, password, level, contact)
+        if(!isErr(users)) res.send({stat: true, user: req.session.csucom, info: users})
+        res.send({stat: false, user: null})
+    })
     
+    api.get('/user', async (req, res)=>{
+        const all =  await User.getUser()
+        if(!isErr(all)){
+            res.send({stat: true, user:req.session.csucom, info: all})
+        }
+        else  res.send({stat: true, user:null})
+
+    })
     api.get('/pres', async (req, res)=>{
         console.log('req  '+ JSON.stringify(req))
         let info = await User.getAllPrescriction();
@@ -181,11 +199,8 @@ mysql.createConnection({
             const personC = await User.userExist(user, password);
            if (!isErr(personC)){
                
-            const  expiresIn  =  24  *  60  *  60;
-            const  accessToken  =  jwt.sign({ user:  personC }, config.session.secret, {
-                expiresIn:  expiresIn
-            });
-            res.status(200).send({ stat: true, "user":  personC, "access_token":  accessToken, "expires_in":  expiresIn});
+            req.session.csucom = personC
+            res.status(200).send({ stat: true, "user":  req.session.csucom});
         }
            else{
             console.log("again")
