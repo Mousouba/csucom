@@ -42,14 +42,8 @@ export class LoginComponent implements OnInit {
   onSubmit(ngForm: NgForm){ 
     this.isClick = true;
     return this.dataService.authUser(ngForm.value)
-<<<<<<< HEAD
     .subscribe( (Data) => { this.queryResponse = Data; 
       console.log( JSON.stringify(this.queryResponse) );
-=======
-    .subscribe( (Data) => { this.queryResponse = Data;
-       
-      console.log('auth: '+JSON.stringify(Data));
->>>>>>> 581188a335db37f4d147aad95b3d9679c8a2a752
 
       setTimeout( () => {
         if(Data.stat == false){

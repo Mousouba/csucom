@@ -24,10 +24,6 @@ export class PrescripteurComponent implements OnInit {
     });
     this.collection = temp;
   }
-  imprimer(){
-    alert("voulez vous imprimer");
-    window.print();
-  }
   ngOnInit(){
     return this.dataService.getMedecin()
     .subscribe( (Data) => { this.collection = Data.info;

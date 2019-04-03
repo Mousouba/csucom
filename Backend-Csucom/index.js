@@ -18,7 +18,6 @@ const mysql = require('promise-mysql');
 
 mysql.createConnection({
     host: config.db.host,
-    port: 8889,
     database: config.db.database,
     user: config.db.user,
     password: config.db.password
@@ -62,9 +61,10 @@ mysql.createConnection({
     
     api.get('/', async (req, res)=>{
         var token = req.headers['x-access-token'];
-        if(!token){
+        console.log(token)
+        if(token){
             jwt.verify(token, config.session.secret, async function(err, decoded) {
-                if (err) {res.status(500).send({stat:false, user: null});}
+                if (err) {res.send({stat:false, user: null});}
                 else{
                     let info = {};
             
@@ -82,7 +82,7 @@ mysql.createConnection({
             info.totalSumPres = (SumPres.sumPres !== null) ? SumPres.sumPres : 0
             info.SumPhar = (SumPhar.sumEn !== null) ? SumPhar.sumEn : 0
             info.listeOb = listeOb
-            res.status(200).send({stat:true, user: decoded, info:info})
+            res.send({stat:true, user: decoded, info:info})
                 }
               });
             
@@ -185,11 +185,11 @@ mysql.createConnection({
             const  accessToken  =  jwt.sign({ user:  personC }, config.session.secret, {
                 expiresIn:  expiresIn
             });
-            res.status(200).send({ stat: true, "user":  personC, "access_token":  accessToken, "expires_in":  expiresIn});
+            res.send({ stat: true, "user":  personC, "access_token":  accessToken, "expires_in":  expiresIn});
         }
            else{
             console.log("again")
-            res.status(500).send({ stat: false, error: 'Identification Echoué. Veuillez verifier vos cordonnées' });
+            res.json({ stat: false, error: 'Identification Echoué. Veuillez verifier vos cordonnées' });
            }
         }
     });

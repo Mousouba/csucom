@@ -15,8 +15,8 @@
     },
     "db": {
       "host": "localhost",
-      "database": "csucom",
+      "database": "csucom-2",
       "user": "root",
-      "password": "root"
+      "password": ""
     }
   }
