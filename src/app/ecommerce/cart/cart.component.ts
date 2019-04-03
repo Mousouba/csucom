@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { PanierService } from 'src/app/service/panier.service';
+import { NgForm } from '@angular/forms';
+import { DataService } from '../../service/data.service';
 @Component({
   templateUrl: 'cart.component.html'
 })
@@ -13,17 +15,22 @@ export class CartComponent implements OnInit {
   public keyGen: string =  Math.floor(Math.random() * 99999 ).toString() ;
   public form = {};
 
-  constructor( private panier: PanierService){}
+  constructor( private panier: PanierService, private dataService : DataService){}
 
   ngOnInit(){
     this.collection = this.panier.panier;
     this.calculeTotal();
     console.log("monnaie "+this.monnaie);
+    console.log('Panier :'+ JSON.stringify(this.panier.panier))
 
   }
-  onSubmit(){
-    
+  onSubmit(f : NgForm){
+    this.dataService.setPanier({client:this.client, keyGen:this.keyGen, monnaie:this.monnaie, panier: this.panier.panier})
+    .subscribe( (Data) => { 
+      console.log('Data '+JSON.stringify(Data));
+    })
   }
+
 
   removeItem(index:number){
     this.reCalculeTotal(index);
@@ -40,7 +47,7 @@ export class CartComponent implements OnInit {
   
   reCalculeTotal(index:number){
     if(this.collection.length > 0){
-      this.total = this.total - this.panier.panier[index].priceVente;
+      this.total = this.panier.panier[index].priceVente -  this.total;
       console.log(index);
     }else{
       this.total = 0;

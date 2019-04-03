@@ -18,6 +18,7 @@ const mysql = require('promise-mysql');
 
 mysql.createConnection({
     host: config.db.host,
+    port: 8889,
     database: config.db.database,
     user: config.db.user,
     password: config.db.password
@@ -60,19 +61,12 @@ mysql.createConnection({
       }
     
     api.get('/', async (req, res)=>{
-<<<<<<< HEAD
-        var token = req.headers;
-        console.log(token)
-        console.log(req.session.csucom)
-        if(req.session.csucom){
-=======
         var token = req.headers['x-access-token'];
         console.log(token)
-        if(token){
-            jwt.verify(token, config.session.secret, async function(err, decoded) {
+        if(true){
+            /*jwt.verify(token, config.session.secret, async function(err, decoded) {
                 if (err) {res.send({stat:false, user: null});}
-                else{
->>>>>>> af87262565c69c72cc94ae4c5cf00aa9ee715e82
+                else{*/
                     let info = {};
             
             const NumberPer =  await User.getTotalPrescription();
@@ -88,21 +82,18 @@ mysql.createConnection({
             info.totalDeficite = NumberDeficite.totalDeficite
             info.totalSumPres = (SumPres.sumPres !== null) ? SumPres.sumPres : 0
             info.SumPhar = (SumPhar.sumEn !== null) ? SumPhar.sumEn : 0
-            info.listeOb = listeOb
-<<<<<<< HEAD
-            
-            res.status(200).send({stat:true, user: req.session.csucom, info:info})
-=======
-            res.send({stat:true, user: decoded, info:info})
+            info.listeOb = listeOb;
+            me = {id: 1, pseudo: "Icore", email: "core.irie@gmail.com"}
+            console.log(info)
+            res.send({stat:true, user: me, info:info})
                 }
               });
->>>>>>> af87262565c69c72cc94ae4c5cf00aa9ee715e82
             
-        }else{
+        /*}else{
             console.log("false INC")
             res.json({stat:false, user: null})
         }
-    });
+    });*/
     api.get('/medecin', async (req, res)=>{
         let info = await User.getAllMedecin();
         console.log("seesion "+ req.session.csucom)
@@ -118,6 +109,7 @@ mysql.createConnection({
         
         let info = await User.getAllObservation();
         let chambre = await User.getAllChambre();
+    
         let lit = await User.getAllLit();
         console.log("Obs " + req.session.csucom)
         res.json({success:true, user: req.session.csucom, info:info, chambre:chambre, lit:lit})
@@ -145,7 +137,6 @@ mysql.createConnection({
 
     })
     api.get('/pres', async (req, res)=>{
-        console.log('req  '+ JSON.stringify(req))
         let info = await User.getAllPrescriction();
         res.json({success:true, user: req.session.csucom, info:info})
     })
@@ -154,6 +145,13 @@ mysql.createConnection({
        
         let article = await User.getAllArticle();
         res.json({success:true, user: req.session.csucom, article:article})
+    })
+
+    api.post('/panier', async (req, res)=>{
+       console.log(req.body)
+       //const Pan = await
+        /*let article = await User.getAllArticle();
+        res.json({success:true, user: req.session.csucom, article:article})*/
     })
 
     api.get('/inventaire', async (req, res)=>{
@@ -188,6 +186,7 @@ mysql.createConnection({
         res.json({success:true, user: req.session.csucom, data:famille})
     })
     api.post('/del', async (req, res)=>{
+        console.log(req.body)
         const del = await User.delElement(req.body.table, req.body.id);
         if(!isErr(del)){
             res.send({user: req.session.csucom, stat: true} )
@@ -213,16 +212,11 @@ mysql.createConnection({
             const personC = await User.userExist(user, password);
            if (!isErr(personC)){
                
-<<<<<<< HEAD
-            req.session.csucom = personC
-            res.status(200).send({ stat: true, "user":  req.session.csucom});
-=======
             const  expiresIn  =  24  *  60  *  60;
             const  accessToken  =  jwt.sign({ user:  personC }, config.session.secret, {
                 expiresIn:  expiresIn
             });
             res.send({ stat: true, "user":  personC, "access_token":  accessToken, "expires_in":  expiresIn});
->>>>>>> af87262565c69c72cc94ae4c5cf00aa9ee715e82
         }
            else{
             console.log("again")
@@ -345,13 +339,24 @@ mysql.createConnection({
 
     api.post('/chambre', async (req, res)=>{
         const ch = await User.setChambre(req.body.chambre);
-        if(!isErr(ch)) res.send({stat: true})
-        res.send({stat: false})
+        if(!isErr(ch)) {
+            console.log(ch)
+            res.send({stat: true, info:ch})
+        }
+        else{
+            res.send({stat: false})
+        }
+        
     })
     api.post('/lit', async (req, res)=>{
         const ch = await User.setLit(req.body.lit, req.body.chambre_selected);
-        if(!isErr(ch)) res.send({stat: true})
-        res.send({stat: false})
+        if(!isErr(ch)) {
+            console.log(ch)
+            res.send({stat: true, info: ch})
+        }
+        else{
+            res.send({stat: false})
+        }
     })
 
     api.get('/chambre', async (req, res)=>{
@@ -412,6 +417,10 @@ mysql.createConnection({
      * Donc Priez de ne pas vous Concentrer sur mes nom de variable.
      */
     io.on('connection', (socket)=> {
+        socket.on('press', async (data)=>{
+            console.log("tcheck "+ data);
+            io.emit('press', {text: "Bien reçu"})
+        })
         
     });
     https.listen(config.port, ()=>{

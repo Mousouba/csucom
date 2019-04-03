@@ -71,7 +71,7 @@ let User = class {
     }
     static getTotalPatient(){
         return new Promise((next)=>{
-            db.query("SELECT *, COUNT(id) totalClient FROM client")
+            db.query("SELECT COUNT(id) totalClient FROM client")
             .then((result)=>{
                 next(result[0]);
             }).catch((err)=>{
@@ -97,7 +97,9 @@ let User = class {
             .then((resultat)=>{
                 next(resultat)
             })
-            .catch((err)=>{ next(err)})
+            .catch((err)=>{ 
+                console.log(err)
+                next(err)})
         })
     }
 
@@ -147,7 +149,7 @@ let User = class {
 
     static getTotalDeficite(){
         return new Promise((next)=>{
-            db.query("SELECT COUNT(id) totalDeficite FROM ph_article WHERE qte < 6")
+            db.query("SELECT COUNT(id) totalDeficite FROM ph_article WHERE qtes < 6")
             .then((result)=>{
                 next(result[0]);
             }).catch((err)=>{
@@ -178,6 +180,7 @@ let User = class {
     }
     
     
+
 
     static getAllArticle(){
         return new Promise((next)=>{
@@ -214,7 +217,7 @@ let User = class {
 
     static getAllLit(){
         return new Promise((next)=>{
-            db.query("SELECT *, lit.libelle lib FROM lit LEFT JOIN chambre ON lit.id_chambre = chambre.id ORDER BY lit.libelle ASC")
+            db.query("SELECT *, lit.libelle lib,lit.id ident, chambre.libelle libe FROM lit LEFT JOIN chambre ON lit.id_chambre = chambre.id ORDER BY lit.libelle ASC")
             .then((result)=>{
                 next(result);
             }).catch((err)=>{
@@ -303,6 +306,21 @@ let User = class {
             })
         })
     }
+    static setObservation(name, keyGen, monaie, gestionnaire_id){
+        return new Promise((next)=>{
+            db.query("INSERT INTO ph_journalVente(name_client, keyGen, encaisse, gestionnaire_id)", [name, keyGen, monaie, parsInt(gestionnaire_id, 10)] )
+            .then((result)=>{
+                db.query("SELECT id FROM ph_journalVente WHERE keyGen = ? AND encaisse = ?", [keyGen, monaie])
+                .then((ress)=>{
+                    
+                }).catch((errs)=>{
+
+                })
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
 
     static setObservation(prescription_id,ch,lt,sortie){
         return new Promise((next)=>{
@@ -342,9 +360,14 @@ let User = class {
         return new Promise((next)=>{
             db.query("INSERT INTO chambre(libelle) VALUES (?)", [name] )
             .then((result)=>{
-                next(result[0]);
-            }).catch((err)=>{
-                next(err)
+                db.query("SELECT * FROM chambre ORDER BY libelle ASC")
+            .then((results)=>{
+                next(results);
+            }).catch((errs)=>{
+                next(errs)
+            })
+            }).catch((errs)=>{
+                next(errs)
             })
         })
     }
@@ -354,7 +377,12 @@ let User = class {
         return new Promise((next)=>{
             db.query("INSERT INTO lit(libelle, id_chambre) VALUES (?,?)", [name, parseInt(chambre_id)] )
             .then((result)=>{
-                next(result[0]);
+                db.query("SELECT *, lit.libelle lib, chambre.libelle libe FROM lit LEFT JOIN chambre ON lit.id_chambre = chambre.id ORDER BY lit.libelle ASC")
+            .then((results)=>{
+                next(results);
+            }).catch((errs)=>{
+                next(errs)
+            })
             }).catch((err)=>{
                 next(err)
             })

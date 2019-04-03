@@ -20,7 +20,7 @@
                                 <td>{{ i+1 }}</td>
                                 <td>{{ item.libelle }}</td>
                                 <td>{{ item.priceVente }}</td>
-                                <td>{{ item.qte }}</td>
+                                <td>{{ item.qtes }}</td>
                                 <td class="text-right">
                                     <a (click)="removeItem(i)" href="javascript:void(0)" class=" mr-3 text-danger" title="Supprimer de la liste"><i class="text-danger ti-close"></i></a>
                                 </td>
@@ -50,7 +50,7 @@
                 <hr>
                 <div class="form-actions" style="width: 100%;margin-top: 40px">
                     <div class="text-center">
-                        <button *ngIf="total" [disabled]="!client" type="submit" class="btn btn-success m-r-1">Commander</button>
+                        <button *ngIf="total" (click)="onSubmit()" [disabled]="!client" type="submit" class="btn btn-success m-r-1">Commander</button>
                     </div>
                 </div>
             </div>

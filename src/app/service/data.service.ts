@@ -93,6 +93,9 @@ export class DataService {
     return this._http.post<any[]>(this.apiUrl+"/lit",data);
   }
 
+  setPanier(data: any): Observable<any[]>{
+    return this._http.post<any[]>(this.apiUrl+"/panier",data);
+  }
   //Delete Something
   deleteItem(data: any): Observable<any[]>{
     return this._http.post<any[]>(this.apiUrl+"/del",data);

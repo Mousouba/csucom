@@ -30,8 +30,8 @@
                                 <td>{{ item.libelle }}</td>
                                 <td>{{ item.priceVente }}</td>
                                 <td>
-                                    <label *ngIf=" 5 < item.qte"  class="label label-success label-rounded">{{ item.qte }}</label>
-                                    <label *ngIf=" 5 > item.qte"   class="label label-danger label-rounded">{{ item.qte }}</label>
+                                    <label *ngIf=" 5 < item.qtes"  class="label label-success label-rounded">{{ item.qtes }}</label>
+                                    <label *ngIf=" 5 > item.qtes"   class="label label-danger label-rounded">{{ item.qtes }}</label>
                                 </td>
                                 <td class="text-right">
                                     <a (click)="addToCart(i)" href="javascript:void(0)" class=" mr-3 text-danger" title="Ajouter au panier"><i class="text-success icon-Add-Bag"></i></a>

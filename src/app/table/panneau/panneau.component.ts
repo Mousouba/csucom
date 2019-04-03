@@ -11,6 +11,7 @@ export class PanneauComponent implements OnInit {
 
   public lit: [];
   public chambre : [];
+  public numb: any;
   public users : [];
 
 
@@ -24,7 +25,7 @@ export class PanneauComponent implements OnInit {
     this.dataService.getAllUser()
     .subscribe( (Data) => { 
       console.log("response "+JSON.stringify(Data));
-      this.users = Data.user;
+      this.users = Data.info;
     },  
     (error) => {
      console.log("erreur")
@@ -34,6 +35,8 @@ export class PanneauComponent implements OnInit {
     .subscribe( (Data) => { 
       this.lit = Data.lit; 
       this.chambre = Data.chambre;
+      this.numb = this.chambre.length + 1;
+      console.log('ch: ' + this.numb)
 
     })
   }
@@ -43,17 +46,17 @@ export class PanneauComponent implements OnInit {
     console.log('on lit id '+JSON.stringify(f.value.chambre_selected));
     this.dataService.setLit(f.value)
     .subscribe( (Data) => { 
-      console.log(JSON.stringify(Data))
+      this.lit = Data.info;
     });
-    this.getUser();
+    //this.getUser();
   }
 
   onChambre(){
     let num = this.chambre.length + 1;
     this.dataService.setChambre({chambre:'chambre '+ num})
     .subscribe( (Data) => { 
-      console.log(JSON.stringify(Data));
-      this.getUser();
+      this.chambre = Data.info
+      //this.getUser();
     })
   }
 // Suppression de lit @param1: id de l'item , @param2: nom_de_la_table

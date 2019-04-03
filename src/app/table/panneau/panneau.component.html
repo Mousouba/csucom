@@ -86,7 +86,7 @@
           <div class="d-flex no-block justify-content-end align-items-center">
               <nav aria-label="breadcrumb">
                   <ol class="breadcrumb col-md-12">
-                      <li class="breadcrumb-item active font-18" aria-current="page"><span class="text-info font-20"><b>{{ chambre.length }}</b>&nbsp;</span>CHAMBRES </li>
+                      <li class="breadcrumb-item active font-18" aria-current="page"><span class="text-info font-20"><b>{{ numb }}</b>&nbsp;</span>CHAMBRES </li>
                       <li class="breadcrumb-item active font-18" aria-current="page"><span class="text-info font-20"><b>{{ lit.length }}</b>&nbsp;</span>LITS </li>
                   </ol>
               </nav>
@@ -114,10 +114,10 @@
                           </thead>
                           <tbody>
                               <tr *ngFor="let item of lit">
-                                 <td>{{ item.sa_chambre }}</td> 
+                                 <td>{{ item.libe }}</td> 
                                   <td>{{ item.lib }}</td>
                                   <td width="10" align="center">
-                                      <a (click)="deleteItem(item.id, lit)" href="javascript:void(0)" class="text-inverse " title="Supprimer"><i class="ti-trash text-dark"></i></a>
+                                      <a (click)="deleteItem(item.ident, 'lit')" href="javascript:void(0)" class="text-inverse " title="Supprimer"><i class="ti-trash text-dark"></i></a>
                                   </td>
                               </tr>
                           </tbody>
@@ -134,7 +134,8 @@
               <hr>
               <div class="row">
                 <div class="col-sm-6 col-md-6">
-                    <input type="text" disabled value="chambre {{ chambre.length+1 }}" class="form-control m-t-10">
+                       
+                    <input type="text" value="{{ numb }}" disabled class="form-control m-t-10">
                 </div>
                 <div class="col-sm-6 col-md-6">
                     <button type="button" (click)="onChambre()" class="btn waves-effect waves-light btn-success float-right" style="margin-top: 10px">Ajouter</button>

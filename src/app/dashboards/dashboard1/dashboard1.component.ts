@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { HttpClient } from '@angular/common/http';
 import { InfoUserService } from '../../service/info-user.service';
+import { OperationService } from '../../operation.service';
 
 
 @Component({
@@ -15,11 +16,18 @@ public user = {};
 public info = {};   
 
 title = "yves mick"; 
-  constructor(private dataService: DataService, private route:Router, private http: HttpClient){}
+  constructor(private dataService: DataService, private route:Router, private http: HttpClient, private sock: OperationService){}
 
   ngOnInit() {
+    this.sock.messages.subscribe(msg =>{
+      console.log(msg);
+    })
     return this.dataService.getData()
-      .subscribe( (Data) => { this.data = Data["info"].listeOb; this.user = Data["user"]; this.info = Data["info"]});
+      .subscribe( (Data) => { console.log(JSON.stringify(Data)); this.data = Data["info"].listeOb; this.user = Data["user"]; this.info = Data["info"]});
+  }
+
+  sendMessage(){
+    this.sock.sendMessage('Test de Ouf')
   }
 }
 
