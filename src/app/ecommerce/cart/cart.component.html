@@ -3,7 +3,7 @@
     <div class="col-md-9 col-lg-9">
         <div class="card">
             <div class="card-body">
-                <button class="mb-2 btn btn-light" [routerLink]="['/ecom/products']">Retour</button>
+                <button style="background:#c1c1c1" class="mb-2 btn btn-light" [routerLink]="['/ecom/products']"><i class="mdi mdi-arrow-left-bold"></i>  Retour</button>
                 <div class="table-responsive">
                     <table class="table v-middle product-overview" id="zero_config">
                         <thead>
@@ -36,7 +36,7 @@
         <div class="card">
             <div class="card-body">
                 <small>N° Reçu</small>
-                <h2>00345</h2>
+                <h2>{{ keyGen }}</h2>
                 <small>Client / Destination<span class="font-12 text-danger">&nbsp;*</span></small>
                 <input [(ngModel)]="client" type="text" class="form-control" placeholder="Saisir nom ici">
                 <hr>

@@ -54,3 +54,141 @@
        </table>
     </div>
 </div>
+<div class="imprimer" id='sectionAimprimer'>
+    <div class="milieu">
+        <div class="gauche">
+            <h2>CSUCOM <br> RIVIERA PALMERAIE</h2>
+            <h4>04 BP 2258 ABIDJAN 04</h4>
+            <h4>TEL : 22 47 26 78</h4>
+        </div>
+        <div class="droit">
+            <div class="titre">
+                <h2 style="">ETAT GENERAL DES VENTES</h2>
+                <p class="rotate"></p>
+            </div>
+            
+        </div>
+    </div>
+    <br><hr style="margin-top: 20px">
+    <div>
+        <table class="tableau1">
+            <tr>
+                <td>ETAT : <span style="color:red">garde/jour</span> </td>
+                
+            </tr>
+        </table>
+    </div>
+    <div class="debut">
+        CAISSE DE LA PHARMACIE
+    </div>
+    <br><br>
+        <table class="tableau" border="1">
+            <thead>
+                <tr class="bg-light">
+                    <th>Reçu N°</th>
+                    <th>Date</th>
+                    <th>Client</th>
+                    <th>Designation</th>
+                    <th>Montant</th>
+                    <th>Gestionnaire</th>
+                    <th>Prescripteur</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of collection">
+                    <td>{{ item.keyGen }}</td>
+                    <td>{{ item.register_date }}</td>
+                    <td>{{ item.nom }} {{ item.prenom }}</td>
+                    <td>{{ item.desig }}</td>
+                    <td *ngIf="item.ristourne != 0">{{ item.prix }}</td>
+                    <td style="font-weight:bolder" class="text-danger" *ngIf="item.ristourne == 0"><b>{{ item.prix }}</b></td>
+                    <td>{{ item.gestionnaire_id }}</td>
+                    <td>{{ item.medecin }}</td>
+                </tr>
+    
+            </tbody>
+    
+        </table>
+        <style type="text/css" media="screen">
+                .imprimer
+                {
+                    display:none;
+                }
+                
+            </style>
+    <style type="text/css" media="print">
+        *{box-sizing: border-box;}
+        body{
+            margin: 50px;
+        }
+        .milieu{
+            width: 98%;
+            height: 160px;
+            margin: 10px;
+            margin-top: 30px;
+        }
+        .gauche{
+            float: left;
+            width: 23%;
+            background-color: #eeeeee;
+            height: 160px;
+            padding-left: 10px
+        }
+        .droit{
+            float: right;
+            width: 70%;
+            background-color: #eeeeee;
+            height: 160px
+        }
+        .titre{
+            width: 80%;
+            float: left;
+            height: 80px;
+            border: 2px solid black;
+            margin-top: 30px;
+            margin-left: 30px;
+            text-align: center;
+        }
+        .tableau1{
+            border-collapse: collapse;
+            width: 100%;
+            height: 40px;
+            font-size: 20px
+        }
+        .debut{
+            width: 80%;
+            border: 1px solid black;
+            height: 40px;
+            margin-top: 30px;
+            margin-left: 10%;
+            text-align: center;
+            font-size: 30px;
+    
+        }
+        .tableau{
+                width: 100%;
+                height: 100%;
+                border-collapse: collapse;
+                text-align: center;
+            }
+            .imprimer
+                {
+                    display:block;
+                }
+            .rotate{
+                writing-mode: tb-rl;
+                height: 80%; margin: 10% 0%;
+                width: 100%
+            }
+    </style>
+    </div>
+    <script>
+    function imprimer() {
+          var printContents = document.getElementById('sectionAimprimer').innerHTML;    
+       var originalContents = document.body.innerHTML;      
+       document.body.innerHTML = printContents;     
+       window.print();     
+       document.body.innerHTML = originalContents;
+       }
+    </script>
+    

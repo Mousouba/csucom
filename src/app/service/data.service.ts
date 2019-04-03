@@ -55,6 +55,10 @@ export class DataService {
     return this._http.get<any[]>(this.apiUrl+"/des");
   }
 
+  getAllUser(): Observable<any> {
+    return this._http.get<any[]>(this.apiUrl+"/user");
+  }
+
   // POST PART
 
   authUser(data:any): Observable<any[]>{
@@ -77,8 +81,22 @@ export class DataService {
     return this._http.post<any[]>(this.apiUrl+"/pres",data);
   }
 
-  //Delete Something
+  setUser(data: any): Observable<any[]>{
+    return this._http.post<any[]>(this.apiUrl+"/user",data);
+  }
 
+  setChambre(data: any): Observable<any[]>{
+    return this._http.post<any[]>(this.apiUrl+"/chambre",data);
+  }
+
+  setLit(data: any): Observable<any[]>{
+    return this._http.post<any[]>(this.apiUrl+"/lit",data);
+  }
+
+  //Delete Something
+  deleteItem(data: any): Observable<any[]>{
+    return this._http.post<any[]>(this.apiUrl+"/del",data);
+  }
   
   
 }

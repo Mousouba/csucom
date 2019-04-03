@@ -13,7 +13,7 @@ export class ToastrComponent {
 
   showError() {
     this.toastr.error('This is not good!', 'Oops!');
-  }
+  } 
 
   showWarning() {
     this.toastr.warning('You are being warned.', 'Alert!');

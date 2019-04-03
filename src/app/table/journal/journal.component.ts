@@ -29,5 +29,11 @@ export class JournalComponent implements OnInit {
       this.dana = this.collection;
     } );
   }
-
+  imprimer(){
+    let printContents = document.getElementById('sectionAimprimer').innerHTML;    
+    let originalContents = document.body.innerHTML;      
+    document.body.innerHTML = printContents;     
+    window.print();     
+    document.body.innerHTML = originalContents;
+   }
 }

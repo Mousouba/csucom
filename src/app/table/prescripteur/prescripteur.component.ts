@@ -24,10 +24,6 @@ export class PrescripteurComponent implements OnInit {
     });
     this.collection = temp;
   }
-  imprimer(){
-    alert("voulez vous imprimer");
-    window.print();
-  }
   ngOnInit(){
     return this.dataService.getMedecin()
     .subscribe( (Data) => { this.collection = Data.info;
@@ -36,5 +32,13 @@ export class PrescripteurComponent implements OnInit {
     (error) => {
      console.log("erreur")
     });
+  }
+
+  imprimer(){
+   let printContents = document.getElementById('sectionAimprimer').innerHTML;    
+   let originalContents = document.body.innerHTML;      
+   document.body.innerHTML = printContents;     
+   window.print();     
+   document.body.innerHTML = originalContents;
   }
 }

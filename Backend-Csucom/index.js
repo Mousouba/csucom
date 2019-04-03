@@ -18,7 +18,6 @@ const mysql = require('promise-mysql');
 
 mysql.createConnection({
     host: config.db.host,
-    port: 8889,
     database: config.db.database,
     user: config.db.user,
     password: config.db.password
@@ -61,10 +60,19 @@ mysql.createConnection({
       }
     
     api.get('/', async (req, res)=>{
+<<<<<<< HEAD
         var token = req.headers;
         console.log(token)
         console.log(req.session.csucom)
         if(req.session.csucom){
+=======
+        var token = req.headers['x-access-token'];
+        console.log(token)
+        if(token){
+            jwt.verify(token, config.session.secret, async function(err, decoded) {
+                if (err) {res.send({stat:false, user: null});}
+                else{
+>>>>>>> af87262565c69c72cc94ae4c5cf00aa9ee715e82
                     let info = {};
             
             const NumberPer =  await User.getTotalPrescription();
@@ -81,8 +89,14 @@ mysql.createConnection({
             info.totalSumPres = (SumPres.sumPres !== null) ? SumPres.sumPres : 0
             info.SumPhar = (SumPhar.sumEn !== null) ? SumPhar.sumEn : 0
             info.listeOb = listeOb
+<<<<<<< HEAD
             
             res.status(200).send({stat:true, user: req.session.csucom, info:info})
+=======
+            res.send({stat:true, user: decoded, info:info})
+                }
+              });
+>>>>>>> af87262565c69c72cc94ae4c5cf00aa9ee715e82
             
         }else{
             console.log("false INC")
@@ -199,12 +213,20 @@ mysql.createConnection({
             const personC = await User.userExist(user, password);
            if (!isErr(personC)){
                
+<<<<<<< HEAD
             req.session.csucom = personC
             res.status(200).send({ stat: true, "user":  req.session.csucom});
+=======
+            const  expiresIn  =  24  *  60  *  60;
+            const  accessToken  =  jwt.sign({ user:  personC }, config.session.secret, {
+                expiresIn:  expiresIn
+            });
+            res.send({ stat: true, "user":  personC, "access_token":  accessToken, "expires_in":  expiresIn});
+>>>>>>> af87262565c69c72cc94ae4c5cf00aa9ee715e82
         }
            else{
             console.log("again")
-            res.status(500).send({ stat: false, error: 'Identification Echoué. Veuillez verifier vos cordonnées' });
+            res.json({ stat: false, error: 'Identification Echoué. Veuillez verifier vos cordonnées' });
            }
         }
     });

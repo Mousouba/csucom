@@ -13,7 +13,7 @@ export class SaisiepatientComponent implements OnInit {
   public medecin: any[];
   public service: any[];
   public designation: any[];
-  public ID : any = 1;
+  public ID : number = 1;
   public gestionnaire: number = 1;
   public ristourne: number = 10;
   public montant: number = 0;
@@ -24,12 +24,10 @@ export class SaisiepatientComponent implements OnInit {
   ngOnInit(){
     this.collection = this.infoClient.infoClient;
     this.gestionnaire = this.infoUser.infoUser.user.id;
-    console.log("1 "+JSON.stringify(this.infoUser.infoUser.id));
-    console.log("2 "+JSON.stringify(this.infoUser.infoUser.user.id));
     if(!this.gestionnaire){
       this.gestionnaire = 1;
     }
-    console.log('Id depuis le service: '+JSON.stringify(this.infoUser.infoUser.id))
+    console.log('Id depuis le service: '+JSON.stringify(this.infoUser.infoUser.user.id))
 
     return this.dataService.getMedecin()
     .subscribe( (Data) => { 
@@ -63,34 +61,40 @@ export class SaisiepatientComponent implements OnInit {
       this.ristourne = 0;
       this.montant = ngForm.value["montant"]
     }else{
-      this.montant = 0;
+      this.montant = ngForm.value["priceU"];
     }
 
     if(this.infoClient.isExist == 0){
       return this.dataService.setPatient({name:ngForm.value["name"], firstname:ngForm.value["firstname"] ,sexe:ngForm.value["sexe"],birth_date:ngForm.value["birth_date"],number:ngForm.value["number"],assure:ngForm.value["assure"]})
       .subscribe( (Data) => { 
-        this.ID = Data.patient[0].lastID;
+        this.ID = parseInt(Data.patient[0].lastID, 10);
+        console.log("last id "+this.ID);
        },  
       (error) => {
        console.log("erreur")
       }),
       this.dataService.setPres({client:this.ID,service:ngForm.value["service"], medecin:ngForm.value["medecin"] ,libelle:ngForm.value["libelle"],keyGen:this.keyGen,gestionnaire:this.gestionnaire,ristourne:this.ristourne,montant:this.montant})
-      .subscribe( (Data) => { 
-        console.log('Response :'+JSON.stringify(Data));
+      .subscribe( (Data1) => { 
+        console.log("last id 2:  "+this.ID);
+        console.log('Response :'+JSON.stringify(Data1));
       });
 
       
     }else{
-      this.ID = this.infoClient.infoClient.id;
+      this.ID = this.infoUser.infoUser.user.id;
       return this.dataService.setPres({client:this.ID,service:ngForm.value["service"], medecin:ngForm.value["medecin"] ,libelle:ngForm.value["libelle"],keyGen:this.keyGen,gestionnaire:this.gestionnaire,ristourne:this.ristourne,montant:this.montant})
       .subscribe( (Data) => { 
         console.log('Response :'+JSON.stringify(Data));
       });
     }
-
-
-      
-
     
+  }
+
+  imprimer(){
+    let printContents = document.getElementById('sectionAimprimer').innerHTML;    
+    let originalContents = document.body.innerHTML;      
+    document.body.innerHTML = printContents;     
+    window.print();     
+    document.body.innerHTML = originalContents;
   }
 }

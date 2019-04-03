@@ -1,6 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-declare var require: any;
-const data: any = require('./bon.json');
 
 @Component({
   selector: 'app-bon',

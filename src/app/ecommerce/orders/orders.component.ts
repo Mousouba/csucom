@@ -22,14 +22,22 @@ export class OrderComponent implements OnInit {
     }
 
     ngOnInit(){
+      this.getData();
+    }
+
+    getData(){
       this.dataService.getInventaire()
       .subscribe( (Data) => { this.collection = Data.article;
                               this.dana = this.collection;
       })
     }
 
-    delArticle(id:number){
-      console.log('son id est : '+id);
+    deleteItem(id:number, table:string){
+      this.dataService.deleteItem({id:id, table: table})
+      .subscribe( (Data) => { 
+        console.log(JSON.stringify(Data));
+      });
+      this.getData();
     }
 
 

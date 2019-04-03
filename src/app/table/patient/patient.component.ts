@@ -32,6 +32,10 @@ export class PatientComponent  implements OnInit {
   }
 
   ngOnInit(){
+    this.getData();
+  }
+
+  getData(){
     return this.dataService.getPatient()
     .subscribe( (Data) => { this.collection = Data.data ;
         this.dana = this.collection;
@@ -61,9 +65,20 @@ export class PatientComponent  implements OnInit {
           break;
         }
       }
-      this.infoClient.isExist = isExist;
+      
+    }else{
+      this.infoClient.infoClient = [];
     }
+    this.infoClient.isExist = isExist;
     this.route.navigate(['/tables/saisiepatient']);
+  }
+
+  deleteItem(id:number, table:string){
+    this.dataService.deleteItem({id:id, table: table})
+    .subscribe( (Data) => { 
+      console.log(JSON.stringify(Data));
+    });
+    this.getData();
   }
 
 
