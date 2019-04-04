@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PanierService } from 'src/app/service/panier.service';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../../service/data.service';
+import { InfoUserService } from '../../service/info-user.service';
 @Component({
   templateUrl: 'cart.component.html'
 })
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit {
   public keyGen: string =  Math.floor(Math.random() * 99999 ).toString() ;
   public form = {};
 
-  constructor( private panier: PanierService, private dataService : DataService){}
+  constructor( private panier: PanierService, private dataService : DataService, private infoUser : InfoUserService){}
 
   ngOnInit(){
     this.collection = this.panier.panier;
@@ -25,7 +26,7 @@ export class CartComponent implements OnInit {
 
   }
   onSubmit(f : NgForm){
-    this.dataService.setPanier({client:this.client, keyGen:this.keyGen, monnaie:this.monnaie, panier: this.panier.panier})
+    this.dataService.setPanier({client:this.client, keyGen:this.keyGen, monnaie:this.monnaie, panier: this.panier.panier, gestionnaire_id:this.infoUser.infoUser.user[0].id })
     .subscribe( (Data) => { 
       console.log('Data '+JSON.stringify(Data));
     })

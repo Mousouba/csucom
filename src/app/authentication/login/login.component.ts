@@ -43,8 +43,6 @@ export class LoginComponent implements OnInit {
     this.isClick = true;
     return this.dataService.authUser(ngForm.value)
     .subscribe( (Data) => { this.queryResponse = Data; 
-      console.log( JSON.stringify(this.queryResponse) );
-
       setTimeout( () => {
         if(Data.stat == false){
           this.errorMsg = "Connexion échouée. Veuillez vérifier vos coordonnées ";
@@ -53,7 +51,8 @@ export class LoginComponent implements OnInit {
             this.errorMsg = " ";
           },4000)
         }else{
-          this.infoUser.infoUser = this.queryResponse;
+          this.infoUser.infoUser = Data;
+          console.log('Login '+ JSON.stringify(this.infoUser.infoUser ) );
           this.route.navigate(["/dashboard/dashboard1"]);
         }
       },2000)

@@ -45,5 +45,7 @@ export class SidebarComponent implements OnInit {
   // End open close
   ngOnInit() {
     this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    console.log('user 11 depuis nav'+JSON.stringify(this.infoUser.infoUser.user["pseudo"]));
+    console.log('user depuis nav pseudo :'+JSON.stringify(this.infoUser.infoUser.user[0].pseudo));
   }
 }

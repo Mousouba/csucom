@@ -149,7 +149,7 @@ mysql.createConnection({
 
     api.post('/panier', async (req, res)=>{
        console.log(req.body)
-       const ele = await User.setPanierInJourn(req.body.client, req.body.keyGen, req.body.monnaie, 1)
+       const ele = await User.setPanierInJourn(req.body.client, req.body.keyGen, req.body.monnaie, req.body.gestionnaire_id)
        if(!isErr(ele)){
            for(let i in req.body.panier){
             const Product = await User.setPanierInProduct(req.body.panier[i].id, ele.id);
@@ -160,15 +160,7 @@ mysql.createConnection({
                 console.log("err pour " + val + " " + ele.id)
                }
            }
-           /*req.body.panier.forEach(async (val, key)=>{
-               const Product = await User.setPanierInProduct(val.id, ele.id);
-               if(!isErr(Product)){
-                   console.log("Fait pour " + JSON.stringify(val) + " " + ele.id)
-               }
-               else{
-                console.log("err pour " + val + " " + ele.id)
-               }
-           })*/
+           
        }
        else{
            console.log(ele)
