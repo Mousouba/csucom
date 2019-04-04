@@ -34,7 +34,7 @@
                         <td>{{ i+1 }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.firstname }}</td>
-                        <td>{{ item.birth_date }}</td>
+                        <td>{{ item.jr }}/{{ item.mois }}/{{ item.anne }}</td>
                         <td>{{ item.sexe }}</td>
                         <td *ngIf="item.number != 0" >{{ item.number }}</td>
                         <td *ngIf="item.number == 0" >00 00 00 00</td>

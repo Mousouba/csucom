@@ -82,7 +82,7 @@ let User = class {
 
     static getAllPatient(){
         return new Promise((next)=>{
-            db.query("SELECT * FROM client ORDER BY id DESC")
+            db.query("SELECT *, YEAR(birth_date) anne, MONTH(birth_date) mois, DAY(birth_date) jr FROM client ORDER BY name DESC")
             .then((result)=>{
                 next(result);
             }).catch((err)=>{
@@ -217,7 +217,7 @@ let User = class {
 
     static getAllLit(){
         return new Promise((next)=>{
-            db.query("SELECT *, lit.libelle lib,lit.id ident, chambre.libelle libe FROM lit LEFT JOIN chambre ON lit.id_chambre = chambre.id ORDER BY lit.libelle ASC")
+            db.query("SELECT *, lit.libelle lib,lit.id ident, chambre.libelle libe FROM lit LEFT JOIN chambre ON lit.id_chambre = chambre.id ORDER BY chambre.libelle ASC")
             .then((result)=>{
                 next(result);
             }).catch((err)=>{
@@ -306,15 +306,35 @@ let User = class {
             })
         })
     }
-    static setObservation(name, keyGen, monaie, gestionnaire_id){
+    static setPanierInJourn(name, keyGen, monaie, gestionnaire_id){
         return new Promise((next)=>{
-            db.query("INSERT INTO ph_journalVente(name_client, keyGen, encaisse, gestionnaire_id)", [name, keyGen, monaie, parsInt(gestionnaire_id, 10)] )
+            db.query("INSERT INTO ph_journalVente(name_client, keyGen, encaisse, gestionnaire_id) VALUES (?,?,?,?)", [name, keyGen, parseInt(monaie, 10), parseInt(gestionnaire_id, 10)] )
             .then((result)=>{
-                db.query("SELECT id FROM ph_journalVente WHERE keyGen = ? AND encaisse = ?", [keyGen, monaie])
+                db.query("SELECT id FROM ph_journalVente WHERE keyGen = ? AND encaisse = ?", [keyGen, parseInt(monaie, 10)])
                 .then((ress)=>{
-                    
-                }).catch((errs)=>{
+                    next(ress[0])
+                }).catch((errs)=>{next(errs)
+                })
+            }).catch((err)=>{
+                next(err)
+            })
+        })
+    }
 
+
+    static setPanierInProduct(article_id, jr_vente_id){
+        return new Promise((next)=>{
+            db.query("INSERT INTO ph_product_select(ph_article_id,ph_journalVente_id) VALUES (?,?)", [parseInt(article_id, 10), parseInt(jr_vente_id, 10)] )
+            .then((result)=>{
+                db.query("SELECT qtes FROM ph_article WHERE id = ?", [parseInt(article_id, 10)])
+                .then((ress)=>{
+                    console.log(ress[0].qtes - 1)
+                    db.query("UPDATE ph_article SET qtes = ? WHERE id = ?", [(ress[0].qtes - 1), parseInt(article_id, 10)])
+                        .then((resss)=>{
+                            next(resss)
+                        }).catch((errss)=>{next(errs)
+                        })
+                }).catch((errs)=>{next(errs)
                 })
             }).catch((err)=>{
                 next(err)
@@ -377,7 +397,7 @@ let User = class {
         return new Promise((next)=>{
             db.query("INSERT INTO lit(libelle, id_chambre) VALUES (?,?)", [name, parseInt(chambre_id)] )
             .then((result)=>{
-                db.query("SELECT *, lit.libelle lib, chambre.libelle libe FROM lit LEFT JOIN chambre ON lit.id_chambre = chambre.id ORDER BY lit.libelle ASC")
+                db.query("SELECT *, lit.libelle lib, chambre.libelle libe FROM lit LEFT JOIN chambre ON lit.id_chambre = chambre.id ORDER BY chambre.libelle ASC")
             .then((results)=>{
                 next(results);
             }).catch((errs)=>{

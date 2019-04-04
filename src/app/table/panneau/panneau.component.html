@@ -86,7 +86,7 @@
           <div class="d-flex no-block justify-content-end align-items-center">
               <nav aria-label="breadcrumb">
                   <ol class="breadcrumb col-md-12">
-                      <li class="breadcrumb-item active font-18" aria-current="page"><span class="text-info font-20"><b>{{ numb }}</b>&nbsp;</span>CHAMBRES </li>
+                      <li class="breadcrumb-item active font-18" aria-current="page"><span class="text-info font-20"><b>{{ numb - 1 }}</b>&nbsp;</span>CHAMBRES </li>
                       <li class="breadcrumb-item active font-18" aria-current="page"><span class="text-info font-20"><b>{{ lit.length }}</b>&nbsp;</span>LITS </li>
                   </ol>
               </nav>
@@ -135,7 +135,7 @@
               <div class="row">
                 <div class="col-sm-6 col-md-6">
                        
-                    <input type="text" value="{{ numb }}" disabled class="form-control m-t-10">
+                    <input type="text" value="chambre {{ numb }}" disabled class="form-control m-t-10">
                 </div>
                 <div class="col-sm-6 col-md-6">
                     <button type="button" (click)="onChambre()" class="btn waves-effect waves-light btn-success float-right" style="margin-top: 10px">Ajouter</button>
