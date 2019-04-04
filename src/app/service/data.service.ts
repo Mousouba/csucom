@@ -100,6 +100,10 @@ export class DataService {
   deleteItem(data: any): Observable<any[]>{
     return this._http.post<any[]>(this.apiUrl+"/del",data);
   }
+
+  setObser(data: any): Observable<any[]>{
+    return this._http.post<any[]>(this.apiUrl+"/observ",data);
+  }
   
   
 }

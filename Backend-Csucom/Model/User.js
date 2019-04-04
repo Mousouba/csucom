@@ -342,9 +342,9 @@ let User = class {
         })
     }
 
-    static setObservation(prescription_id,ch,lt,sortie){
+    static setObservation(prescription_id,ch,lt,heure,sortie){
         return new Promise((next)=>{
-            db.query("INSERT INTO observation(prescription_id, chambre, lit, enter_date, back_date) VALUES (?,?,?,NOW(),?)", [parseInt(prescription_id, 10), parseInt(ch, 10), parseInt(lt, 10),sortie] )
+            db.query("INSERT INTO observation(prescription_id, chambre, lit, enter_date, back_date) VALUES (?,?,?,?,?)", [parseInt(prescription_id, 10), parseInt(ch, 10), parseInt(lt, 10),heure,sortie] )
             .then((result)=>{
                 next(result[0]);
             }).catch((err)=>{

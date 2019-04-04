@@ -115,6 +115,22 @@ mysql.createConnection({
         res.json({success:true, user: req.session.csucom, info:info, chambre:chambre, lit:lit})
     })
 
+    api.post('/observ', async (req, res)=>{
+        console.log(JSON.stringify(req.body));
+        const prescription_id = req.body.id;
+        const chambre = req.body.chambre;
+        const lit = req.body.lit;
+        const date = req.body.date;
+        const heure = req.body.heure;
+        const users = await User.setObservation(prescription_id, chambre, lit, heure, date)
+        if(!isErr(users)){
+            res.send({stat: true, user: req.session.csucom, info: users});
+        } else{
+            res.send({stat: false, user: null});
+        }
+        
+    })
+
     api.post('/user', async (req, res)=>{
         var test = req.body
         const email = test.email;
@@ -124,8 +140,13 @@ mysql.createConnection({
         let password = crypto.createHmac('sha256', test.mdp).update('I love cupcakes').digest('hex');
         console.log(password)
         const users = await User.setUser(pseudo, email, password, level, contact)
-        if(!isErr(users)) res.send({stat: true, user: req.session.csucom, info: users})
-        res.send({stat: false, user: null})
+        if(!isErr(users)){
+            res.send({stat: true, user: req.session.csucom, info: users})
+        } else{
+            res.send({stat: false, user: null});
+            console.log("err "+isErr);
+        }
+        
     })
     
     api.get('/user', async (req, res)=>{

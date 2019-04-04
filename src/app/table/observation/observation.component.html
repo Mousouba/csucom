@@ -20,7 +20,7 @@
                             <td class="text-center">CH&nbsp;{{ item.chambre }}</td>
                             <td class="text-center">L&nbsp;{{ item.lit }}</td>
                             <td class="text-center">{{ item.back_date }}</td>
-                            <td class="text-center">00:00</td>
+                            <td class="text-center">{{ item.enter_date }}</td>
                             <td class="text-center">
                                 <a  href="javascript:void(0)" class="mr-3 text-inverse text-center" title="Voir profil"><i class="ti-user text-dark"></i></a>
                             </td>
@@ -33,40 +33,41 @@
         <div class="comment-widgets scrollable" style="height:auto;">
             <div class="card">
                 <div class="card-body">
+                <form (ngSubmit)="onSubmit(f)"  #f="ngForm" >
                     <h5 class="card-title">SAISIE D'INFORMATION</h5>
                     <hr>
                     <small>N° de reçu<span class="font-12 text-danger">&nbsp;*</span></small>
-                    <input class="form-control" placeholder="000333">
-                    <small>Nom du patient</small>
-                    <h4>Kone</h4>
-                    <small>Numero</small>
-                    <h4>03030303</h4>
-                    <small>Sexe</small>
-                    <h4>Homme</h4>
+                    <input (keyup)="updateFilter($event)" class="form-control" placeholder="000333">
+                    <div *ngIf="filterData.length > 0">
+                        <small>Nom du patient</small>
+                        <h4 *ngFor="let item of filterData">{{filterData[0].nom}} {{filterData[0].prenom}}</h4>
+                        <small>Numero</small>
+                        <h4>03030303</h4>
+                        <small>Sexe</small>
+                        <h4>Homme</h4>
+                    </div>
+                    <h4 class="text-danger" *ngIf="filterData.length < 1">Aucun client trouvé</h4>
+
                     <hr>
-                    <form>
-                        <div class="form-group m-b-30">
-                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option *ngFor="let item of chambre">{{ item.libelle | uppercase }}</option>
-                            </select>
-                        </div>
-                    </form>
-                    <form>
-                        <div class="form-group m-b-30">
-                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option *ngFor="let item of lit">{{ item.lib | uppercase }}</option>
-                            </select>
-                        </div>
-                    </form>
-                    <small>Date de mise en observation<span class="font-12 text-danger">&nbsp;*</span></small>
-                    <input type="text" class="form-control" placeholder="2017-06-04" id="mdate">
-                    <small>Heure de sortie<span class="font-12 text-danger">&nbsp;*</span></small>
-                    <input type="date" class="form-control" id="timepicker1" placeholder="00:00">
+                    <div class="form-group m-b-30">
+                        <select ngModel name="chambre" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option value="{{ item.id }}" *ngFor="let item of chambre">{{ item.libelle | uppercase }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group m-b-30">
+                        <select ngModel name="lit" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option value="{{ item.id }}" *ngFor="let item of lit">{{ item.lib | uppercase }}</option>
+                        </select>
+                    </div>
+                    <small>Date de Sortie<span class="font-12 text-danger">&nbsp;*</span></small>
+                    <input ngModel name="date" type="date" class="form-control" id="mdate" required>
+                    <input ngModel name="time" type="time" class="form-control" id="mdate" required>
+                    
                     <hr>
                     <div class="form-group col-md-12 text-center">
-                        <button class="btn btn-success mr-1">Enreg</button>
-                        <button class="btn btn-secondary btn-outline">Modifier</button>
+                        <button type="submit" [disabled]="!f.form.valid || !filterData.length > 0" class="btn btn-success mr-1">Enreg</button>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
