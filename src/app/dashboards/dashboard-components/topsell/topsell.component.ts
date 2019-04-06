@@ -5,6 +5,6 @@ import { Component, Input } from '@angular/core';
 })
 export class TopsellComponent {
 
-@Input() data:[];
+@Input() data:any;
   constructor() {}
 }

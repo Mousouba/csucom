@@ -11,7 +11,7 @@ const data: any = require('./correction.json');
 })
 export class CorrectionComponent implements OnInit {
 
-  public collection:any[];
+  public collection:any;
   public dana = [];
  
   constructor( private dataService : DataService) { }

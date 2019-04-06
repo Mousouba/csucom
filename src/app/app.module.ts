@@ -35,6 +35,8 @@ import { PanierService } from './service/panier.service';
 import { InfoUserService } from './service/info-user.service';
 import { OperationService } from './operation.service';
 import { WebsocketService } from './websocket.service';
+import { ToastrModule } from 'ngx-toastr';
+import {NgxWebstorageModule} from 'ngx-webstorage';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -56,6 +58,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   imports: [
     CommonModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    NgxWebstorageModule.forRoot(),
     FormsModule,
     HttpClientModule,
     NgbModule.forRoot(),

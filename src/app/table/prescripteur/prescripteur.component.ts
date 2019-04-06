@@ -11,7 +11,7 @@ export class PrescripteurComponent implements OnInit {
   //Pour recherche
   public dana = [];
 
-  public collection:any[];
+  public collection:any;
 
   constructor( private dataService: DataService) {
   }

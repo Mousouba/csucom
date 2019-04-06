@@ -11,98 +11,98 @@ export class DataService {
 
   constructor(private _http: HttpClient) { }
 
-  getData(): Observable<any[]> {
-    return this._http.get<any[]>(this.apiUrl);
+  getData(): Observable<any> {
+    return this._http.get<any>(this.apiUrl);
   }
 
-  getMedecin(): Observable<any[]> {
-    return this._http.get<any[]>(this.apiUrl+"/medecin");
+  getMedecin(): Observable<any> {
+    return this._http.get<any>(this.apiUrl+"/medecin");
   }
 
-  getService(): Observable<any[]> {
-    return this._http.get<any[]>(this.apiUrl+"/service");
+  getService(): Observable<any> {
+    return this._http.get<any>(this.apiUrl+"/service");
   }
 
-  getPres(): Observable<any[]> {
-    return this._http.get<any[]>(this.apiUrl+"/pres");
+  getPres(): Observable<any> {
+    return this._http.get<any>(this.apiUrl+"/pres");
   }
 
-  getObs(): Observable<any[]> {
-    return this._http.get<any[]>(this.apiUrl+"/observ");
+  getObs(): Observable<any> {
+    return this._http.get<any>(this.apiUrl+"/observ");
   }
 
-  getArticle(): Observable<any[]> {
-    return this._http.get<any[]>(this.apiUrl+"/vente");
+  getArticle(): Observable<any> {
+    return this._http.get<any>(this.apiUrl+"/vente");
   }
 
-  getInventaire(): Observable<any[]> {
-    return this._http.get<any[]>(this.apiUrl+"/inventaire"); 
+  getInventaire(): Observable<any> {
+    return this._http.get<any>(this.apiUrl+"/inventaire"); 
   }
 
-  getJournal(data:any): Observable<any> {
-    return this._http.get<any[]>(this.apiUrl+"/journal"); 
+  getJournal(): Observable<any> {
+    return this._http.get<any>(this.apiUrl+"/journal"); 
   }
 
   getFamille(): Observable<any> {
-    return this._http.get<any[]>(this.apiUrl+"/fm");
+    return this._http.get<any>(this.apiUrl+"/fm");
   }
 
   getPatient(): Observable<any> {
-    return this._http.get<any[]>(this.apiUrl+"/patient");
+    return this._http.get<any>(this.apiUrl+"/patient");
   }
 
   getDes(): Observable<any> {
-    return this._http.get<any[]>(this.apiUrl+"/des");
+    return this._http.get<any>(this.apiUrl+"/des");
   }
 
   getAllUser(): Observable<any> {
-    return this._http.get<any[]>(this.apiUrl+"/user");
+    return this._http.get<any>(this.apiUrl+"/user");
   }
 
   // POST PART
 
-  authUser(data:any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/login",data);
+  authUser(data:any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/login",data);
   }
 
-  setFamille(data: any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/fm",data);
+  setFamille(data: any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/fm",data);
   }
 
-  setArticle(data: any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/art",data);
+  setArticle(data: any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/art",data);
   }
 
-  setPatient(data: any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/saisiepatient",data);
+  setPatient(data: any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/saisiepatient",data);
   }
 
-  setPres(data: any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/pres",data);
+  setPres(data: any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/pres",data);
   }
 
-  setUser(data: any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/user",data);
+  setUser(data: any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/user",data);
   }
 
-  setChambre(data: any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/chambre",data);
+  setChambre(data: any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/chambre",data);
   }
 
-  setLit(data: any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/lit",data);
+  setLit(data: any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/lit",data);
   }
 
-  setPanier(data: any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/panier",data);
+  setPanier(data: any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/panier",data);
   }
   //Delete Something
-  deleteItem(data: any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/del",data);
+  deleteItem(data: any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/del",data);
   }
 
-  setObser(data: any): Observable<any[]>{
-    return this._http.post<any[]>(this.apiUrl+"/observ",data);
+  setObser(data: any): Observable<any>{
+    return this._http.post<any>(this.apiUrl+"/observ",data);
   }
   
   

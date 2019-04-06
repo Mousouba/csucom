@@ -9,7 +9,7 @@ import { InfoUserService } from '../../service/info-user.service';
 })
 export class CartComponent implements OnInit {
 
-  public collection: any[]
+  public collection: any;
   public total: number = 0;
   public monnaie: number = 0;
   public client: string;

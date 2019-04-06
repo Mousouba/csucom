@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/service/data.service';
 import { Router } from '@angular/router';
 import { InfoUserService } from 'src/app/service/info-user.service';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,10 @@ export class LoginComponent implements OnInit {
 
   public isClick = false;
     
-  constructor( private http: HttpClient, private dataService: DataService,
+  constructor( private http: HttpClient, private dataService: DataService, 
                                          private route: Router, 
-                                         private infoUser: InfoUserService) {}
+                                         private infoUser: InfoUserService,
+                                         private storage: LocalStorageService ) {}
 
   loginform = true;
   recoverform = false;
@@ -51,11 +53,12 @@ export class LoginComponent implements OnInit {
             this.errorMsg = " ";
           },4000)
         }else{
-          this.infoUser.infoUser = Data;
+          this.storage.store('stockage' , Data);
+          this.infoUser.infoUser = this.storage.retrieve('stockage');
           console.log('Login '+ JSON.stringify(this.infoUser.infoUser ) );
           this.route.navigate(["/dashboard/dashboard1"]);
         }
-      },2000)
+      },200)
     })
   }
 

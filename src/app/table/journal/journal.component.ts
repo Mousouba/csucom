@@ -8,7 +8,7 @@ import { DataService } from 'src/app/service/data.service';
 })
 export class JournalComponent implements OnInit {
 
-  public collection:any[];
+  public collection:any;
   public dana = [];
 
 

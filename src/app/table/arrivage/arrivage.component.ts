@@ -15,7 +15,7 @@ export class ArrivageComponent {
   rows = [];
   temp = [...data];
 
-  loadingIndicator = true;
+  loadingIndicator = true; 
   reorderable = true;
 
   columns = [{ name: 'N°' }, { name: 'Matricule' }, { name: 'Nom' }, { name: 'Prenom' } , { name: 'Cni' }, { name: 'Contact' }, { name: 'Specialite' }, { name: 'Email' }, { name: 'Ville' }];

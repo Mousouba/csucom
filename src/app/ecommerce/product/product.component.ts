@@ -7,7 +7,7 @@ import { PanierService } from 'src/app/service/panier.service';
   styleUrls: ['./product.css']
 })
 export class ProductComponent implements OnInit{
-    public collection:any[];
+    public collection:any;
     public index:number;
     public count:number = 0;
     //Pour recherche

@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './info-card.component.html'
 })
 export class InfocardComponent {
-  @Input() data:[]; 
+  @Input() data:any; 
   constructor() {}
 
 }

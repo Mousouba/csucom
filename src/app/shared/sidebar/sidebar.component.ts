@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InfoUserService } from 'src/app/service/info-user.service';
 import { DataService } from '../../service/data.service';
+import { LocalStorageService } from 'ngx-webstorage';
 declare var $: any;
 
 @Component({
@@ -39,13 +40,20 @@ export class SidebarComponent implements OnInit {
     private route: ActivatedRoute,
     private infoUser: InfoUserService,
     private _route: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private storage: LocalStorageService,
   ) {}
 
   // End open close
   ngOnInit() {
+    this.infoUser.infoUser = this.storage.retrieve('stockage');
     this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
-    console.log('user 11 depuis nav'+JSON.stringify(this.infoUser.infoUser.user["pseudo"]));
-    console.log('user depuis nav pseudo :'+JSON.stringify(this.infoUser.infoUser.user[0].pseudo));
   }
+
+  onDeco(){
+    this.storage.clear('stockage');
+    this._route.navigate(['/authentication/login']);
+  }
+
+
 }

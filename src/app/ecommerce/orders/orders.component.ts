@@ -5,7 +5,7 @@ import { DataService } from 'src/app/service/data.service';
   templateUrl: 'orders.component.html'
 })
 export class OrderComponent implements OnInit {
-    public collection : [any];
+    public collection : any;
     public hisID:number;
 
     public dana = [];

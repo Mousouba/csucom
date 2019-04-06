@@ -11,8 +11,6 @@ import { ObservationComponent } from './observation/observation.component';
 import { CorrectionComponent } from './correction/correction.component';
 import { JournalComponent } from './journal/journal.component';
 import { ArrivageComponent } from './arrivage/arrivage.component';
-import { BonComponent } from './bon/bon.component';
-import { FournisseurComponent } from './fournisseur/fournisseur.component';
 import { FamilleComponent } from './famille/famille.component';
 import { ArticleComponent } from './article/article.component';
 import { SaisiefournisseurComponent } from './saisiefournisseur/saisiefournisseur.component';
@@ -51,8 +49,6 @@ import { CompteComponent } from './compte/compte.component';
     CorrectionComponent,
     JournalComponent,
     ArrivageComponent,
-    BonComponent,
-    FournisseurComponent,
     FamilleComponent,
     ArticleComponent,
     SaisiefournisseurComponent,

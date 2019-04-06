@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class InfoUserService {
 
-  public infoUser = [];
+  public infoUser :any;
 
-  public infoClient = [];
+  public infoClient :any;
 
   public isExist : number = 0;
 

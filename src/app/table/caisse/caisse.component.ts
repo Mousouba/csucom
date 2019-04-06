@@ -8,7 +8,7 @@ import { DataService } from 'src/app/service/data.service';
 })
 export class CaisseComponent implements OnInit {
 
-  public collection:any[];
+  public collection:any;
  
 
   constructor(private dataService:DataService) {}

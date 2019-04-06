@@ -9,10 +9,10 @@ import { DataService } from 'src/app/service/data.service';
 })
 export class PanneauComponent implements OnInit {
 
-  public lit: [];
-  public chambre : [];
+  public lit: any;
+  public chambre : any;
   public numb: any;
-  public users : [];
+  public users : any;
 
 
   constructor( private dataService : DataService) { }

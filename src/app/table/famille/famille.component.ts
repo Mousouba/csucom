@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class FamilleComponent implements OnInit{
 
-  public data: any[];
+  public data: any;
   constructor( private dataService: DataService) {}
 
   ngOnInit(){

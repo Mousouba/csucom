@@ -9,10 +9,10 @@ import { InfoUserService } from 'src/app/service/info-user.service';
   styleUrls: ['./saisiepatient.component.css']
 })
 export class SaisiepatientComponent implements OnInit {
-  public collection: any[];
-  public medecin: any[];
-  public service: any[];
-  public designation: any[];
+  public collection: any;
+  public medecin: any;
+  public service: any;
+  public designation: any;
   public ID : number = 1;
   public gestionnaire: number = 1;
   public ristourne: number = 10;

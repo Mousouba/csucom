@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
 import { NgForm } from '@angular/forms';
+import { NotificationService } from 'src/app/service/notification.service';
 
 
 
@@ -17,7 +18,7 @@ export class ObservationComponent {
   chambre:any;
   lit:any;
 
-  constructor(private dataService: DataService){
+  constructor(private dataService: DataService , private notif: NotificationService){
 
   }
 
@@ -67,5 +68,9 @@ export class ObservationComponent {
     .subscribe( (Data) => { 
       console.log(JSON.stringify(Data));
     })
+   }
+
+   test(){
+    this.notif.success("ceci est mon text", "Mise en observation");
    }
 }

@@ -17,6 +17,6 @@
       "host": "localhost",
       "database": "csucom",
       "user": "root",
-      "password": "root"
+      "password": ""
     }
   }

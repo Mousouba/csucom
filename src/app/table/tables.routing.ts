@@ -6,8 +6,6 @@ import { ObservationComponent } from './observation/observation.component';
 import { CorrectionComponent } from './correction/correction.component';
 import { JournalComponent } from './journal/journal.component';
 import { ArrivageComponent } from './arrivage/arrivage.component';
-import { BonComponent } from './bon/bon.component';
-import { FournisseurComponent } from './fournisseur/fournisseur.component';
 import { FamilleComponent } from './famille/famille.component';
 import { ArticleComponent } from './article/article.component';
 import { SaisiefournisseurComponent } from './saisiefournisseur/saisiefournisseur.component';
@@ -125,38 +123,6 @@ export const TablesRoutes: Routes = [
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Liste des prescriptions' }
-          ]
-        }
-      }
-    ]
-  },
-  {
-    path: '',
-    children: [
-      {
-        path: 'bon',
-        component: BonComponent,
-        data: {
-          title: 'Bons de commande fournisseur',
-          urls: [
-            { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Bons de commande fournisseur' }
-          ]
-        }
-      }
-    ]
-  },
-  {
-    path: '',
-    children: [
-      {
-        path: 'fournisseur',
-        component: FournisseurComponent,
-        data: {
-          title: 'Liste des fournisseurs',
-          urls: [
-            { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Bons de commande fournisseur' }
           ]
         }
       }
