@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, AfterViewInit, EventEmitter, Output, OnInit } from '@angular/core';
 import {
   NgbModal,
   ModalDismissReasons,
@@ -6,20 +6,22 @@ import {
   NgbCarouselConfig
 } from '@ng-bootstrap/ng-bootstrap';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ProfilService } from 'src/app/profil.service';
 declare var $: any;
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html'
 })
-export class NavigationComponent implements AfterViewInit {
+export class NavigationComponent implements AfterViewInit, OnInit {
+  public currentIcon;
   @Output() toggleSidebar = new EventEmitter<void>();
 
   public config: PerfectScrollbarConfigInterface = {};
 
   public showSearch = false;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal , private profil : ProfilService) {}
 
   // This is for Notifications
   notifications: Object[] = [
@@ -38,6 +40,7 @@ export class NavigationComponent implements AfterViewInit {
       time: '9:10 AM'
     },
     {
+
       btn: 'btn-info',
       icon: 'ti-settings',
       title: 'Settings',
@@ -53,37 +56,9 @@ export class NavigationComponent implements AfterViewInit {
     }
   ];
 
-  // This is for Mymessages
-  mymessages: Object[] = [
-    {
-      useravatar: 'assets/images/users/1.jpg',
-      status: 'online',
-      from: 'Pavan kumar',
-      subject: 'Just see the my admin!',
-      time: '9:30 AM'
-    },
-    {
-      useravatar: 'assets/images/users/2.jpg',
-      status: 'busy',
-      from: 'Sonu Nigam',
-      subject: 'I have sung a song! See you at',
-      time: '9:10 AM'
-    },
-    {
-      useravatar: 'assets/images/users/2.jpg',
-      status: 'away',
-      from: 'Arijit Sinh',
-      subject: 'I am a singer!',
-      time: '9:08 AM'
-    },
-    {
-      useravatar: 'assets/images/users/4.jpg',
-      status: 'offline',
-      from: 'Pavan kumar',
-      subject: 'Just see the my admin!',
-      time: '9:00 AM'
-    }
-  ];
+ ngAfterViewInit() {}
+ ngOnInit(){
+  this.currentIcon = this.profil.choiceProfil();
 
-  ngAfterViewInit() {}
+ }
 }

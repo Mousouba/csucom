@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/service/data.service';
 import { InfoUserService } from 'src/app/service/info-user.service';
+import { NotificationService } from 'src/app/service/notification.service';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-saisiepatient',
@@ -19,7 +21,11 @@ export class SaisiepatientComponent implements OnInit {
   public montant: number = 0;
   public keyGen: string =  Math.floor(Math.random() * 99999 ).toString() ;
 
-  constructor( private dataService: DataService, private infoClient : InfoUserService, private infoUser: InfoUserService) {}
+  constructor( private dataService: DataService, 
+               private infoClient : InfoUserService, 
+               private infoUser: InfoUserService , 
+               private notif: NotificationService,
+               private storage: LocalStorageService) {}
 
   ngOnInit(){
     this.collection = this.infoClient.infoClient;
@@ -27,7 +33,7 @@ export class SaisiepatientComponent implements OnInit {
     if(!this.gestionnaire){
       this.gestionnaire = 1;
     }
-    console.log('Id depuis le service: '+JSON.stringify(this.infoUser.infoUser.user.id))
+    console.log('Id depuis le service 1: '+JSON.stringify(this.infoUser.infoUser.user[0].id));
 
     return this.dataService.getMedecin()
     .subscribe( (Data) => { 
@@ -65,10 +71,16 @@ export class SaisiepatientComponent implements OnInit {
     }
 
     if(this.infoClient.isExist == 0){
-      return this.dataService.setPatient({name:ngForm.value["name"], firstname:ngForm.value["firstname"] ,sexe:ngForm.value["sexe"],birth_date:ngForm.value["birth_date"],number:ngForm.value["number"],assure:ngForm.value["assure"]})
+      this.dataService.setPatient({name:ngForm.value["name"], firstname:ngForm.value["firstname"] ,sexe:ngForm.value["sexe"],birth_date:ngForm.value["birth_date"],number:ngForm.value["number"],assure:ngForm.value["assure"]})
       .subscribe( (Data) => { 
         this.ID = parseInt(Data.patient[0].lastID, 10);
+        this.storage.store('id', parseInt(Data.patient[0].lastID, 10));
         console.log("last id "+this.ID);
+        if(Data.stat){
+          this.notif.info("Patient bien enregistré !");
+        }else{
+          this.notif.info("Echec d'enregistrement !");
+        }
        },  
       (error) => {
        console.log("erreur")
@@ -81,13 +93,12 @@ export class SaisiepatientComponent implements OnInit {
 
       
     }else{
-      this.ID = this.infoUser.infoUser.user.id;
-      return this.dataService.setPres({client:this.ID,service:ngForm.value["service"], medecin:ngForm.value["medecin"] ,libelle:ngForm.value["libelle"],keyGen:this.keyGen,gestionnaire:this.gestionnaire,ristourne:this.ristourne,montant:this.montant})
+      this.ID = this.infoUser.infoUser.user[0].id;
+      return this.dataService.setPres({client:this.storage.retrieve('id'),service:ngForm.value["service"], medecin:ngForm.value["medecin"] ,libelle:ngForm.value["libelle"],keyGen:this.keyGen,gestionnaire:this.gestionnaire,ristourne:this.ristourne,montant:this.montant})
       .subscribe( (Data) => { 
         console.log('Response :'+JSON.stringify(Data));
       });
     }
-    
   }
 
   imprimer(){

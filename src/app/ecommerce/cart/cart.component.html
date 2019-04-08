@@ -17,7 +17,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of collection; let i = index">
-                                <td>{{ i+1 }}</td>
+                                <td>{{ i }}</td>
                                 <td>{{ item.libelle }}</td>
                                 <td>{{ item.priceVente }}</td>
                                 <td>{{ item.qtes }}</td>
@@ -46,11 +46,12 @@
                 <input [(ngModel)]="monnaie" type="number" value="0" min="0" step="5" class="form-control" placeholder="Saisir montant ici">
                 <small>Monnaie rendue</small>
                 <h2 *ngIf="!total">0&nbsp;CFA</h2>
-                <h2 *ngIf="total">{{ total - monnaie }}&nbsp;CFA</h2>
+                <h2 *ngIf="total">{{ monnaie - total  }}&nbsp;CFA</h2>
                 <hr>
                 <div class="form-actions" style="width: 100%;margin-top: 40px">
                     <div class="text-center">
-                        <button *ngIf="total" (click)="onSubmit()" [disabled]="!client" type="submit" class="btn btn-success m-r-1">Commander</button>
+                        <button *ngIf="total" (click)="onSubmit()" [disabled]="!client" type="submit" class="btn btn-success mr-1">Commander</button>
+                        <button *ngIf="total" (click)="onReset()"  class="btn btn-danger">Annuler</button>
                     </div>
                 </div>
             </div>

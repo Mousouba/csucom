@@ -9,16 +9,35 @@ import { DataService } from 'src/app/service/data.service';
 export class CaisseComponent implements OnInit {
 
   public collection:any;
+  public service:any;
+  public dana = [];
+
  
 
   constructor(private dataService:DataService) {}
 
   ngOnInit(){
-    return this.dataService.getPres()
+    this.dataService.getPres()
     .subscribe( (Data) => { this.collection = Data.info; 
-      console.log('DATA DIRECT ' + JSON.stringify(Data["article"]))} );
+      this.dana = this.collection;
+      console.log('DATA DIRECT ' + JSON.stringify(Data))} 
+    );
+
+    this.dataService.getService()
+    .subscribe( (Data) => { this.service = Data.info;
+      console.log(JSON.stringify(Data))
+    } 
+    );
   }
 
+  onChange(event) {
+    const val = event.target.value.toLowerCase();
+    console.log("tape :"+ val);
+    const temp = this.dana.filter(function(d) {
+      return d.service.toLowerCase().indexOf(val) !== -1 || !val; 
+    });
+    this.collection = temp;
+  }
   imprimer(){
     let printContents = document.getElementById('sectionAimprimer').innerHTML;    
     let originalContents = document.body.innerHTML;      

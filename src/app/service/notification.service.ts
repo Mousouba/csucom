@@ -20,4 +20,10 @@ export class NotificationService {
     });
   }
 
+  info( message:string, title?:string ){
+    this.toastr.info(message, title, {
+      positionClass: 'toast-bottom-center'
+    });
+  }
+
 }

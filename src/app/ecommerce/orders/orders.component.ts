@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   templateUrl: 'orders.component.html'
@@ -10,7 +11,7 @@ export class OrderComponent implements OnInit {
 
     public dana = [];
     
-    constructor( private dataService : DataService ){}
+    constructor( private dataService : DataService, private notif : NotificationService ){}
 
     updateFilter(event) {
       const val = event.target.value.toLowerCase();
@@ -29,15 +30,21 @@ export class OrderComponent implements OnInit {
       this.dataService.getInventaire()
       .subscribe( (Data) => { this.collection = Data.article;
                               this.dana = this.collection;
+                              console.log(JSON.stringify(Data))
       })
     }
 
     deleteItem(id:number, table:string){
       this.dataService.deleteItem({id:id, table: table})
       .subscribe( (Data) => { 
-        console.log(JSON.stringify(Data));
+        console.log(JSON.stringify(Data))
+        if(Data.stat){
+          this.notif.info("Article bien supprimé !");
+        }else{
+          this.notif.info("Erreur de suppression !");
+        }
+        this.getData();
       });
-      this.getData();
     }
 
 

@@ -67,10 +67,13 @@ export class ObservationComponent {
     this.dataService.setObser({id:this.filterData[0].id, chambre:f.value.chambre, lit:f.value.lit, date: f.value.date, heure: f.value.time})
     .subscribe( (Data) => { 
       console.log(JSON.stringify(Data));
+      if(Data.stat){
+        this.notif.info("Patient mis en observation !");
+      }else{
+        this.notif.info("Echec de mise en observation !");
+      }
     })
    }
 
-   test(){
-    this.notif.success("ceci est mon text", "Mise en observation");
-   }
+  
 }

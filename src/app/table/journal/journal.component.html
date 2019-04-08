@@ -6,23 +6,28 @@
         <div class="d-md-flex align-items-center col-md-12 ">
             <div>
                 <div _ngcontent-c4="" class="custom-control custom-radio">
-                    <input _ngcontent-c4="" class="custom-control-input" id="customRadio2" name="customRadio" type="radio"><label _ngcontent-c4="" class="custom-control-label" for="customRadio2">Jour</label>
+                    <input _ngcontent-c4="" (click)="check($event)" class="custom-control-input" id="customRadio2" name="customRadio" type="radio"><label _ngcontent-c4="" class="custom-control-label" for="customRadio2">Jour</label>
                 </div>
                 <div _ngcontent-c4="" class="custom-control custom-radio">
-                    <input _ngcontent-c4="" class="custom-control-input" id="customRadio3" name="customRadio" type="radio"><label _ngcontent-c4="" class="custom-control-label" for="customRadio3">Garde</label>
+                    <input _ngcontent-c4="" (click)="check($event)"  class="custom-control-input" id="customRadio3" name="customRadio" type="radio"><label _ngcontent-c4="" class="custom-control-label" for="customRadio3">Garde</label>
                 </div>
-                <button class="btn btn-info" (click)="imprimer()" type="button"><i class="fa fa-print"></i>   imprimer</button>
             </div>
             <div style="margin-left: 3%"  class="col-md-12">
                 <div class="dl">
-                    <form class="m-b-0" style="width: 200px; display: inline-block; float: left">
-                      <input type='date' class="form-control" title="periode" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
+                    <form class="m-b-0" style="width: 200px; display: inline-block; float-left">
+                      <input type='date' class="form-control" title="periode" (change)='change($event)' />
                     </form>
                     <form class="m-b-0" style="width: 200px; display: inline-block; margin-left: 40px">
-                        <input type='text' class="form-control" title="Recherche" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
+                        <input type='text' class="form-control" title="Recherche" placeholder='Rechercher par n° reçu...' (keyup)='updateFilter($event)' />
                     </form>
                 </div>
             </div>
+            <div  class="col-md-12 float-right">
+                <div class="dl">
+                    <button class="btn btn-info" (click)="imprimer()" type="button"><i class="fa fa-print"></i>   imprimer</button>
+                </div>
+            </div>
+
         </div>
         <!-- title -->
     </div>

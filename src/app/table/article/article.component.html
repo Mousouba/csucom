@@ -15,7 +15,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Famille<span class="font-12 text-danger">&nbsp;*</span></label>
-                                    <select required ngModel  name="famille_id" class="form-control" data-placeholder="Choisir une famille" tabindex="1">
+                                    <select ngModel  name="famille_id" class="form-control" data-placeholder="Choisir une famille" tabindex="1">
                                         <option disabled  selected="true">Choisir la famille</option>
                                         <option *ngFor="let item of data">{{ item.name }}</option>
                                     </select>

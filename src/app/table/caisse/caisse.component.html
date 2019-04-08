@@ -19,7 +19,12 @@
                       <input type='date' class="form-control" title="periode début" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
                     </form>
                     <form class="m-b-0" style="width: 200px; display: inline-block; margin-left: 40px">
-                      <input type='date' class="form-control" title="periode fin" placeholder='Rechercher...' (keyup)='updateFilter($event)' />
+                        <select  name="specialite" ngModel class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option *ngFor="let item of service" value="{{ item.id }}"  >{{ item.name }}</option>
+                        </select>
+                    </form>
+                    <form class="m-b-0" style="width: 200px; display: inline-block; margin-left: 40px">
+                        <input type="text" (keyup)="onChange($event)">
                     </form>
                 </div>
             </div>
@@ -47,7 +52,7 @@
                     <td>{{ item.desig }}</td>
                     <td *ngIf="item.ristourne != 0">{{ item.prix }}</td>
                     <td style="font-weight:bolder" class="text-danger" *ngIf="item.ristourne == 0"><b>{{ item.prix }}</b></td>
-                    <td>{{ item.gestionnaire_id }}</td>
+                    <td>{{ item.gestionnaire }}</td>
                     <td>{{ item.medecin }}</td>
                 </tr>
             </tbody>

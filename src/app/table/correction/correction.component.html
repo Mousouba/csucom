@@ -3,9 +3,6 @@
     <div class="card-body">
         <!-- title -->
         <div class="d-md-flex align-items-center">
-            <div>
-                <button class="btn btn-info" type="button"><i class="far fa-edit"></i>   corriger</button>
-            </div>
             <div class="ml-auto">
                 <div class="dl">
                     <form class="m-b-0" style="width: 200px">
@@ -27,27 +24,29 @@
                         <th>Pu Vente</th>
                         <th class="text-center">Statut</th>
                         <th>Qte Rest</th>
+                        <th>Qte de correction</th>
                         <th>Date Exp</th>
                         <th class="text-right">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of collection; let i = index">
-                        <td>{{ i+1 }}</td>
-                        <td>{{ item.sa_famille }}</td>
-                        <td>{{ item.libelle }}</td>
-                        <td class="text-center">{{ item.priceAchat }}</td>
-                        <td class="text-center">{{ item.priceVente }}</td>
-                        <td class="text-center">
-                            <span *ngIf=" item.qte >= 5" class="label label-success font-weight-100 label-rounded">+</span>
-                            <span *ngIf=" item.qte < 5" class="label label-danger font-weight-100 label-rounded">-</span>
-                        </td>
-                        <td class="text-center">{{ item.qte }}</td>
-                        <td>{{ item.date_peremption }}</td>
-                        <td class="text-right">
-                            <a href="javascript:void(0)" class=" mr-3 text-danger" title="Corriger"><i class="text-success ti-check"></i></a>
-                        </td>
-                    </tr>
+                        <tr *ngFor="let item of collection; let i = index">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ item.sa_famille }}</td>
+                            <td>{{ item.libelle }}</td>
+                            <td class="text-center">{{ item.priceAchat }}</td>
+                            <td class="text-center">{{ item.priceVente }}</td>
+                            <td class="text-center">
+                                <span *ngIf=" item.qtes >= 5" class="label label-success font-weight-100 label-rounded">+</span>
+                                <span *ngIf=" item.qtes < 5" class="label label-danger font-weight-100 label-rounded">-</span>
+                            </td>
+                            <td >{{item.qtes}}</td>
+                            <td ><input style="border:none" [(ngModel)]="qtes" class="col-md-5" type="number" placeholder="{{item.qtes}}"></td>
+                            <td>{{ item.date_peremption }}</td>
+                            <td class="text-right">
+                                <a [hidden]="!qtes" (click)="onCorriger(item.id)" class=" mr-3 text-danger" title="Corriger"><i class="text-success ti-check"></i></a>
+                            </td>
+                        </tr>
                 </tbody>
             </table>
         </div>

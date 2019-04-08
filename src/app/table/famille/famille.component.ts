@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
 import { NgForm } from '@angular/forms';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-famille',
@@ -10,7 +11,7 @@ import { NgForm } from '@angular/forms';
 export class FamilleComponent implements OnInit{
 
   public data: any;
-  constructor( private dataService: DataService) {}
+  constructor( private dataService: DataService, private notif : NotificationService) {}
 
   ngOnInit(){
     this.getData();
@@ -31,17 +32,24 @@ export class FamilleComponent implements OnInit{
      .subscribe((Data) => {
       console.log(JSON.stringify(Data));
       this.data = Data.all;
+      this.notif.info("Famille bien enregistrée !");
      },
      (error) => {
-      console.log("erreur")
+      console.log("erreur");
+      this.notif.info("Erreur d'enregistrement !");
      })
   }
 
   deleteItem(id:number, table:string){
     this.dataService.deleteItem({id:id, table: table})
     .subscribe( (Data) => { 
-      console.log(JSON.stringify(Data));
-    });
-    this.getData();
+      this.notif.info("Famille bien supprimée !");
+      this.getData();
+    },
+    (error) => {
+     console.log("erreur");
+     this.notif.info("Erreur de suppression !");
+    })
+    
   }
 }

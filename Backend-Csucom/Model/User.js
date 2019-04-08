@@ -195,7 +195,7 @@ let User = class {
 
     static getAllArticleInventaire(){
         return new Promise((next)=>{
-            db.query("SELECT *, ph_famille.name sa_famille FROM ph_article LEFT JOIN ph_famille ON ph_famille.id = famille_id ORDER BY ph_famille.name ASC")
+            db.query("SELECT *, ph_article.id article_id, ph_famille.name sa_famille FROM ph_article LEFT JOIN ph_famille ON ph_famille.id = famille_id ORDER BY ph_famille.name ASC")
             .then((result)=>{
                 next(result);
             }).catch((err)=>{
@@ -229,7 +229,7 @@ let User = class {
 
     static getAllPrescriction(){
         return new Promise((next)=>{
-            db.query("SELECT *, prescription.register_date date, prescription.price prix, designation.name desig, medecin.name medecin,  client.name nom, client.firstname prenom FROM prescription LEFT JOIN client ON prescription.client_id = client.id LEFT JOIN medecin ON prescription.medecin_id = medecin.id LEFT JOIN designation ON prescription.designation_id = designation.id ORDER BY prescription.id DESC")
+            db.query("SELECT *, prescription.register_date date, prescription.price prix, designation.name desig, medecin.name medecin, client.name nom, client.firstname prenom, gestionnaire.pseudo gestionnaire, service.name service FROM prescription LEFT JOIN client ON prescription.client_id = client.id LEFT JOIN medecin ON prescription.medecin_id = medecin.id LEFT JOIN designation ON prescription.designation_id = designation.id LEFT JOIN gestionnaire ON prescription.gestionnaire_id = gestionnaire.id LEFT JOIN service ON prescription.id_service = service.id ORDER BY prescription.id DESC")
             .then((result)=>{
                 next(result);
             }).catch((err)=>{
@@ -287,7 +287,7 @@ let User = class {
 
     static getFamille(){
         return new Promise((next)=>{
-            db.query("SELECT * FROM ph_famille ORDER BY id DESC")
+            db.query("SELECT * FROM ph_famille ORDER BY id ASC")
             .then((result)=>{
                 next(result);
             }).catch((err)=>{
@@ -356,7 +356,7 @@ let User = class {
 
     static setArticle(libelle,priceAchat,priceVente,qtes,conditi,famille_id,date_peremption,ref,date){
         return new Promise((next)=>{
-            db.query("INSERT INTO ph_article(libelle,priceAchat,priceVente,qte,conditionnement,date_peremption,ref,famille_id,register_date) VALUES (?,?,?,?,?,?,?,?,?)", [libelle,parseInt(priceAchat, 10),parseInt(priceVente, 10),parseInt(qtes, 10),conditi,date_peremption,ref,parseInt(famille_id, 10),date] )
+            db.query("INSERT INTO ph_article(libelle,priceAchat,priceVente,qtes,conditionnement,date_peremption,ref,famille_id,register_date) VALUES (?,?,?,?,?,?,?,?,?)", [libelle,parseInt(priceAchat, 10),parseInt(priceVente, 10),parseInt(qtes, 10),conditi,date_peremption,ref,parseInt(famille_id, 10),date] )
             .then((result)=>{
                 next(result);
             }).catch((err)=>{

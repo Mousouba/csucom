@@ -23,6 +23,14 @@ export class JournalComponent implements OnInit {
     this.collection = temp;
   }
 
+  change(event){
+    alert("sa change")
+  }
+
+  check(event){
+    alert("sa check")
+  }
+
   ngOnInit(){
     return this.dataService.getJournal()
     .subscribe( (Data) => { this.collection = Data.article; 

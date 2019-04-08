@@ -104,6 +104,7 @@ export class DataService {
   setObser(data: any): Observable<any>{
     return this._http.post<any>(this.apiUrl+"/observ",data);
   }
+
   
   
 }

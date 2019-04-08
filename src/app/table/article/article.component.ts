@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/service/data.service';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-article',
@@ -12,7 +13,7 @@ export class ArticleComponent implements OnInit {
   public data: any[];
   public hisID:number;
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService,  private notif: NotificationService) {}
 
   ngOnInit(){
     this.dataService.getFamille()
@@ -35,9 +36,16 @@ export class ArticleComponent implements OnInit {
     this.dataService.setArticle(ngForm.value)
     .subscribe((Data) => {
       console.log(JSON.stringify(Data));
+      if(Data.stat){
+        this.notif.info("Article bien enregistré !");
+      }else{
+        this.notif.info("Echec d'enregistrement !");
+      }
      },
      (error) => {
-      console.log("erreur")
+      console.log("erreur");
+      this.notif.info("Echec d'enregistrement !");
+
      })
   }
 }

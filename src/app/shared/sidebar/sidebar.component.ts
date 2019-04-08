@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InfoUserService } from 'src/app/service/info-user.service';
 import { DataService } from '../../service/data.service';
 import { LocalStorageService } from 'ngx-webstorage';
+import { ProfilService } from 'src/app/profil.service';
 declare var $: any;
 
 @Component({
@@ -16,6 +17,7 @@ export class SidebarComponent implements OnInit {
   showMenu = '';
   showSubMenu = '';
   public sidebarnavItems: any[];
+  public currentIcon : any;
 
   public info = [];
   // this is for the open close
@@ -42,16 +44,19 @@ export class SidebarComponent implements OnInit {
     private _route: Router,
     private dataService: DataService,
     private storage: LocalStorageService,
+    private profil: ProfilService
   ) {}
 
   // End open close
   ngOnInit() {
     this.infoUser.infoUser = this.storage.retrieve('stockage');
+    this.currentIcon = this.profil.choiceProfil();
     this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
   }
 
   onDeco(){
     this.storage.clear('stockage');
+    this.storage.clear('random');
     this._route.navigate(['/authentication/login']);
   }
 

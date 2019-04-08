@@ -58,14 +58,6 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: '/tables/correction',
-        title: 'Correction des stocks',
-        icon: '',
-        class: '',
-        extralink: false,
-        submenu: []
-      },
-      {
         path: '/tables/journal',
         title: 'Journal des ventes',
         icon: '',

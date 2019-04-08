@@ -41,11 +41,12 @@ import {
   WeathercardComponent,
   WelcomeComponent
 } from './dashboard-components';
+import { ChartjsComponent } from './dashboard-components/chart-js/chart-js.component';
 
 @NgModule({
   imports: [
     FormsModule,
-    CommonModule,
+    CommonModule, 
     NgbModule,
     ChartsModule,
     ChartistModule,
@@ -53,7 +54,10 @@ import {
     PerfectScrollbarModule,
     CalendarModule.forRoot(),
     NgxChartsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    NgbModule,
+    FormsModule,
+    NgxChartsModule
   ],
   declarations: [
     Dashboard1Component,
@@ -79,7 +83,8 @@ import {
     VisitorsComponent,
     VisitsBounceComponent,
     WeathercardComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ChartjsComponent
   ]
 })
 export class DashboardModule {}

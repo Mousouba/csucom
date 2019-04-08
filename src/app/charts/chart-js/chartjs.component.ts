@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 
 @Component({
+  selector: 'charts-js',
   templateUrl: './chartjs.component.html'
 })
 export class ChartjsComponent implements AfterViewInit {

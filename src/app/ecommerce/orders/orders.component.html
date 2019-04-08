@@ -37,13 +37,13 @@
                                 <td class="text-center">{{ item.priceAchat }}</td>
                                 <td class="text-center">{{ item.priceVente }}</td>
                                 <td class="text-center">
-                                    <span *ngIf=" item.qte >= 5" class="label label-success font-weight-100 label-rounded">+</span>
-                                    <span *ngIf=" item.qte < 5" class="label label-danger font-weight-100 label-rounded">-</span>
+                                    <span *ngIf=" item.qtes >= 5" class="label label-success font-weight-100 label-rounded">+</span>
+                                    <span *ngIf=" item.qtes < 5" class="label label-danger font-weight-100 label-rounded">-</span>
                                 </td>
-                                <td class="text-center">{{ item.qte }}</td>
+                                <td class="text-center">{{ item.qtes }}</td>
                                 <td>{{ item.date_peremption }}</td>
                                 <td class="text-right">
-                                    <a (click)="deleteItem(item.id, 'ph_article' )"  href="javascript:void(0)" class=" mr-3 text-danger" title="Supprimer de la liste"><i class="text-danger ti-close"></i></a>
+                                    <a (click)="deleteItem(item.article_id, 'ph_article' )"  href="javascript:void(0)" class=" mr-3 text-danger" title="Supprimer de la liste"><i class="text-danger ti-close"></i></a>
                                 </td>
                             </tr>
                         </tbody>

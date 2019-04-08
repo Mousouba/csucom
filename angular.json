@@ -26,7 +26,7 @@
               "node_modules/chartist/dist/chartist.css",
               "node_modules/ng2-slim-loading-bar/style.css",
               "node_modules/c3/c3.min.css",
-              "../node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-toastr/toastr.css",
               "node_modules/quill/dist/quill.snow.css",
               "node_modules/quill/dist/quill.bubble.css",
               "node_modules/angular-calendar/css/angular-calendar.css",

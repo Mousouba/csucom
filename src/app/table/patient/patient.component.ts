@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
 import { InfoUserService } from 'src/app/service/info-user.service';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
     selector: 'app-patient',
@@ -14,7 +15,7 @@ export class PatientComponent  implements OnInit {
   public dana = [];
   public hidden = true;
 
-  constructor( private dataService: DataService, private infoClient: InfoUserService, private route: Router) {}
+  constructor( private dataService: DataService, private infoClient: InfoUserService, private route: Router, private notif: NotificationService) {}
   
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
@@ -77,6 +78,11 @@ export class PatientComponent  implements OnInit {
     this.dataService.deleteItem({id:id, table: table})
     .subscribe( (Data) => { 
       console.log(JSON.stringify(Data));
+      if(Data.stat){
+        this.notif.info("Client a été supprimé !")
+      }else{
+        this.notif.info("Echec de suppression !")
+      }
     });
     this.getData();
   }

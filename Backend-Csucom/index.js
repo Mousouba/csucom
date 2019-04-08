@@ -200,7 +200,8 @@ mysql.createConnection({
     api.get('/journal', async (req, res)=>{
         
         let article = await User.getJournal();
-        res.json({success:true, user: req.session.csucom, article:article})
+        res.json({success:true, user: req.session.csucom, article:article});
+        console.log(article)
     })
 
 
@@ -291,6 +292,7 @@ mysql.createConnection({
         req.check('cond', "Conditionnement Invalide");
         
         const error = req.validationErrors();
+        
         if(error){
             res.json({ errors: error })
         }
@@ -303,7 +305,7 @@ mysql.createConnection({
            let cond =  req.body.cond;
            let famille_id = req.body.famille_id
            const ref = Math.floor(Math.random() * Math.floor(9999));
-           const personC = await User.setArticle(libelle,priceAchat, priceVente,qtes,cond,famille_id,date_peremption,ref, "2019-03-24 14:42:3");
+           const personC = await User.setArticle(libelle,priceAchat, priceVente,qtes,cond,famille_id,date_peremption,ref, new Date());
            if (!isErr(personC)){
                res.json({stat: true, all: personC});
            }
@@ -337,7 +339,7 @@ mysql.createConnection({
     });
 
     api.post('/pres', async (req, res) =>{
-        
+        console.log(JSON.stringify(req.body));
         req.check('service', "Nom Invalide");
         req.check('medecin', "Nom Invalide");
         req.check('libelle', "Nom Invalide");
@@ -357,7 +359,7 @@ mysql.createConnection({
            let medecin = parseInt(req.body.medecin, 10);
            let libelle = parseInt(req.body.libelle, 10);
            let keyGen = req.body.keyGen
-           let client = parseInt(req.body.client, 10);
+           let client = req.body.client;
            let montant = parseInt(req.body.montant, 10);
            let ristourne = parseInt(req.body.ristourne, 10);
            let gestionnaire = parseInt(req.body.gestionnaire, 10);
@@ -385,6 +387,17 @@ mysql.createConnection({
         
     })
     api.post('/lit', async (req, res)=>{
+        const ch = await User.setLit(req.body.lit, req.body.chambre_selected);
+        if(!isErr(ch)) {
+            console.log(ch)
+            res.send({stat: true, info: ch})
+        }
+        else{
+            res.send({stat: false})
+        }
+    })
+
+    api.post('/corriger', async (req, res)=>{
         const ch = await User.setLit(req.body.lit, req.body.chambre_selected);
         if(!isErr(ch)) {
             console.log(ch)

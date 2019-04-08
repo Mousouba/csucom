@@ -36,10 +36,8 @@ export class LoginComponent implements OnInit {
   	this.loginform = !this.loginform;
   	this.recoverform = false;
   }
-  
-  ngOnInit(){
-
-  }
+  public i = 0;
+  ngOnInit(){}
 
   onSubmit(ngForm: NgForm){ 
     this.isClick = true;
@@ -51,14 +49,15 @@ export class LoginComponent implements OnInit {
           this.isClick = false;
           setTimeout(() => {
             this.errorMsg = " ";
-          },4000)
+          },3000)
         }else{
           this.storage.store('stockage' , Data);
+          this.storage.store('random' , Math.floor(Math.random() * 7) );
           this.infoUser.infoUser = this.storage.retrieve('stockage');
           console.log('Login '+ JSON.stringify(this.infoUser.infoUser ) );
           this.route.navigate(["/dashboard/dashboard1"]);
         }
-      },200)
+      },2000)
     })
   }
 

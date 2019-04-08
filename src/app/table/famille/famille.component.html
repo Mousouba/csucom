@@ -6,7 +6,6 @@
                     <tr class="bg-light">
                         <th>N°</th>
                         <th style="width: 50%">Famille</th>
-                        <td class="text-center" >Nombre d'article</td>
                         <th class="text-right">Action</th>
                     </tr>
                 </thead>
@@ -14,7 +13,6 @@
                         <tr *ngFor="let item of data; let i = index">
                             <td>{{ i+1 }}</td>
                             <td>{{ item.name }}</td>
-                            <th class="text-center">122</th>
                             <td class="text-right">
                                 <a href="javascript:void(0)" (click)="deleteItem(item.id, 'ph_famille')" class="text-danger" title="Supprimer de la liste"><i class="ti-close"></i></a>
                             </td>
