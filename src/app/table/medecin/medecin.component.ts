@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../service/data.service';
+import { DataService } from 'src/app/service/data.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 
@@ -10,25 +10,24 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class MedecinComponent implements OnInit {
   public id;
-
+  public imprimer;
   constructor( private dataService: DataService, private route : ActivatedRoute) { }
 
   ngOnInit(){
     (params : Params) => {
-      this.id = params["id"]; 
+      this.id = params["id"];
       console.log('son id '+this.id)
     }
 
-    this.dataService.getMedecinPres({id:1})
-    .subscribe( (Data) => { 
+    /*this.dataService.getMedecinPres({id:1})
+    .subscribe( (Data) => {
       console.log(JSON.stringify(Data));
-    },  
+    },
     (error) => {
      console.log("erreur")
-    })
-;
+    });*/
   }
 
-  
+
 
 }

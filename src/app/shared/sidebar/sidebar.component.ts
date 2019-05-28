@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
-    private infoUser: InfoUserService,
+    public infoUser: InfoUserService,
     private _route: Router,
     private dataService: DataService,
     private storage: LocalStorageService,

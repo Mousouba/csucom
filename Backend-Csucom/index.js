@@ -18,7 +18,6 @@ const mysql = require('promise-mysql');
 
 mysql.createConnection({
     host: config.db.host,
-    port: 8889,
     database: config.db.database,
     user: config.db.user,
     password: config.db.password
@@ -84,7 +83,6 @@ mysql.createConnection({
             info.SumPhar = (SumPhar.sumEn !== null) ? SumPhar.sumEn : 0
             info.listeOb = listeOb;
             me = {id: 1, pseudo: "Icore", email: "core.irie@gmail.com"}
-            console.log(info)
             res.send({stat:true, user: me, info:info})
                 }
               });
@@ -111,12 +109,10 @@ mysql.createConnection({
         let chambre = await User.getAllChambre();
     
         let lit = await User.getAllLit();
-        console.log("Obs " + req.session.csucom)
         res.json({success:true, user: req.session.csucom, info:info, chambre:chambre, lit:lit})
     })
 
     api.post('/observ', async (req, res)=>{
-        console.log(JSON.stringify(req.body));
         const prescription_id = req.body.id;
         const chambre = req.body.chambre;
         const lit = req.body.lit;
@@ -147,13 +143,11 @@ mysql.createConnection({
         const contact = test.contact;
         const level =  test.role;
         let password = crypto.createHmac('sha256', test.mdp).update('I love cupcakes').digest('hex');
-        console.log(password)
         const users = await User.setUser(pseudo, email, password, level, contact)
         if(!isErr(users)){
             res.send({stat: true, user: req.session.csucom, info: users})
         } else{
             res.send({stat: false, user: null});
-            console.log("err "+isErr);
         }
         
     })
@@ -178,7 +172,6 @@ mysql.createConnection({
     })
 
     api.post('/panier', async (req, res)=>{
-       console.log(req.body)
        const ele = await User.setPanierInJourn(req.body.client, req.body.keyGen, req.body.monnaie, req.body.gestionnaire_id)
        if(!isErr(ele)){
            for(let i in req.body.panier){
@@ -232,7 +225,6 @@ mysql.createConnection({
         res.json({success:true, user: req.session.csucom, data:famille})
     })
     api.post('/libere', async (req, res)=>{
-        console.log(req.body)
         const del = await User.updateObser(req.body.id);
         if(!isErr(del)){
             res.send({user: req.session.csucom, stat: true} )
@@ -242,7 +234,6 @@ mysql.createConnection({
         }
     })
     api.post('/del', async (req, res)=>{
-        console.log(req.body)
         const del = await User.delElement(req.body.table, req.body.id);
         if(!isErr(del)){
             res.send({user: req.session.csucom, stat: true} )
@@ -275,7 +266,6 @@ mysql.createConnection({
             res.send({ stat: true, "user":  personC, "access_token":  accessToken, "expires_in":  expiresIn});
         }
            else{
-            console.log("again")
             res.json({ stat: false, error: 'Identification Echoué. Veuillez verifier vos cordonnées' });
            }
         }
@@ -284,7 +274,6 @@ mysql.createConnection({
         req.check('name', "Nom Invalide").notEmpty();
 
         const error = req.validationErrors();
-        console.log('data '+ req.body.name)
         if(error){
             res.json({ errors: error })
         }
@@ -381,7 +370,6 @@ mysql.createConnection({
            let montant = parseInt(req.body.montant, 10);
            let ristourne = parseInt(req.body.ristourne, 10);
            let gestionnaire = parseInt(req.body.gestionnaire, 10);
-           console.log(req.body)
             const personC = await User.setPres(client,service,medecin,libelle,keyGen,"2019-03-20 12:01:13",gestionnaire,ristourne,montant);
             if (!isErr(personC)){
                 res.json({stat: true, all: personC});
@@ -396,7 +384,6 @@ mysql.createConnection({
     api.post('/chambre', async (req, res)=>{
         const ch = await User.setChambre(req.body.chambre);
         if(!isErr(ch)) {
-            console.log(ch)
             res.send({stat: true, info:ch})
         }
         else{
@@ -407,7 +394,6 @@ mysql.createConnection({
     api.post('/lit', async (req, res)=>{
         const ch = await User.setLit(req.body.lit, req.body.chambre_selected);
         if(!isErr(ch)) {
-            console.log(ch)
             res.send({stat: true, info: ch})
         }
         else{

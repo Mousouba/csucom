@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-  apiUrl = 'http://localhost:2037/api';
+  apiUrl = 'http://137.74.116.91:2037/api';
 
   constructor(private _http: HttpClient) { }
 
@@ -36,11 +36,11 @@ export class DataService {
   }
 
   getInventaire(): Observable<any> {
-    return this._http.get<any>(this.apiUrl+"/inventaire"); 
+    return this._http.get<any>(this.apiUrl+"/inventaire");
   }
 
   getJournal(): Observable<any> {
-    return this._http.get<any>(this.apiUrl+"/journal"); 
+    return this._http.get<any>(this.apiUrl+"/journal");
   }
 
   getFamille(): Observable<any> {
@@ -57,6 +57,9 @@ export class DataService {
 
   getAllUser(): Observable<any> {
     return this._http.get<any>(this.apiUrl+"/user");
+  }
+  getMedecinPres(): Observable<any> {
+    return this._http.get<any>(this.apiUrl+"/medecin");
   }
 
   // POST PART
@@ -105,7 +108,7 @@ export class DataService {
     return this._http.post<any>(this.apiUrl+"/observ",data);
   }
 
-  
-  
+
+
 }
 

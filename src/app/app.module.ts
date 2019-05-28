@@ -21,6 +21,7 @@ import { BlankComponent } from './layouts/blank/blank.component';
 import { NavigationComponent } from './shared/header-navigation/navigation.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
+import { MedecinComponent } from './table/medecin/medecin.component';
 
 import { Approutes } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -53,7 +54,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BlankComponent,
     NavigationComponent,
     BreadcrumbComponent,
-    SidebarComponent
+    SidebarComponent,
+    MedecinComponent
   ],
   imports: [
     CommonModule,
